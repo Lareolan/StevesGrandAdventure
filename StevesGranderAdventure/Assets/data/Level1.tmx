@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="500" height="20" tilewidth="32" tileheight="32" backgroundcolor="#ffffff">
+ <tileset firstgid="1" name="MasterTileSet" tilewidth="32" tileheight="32">
+  <image source="MasterTileSet.png" trans="ffffff" width="512" height="512"/>
+  <terraintypes>
+   <terrain name="New Terrain" tile="-1"/>
+  </terraintypes>
+ </tileset>
+ <tileset firstgid="257" name="Character-Tileset" tilewidth="64" tileheight="64">
+  <image source="Character-Tileset.png" trans="ffffff" width="512" height="512"/>
+ </tileset>
+ <layer name="Foreground" width="500" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztnOGN2zAMRoNes0BuiIxyM3XJ/uwYnaEoEKEqQ0kkRUpU8j3gQ5vkznZkms+yc7lcAPDjuzEAAKDhG/JfbnPDCcATH8YAAMCI3c7MHPgceAOfg5PBtaLc7HZmyT3BNsDnIBr4HJxGfd/n45LD6V+7NyAhu31ZPH5/bE/5/+5tgs9BFPA5OAHqcJrdn+uAz5/x9PGMxykrvH4XBD4HM3CfZ4PPQWZ6Do+sS62f4fNnJM4buVC6LInHKfV6vBytWT98DrS05jUF+BxkpOXxXr/1nKdzfuae+yTRLO/VkThP6kKpb2e3NWLZLeBzIGF0bRI+B5kZeZxzQO10j/os/qW+tuYdfe6J15xYup5ol/8FPgc9NNcmC/A5iMI6T7ZeS619PjNHpy4eHQucv+nzVp/jPGAP3ucJHPA5KHDf8WLxsbfPr48AG7PXilvXm38N/p1ZVyvW8z4675b0Vc7/GrQO7/m853lLOHqet74G1hLpc+znfVi+g83qYepjev9xdI9S0iuvwp/TEP355QzffTfz91f0nK5eBnX26HG9vNaYSM8fZ8ZTU0Na/xfK+9M6nHN27/j5ZB7P+P3r8uz7+rUW6PN5gM/zIflO1B+PtB73emFv7mMJ7ZHWv8cYYZ0ncVBPRYQbm1Vw+9Sy/R73RFrLm6m/ledK2v1X9vvMufHI5ZzHe6953Ksf/Yx2/gD8Wenzd/W7Rx/V9lOuF8zOv1sep866OoTDy+cRYyEZo5VEvZffhkSPdyZveB9v1nNj6TmAd7h9A7evQ+Jzi4et93BaSF2YjZl5L3dMa3oojaV3aHpMNLPrizy3kYzRCmavtYzeg9Xn3LhztdZzUP17dFuzMONYOi7RTo/weu8YA75w/vP2uaafSFys7U8rvO4117b01BmfRyeS+v55yU9BRr2TjjU37rTHZhyjqHqz1l+vFr0dVS9vJxHHVGanj2qEvo+sc64TaR3rPZ9r75XM9hNuedYajbon6jX3sfbWd/R5uQbPrVPi9J7XX2GMaE1G+sDD56eMq4aI97GqJiWOnqmLug5bfR6ul1E7iNsPt8bzSM5k6qE0EdT31Ll1Sn3+yk5fMYfT1t/KWuSIqsfWuiLfxwmR7H/JHAb8gxvn0XwPPj8rWXooF4/PwfXCrVPj8yxe96R3rr6z/k7xuXSZu+pid6161YX3uLwyM2MFn5+VLD00S070+cnJ6PNXCcfubfKsid3b+Q65IQiCIAjyEvkDamBDug==
+  </data>
+ </layer>
+ <layer name="Background" width="500" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztmu1N5DAQQC2gAYS2A/hzV8D9Osq4DiiQP1sKJUAbt5EukvFNkvHn2M570mgDm7UnXu88ZolzAGlcvQAYiav3uBcAALNTuvbdZ2cEcMyWty/eOReH0wHgfFyOT1Fx73A61GPL3+Gj9DucDiF31gkAVMCvgw8Z4+BzqIXW4yH06RByJwTALKz1cHF5jo9n8zn1vw6p66rx99Fre+dLiFko5c1UB0seb+l16/lhLEr8/7uEz1t7vYZ3e+rpjnJokaN2Dk2u0rpqxs9x8kg+f/diBp/H+GrrnBz3aTyaOn7q2PjcHqvarpm3hH9G9HkN7/Z0j/RRDprna+cQk4u0rj2scy9IPh+5Vy/tOwvftrw2aINVzYmZN7cHKe3z2k7Xeje1v+2lp/PzuAbHe9dfYs/uzSGNq1mz8HqO3kPNPR2a2vi0E72w159/mmSUR02ft44W1wX1se7XtF7p0ect+vS9687pb2PX8+MWbzvxETlemMdWrkf3g5UgHCcll71zwnsy/cjpkULweTus/dt7/BIC2mHVr7Wad0af5zwfu+6Ls6XP6BpvkeNpc7Lwec7Ye2Ot/j5ydGqvI+3P3h0/ItauHCHwuS29fP9ai6W2bdVBDbG1tRS1fB7L6vM/7vtndP3ZwuelqD3vMpbW5U5xntb/Fn9/ngFrV44Q+Fym1fffs/s8173aWjwrLXw+KxqXp4aLOBef52PtyVECn/8P98aWo6R3z+zzmt+3z4p1bT3LHq2N9fs3UuBzmdn75lZQK/PA5+lY19az7NHaWL9/IwXI4PMysHfzwOf5xO6rFyHYo3ZYO3KUAKgNezcPfJ5O6t4q5fNSPHpxRqw92XsAtMLfd6+3+P3v+MctfgrH7N/vLL5+drLLnx0+32Jr37TyeSkehTgb1r7sKQBgXPB5Gjk+147ZAnwuY+1VPA4AADHgcwAAAABY+AvlubBY
+  </data>
+ </layer>
+ <objectgroup name="Objects">
+  <object name="Steve" type="Steve" gid="257" x="0" y="512" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="267" x="2336" y="480" width="32" height="64"/>
+  <object name="Zombie" type="Spawner" gid="66" x="10272" y="544"/>
+  <object name="Torch" type="Torch" gid="81" x="11328" y="576"/>
+  <object name="Torch" type="Torch" gid="81" x="11456" y="576"/>
+  <object name="Zombie" type="Mob" gid="267" x="4032" y="352" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="267" x="4704" y="544" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="267" x="5248" y="544" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="267" x="6336" y="352" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="267" x="6752" y="352" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="267" x="7168" y="576" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="267" x="8288" y="352" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="267" x="7552" y="576" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="267" x="9440" y="288" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="267" x="9888" y="576" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="267" x="10144" y="576" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="267" x="10560" y="544" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="267" x="11904" y="288" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="267" x="12928" y="352" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="267" x="13280" y="480" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="267" x="13696" y="576" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="267" x="13824" y="576" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="267" x="14080" y="576" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="267" x="14336" y="576" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="267" x="14592" y="576" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="267" x="14912" y="576" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="267" x="15232" y="576" width="32" height="64"/>
+  <object name="Exit" type="Door" gid="98" x="15872" y="416"/>
+  <object name="Torch" type="Torch" gid="81" x="15936" y="352"/>
+  <object name="Exit" type="Door" gid="82" x="15872" y="384"/>
+  <object name="Torch" type="Torch" gid="81" x="15808" y="352"/>
+  <object name="Ladder" type="Ladder" gid="84" x="7360" y="576"/>
+  <object name="Ladder" type="Ladder" gid="84" x="7360" y="544"/>
+  <object name="Ladder" type="Ladder" gid="84" x="7360" y="512"/>
+  <object name="Ladder" type="Ladder" gid="84" x="7360" y="480"/>
+  <object name="Ladder" type="Ladder" gid="84" x="7360" y="416"/>
+  <object name="Ladder" type="Ladder" gid="84" x="7360" y="448"/>
+  <object name="Ladder" type="Ladder" gid="84" x="7360" y="384"/>
+  <object name="Ladder" type="Ladder" gid="84" x="7360" y="352"/>
+  <object name="Ladder" type="Ladder" gid="84" x="7360" y="320"/>
+  <object name="Bed" type="Bed" gid="151" x="5056" y="544"/>
+  <object name="Bed" type="Bed" gid="152" x="5088" y="544"/>
+ </objectgroup>
+</map>
