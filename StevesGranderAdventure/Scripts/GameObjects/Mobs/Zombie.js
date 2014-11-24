@@ -10,7 +10,8 @@
 * Filename:            Zombie.ts
 * Last Modified By:    Konstantin Koton
 * Date Last Modified:  Nov. 22, 2014
-* Revision History:    Too numerous to mention
+* Revision History:
+*      v1 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class
 */
 var GameObjects;
 (function (GameObjects) {
@@ -25,7 +26,7 @@ var GameObjects;
             * and all its variables.
             */
             function Zombie(zombie, foreground, sound, player) {
-                _super.call(this, zombie, foreground, player);
+                _super.call(this, Managers.Assets.characters, zombie, foreground, player);
                 // Instance variables
                 this.spriteNames = [
                     "zombieStandRight",
@@ -39,23 +40,30 @@ var GameObjects;
                 this.name = "Zombie";
                 this.sound = sound;
 
-                var spriteName;
+                /*
+                var spriteName: string;
                 for (var frameID = 0; frameID < this.spriteNames.length; frameID++) {
-                    spriteName = this.spriteNames[frameID];
-                    this.sprites[spriteName] = new createjs.Sprite(Managers.Assets.characters, spriteName);
+                spriteName = this.spriteNames[frameID];
+                this.sprites[spriteName] = new createjs.Sprite(Managers.Assets.characters, spriteName);
                 }
                 this.sprites.length = this.spriteNames.length;
-
+                */
                 this.facing = constants.FACING_RIGHT;
                 this.falling = true;
                 this.jumping = false;
-                this.sprite = this.sprites[this.spriteNames[0]].clone();
-                this.sprite.x = this.canvasX;
-                this.sprite.y = this.canvasY;
-                this.sprite.regX = 0;
-                this.sprite.regY = 0;
 
-                stage.addChild(this.sprite);
+                //                this.sprite = this.sprites[this.spriteNames[0]].clone();
+                //                this.sprite.x = this.canvasX;
+                //                this.sprite.y = this.canvasY;
+                //                this.sprite.regX = 0;
+                //                this.sprite.regY = 0;
+                this.x = this.canvasX;
+                this.y = this.canvasY;
+                this.regX = 0;
+                this.regY = 0;
+
+                //                stage.addChild(this.sprite);
+                stage.addChild(this);
 
                 this.health = 10;
                 this.attackTimer = 0;
@@ -96,25 +104,33 @@ var GameObjects;
 
                 // Animate zombie facing/walking sprites
                 if (this.spriteUpdate) {
-                    stage.removeChild(this.sprite);
+                    //                    stage.removeChild(this.sprite);
+                    stage.removeChild(this);
 
                     if (this.facing === constants.FACING_LEFT) {
                         if (Math.floor((this.runDistance % (this.runDistanceIncrements * 4)) / this.runDistanceIncrements * 2)) {
-                            this.sprite = this.sprites["zombieStepLeft"].clone();
+                            //                            this.sprite = this.sprites["zombieStepLeft"].clone();
+                            this.gotoAndStop("zombieStepLeft");
                         } else {
-                            this.sprite = this.sprites["zombieStandLeft"].clone();
+                            //                            this.sprite = this.sprites["zombieStandLeft"].clone();
+                            this.gotoAndStop("zombieStandLeft");
                         }
                     } else if (this.facing === constants.FACING_RIGHT) {
                         if (Math.floor((this.runDistance % (this.runDistanceIncrements * 4)) / (this.runDistanceIncrements * 2))) {
-                            this.sprite = this.sprites["zombieStepRight"].clone();
+                            //                            this.sprite = this.sprites["zombieStepRight"].clone();
+                            this.gotoAndStop("zombieStepRight");
                         } else {
-                            this.sprite = this.sprites["zombieStandRight"].clone();
+                            //                            this.sprite = this.sprites["zombieStandRight"].clone();
+                            this.gotoAndStop("zombieStandRight");
                         }
                     }
 
-                    this.sprite.x = this.canvasX;
-                    this.sprite.y = this.canvasY;
-                    stage.addChild(this.sprite);
+                    //                    this.sprite.x = this.canvasX;
+                    //                    this.sprite.y = this.canvasY;
+                    //                    stage.addChild(this.sprite);
+                    this.x = this.canvasX;
+                    this.y = this.canvasY;
+                    stage.addChild(this);
 
                     this.spriteUpdate = false;
                 }
@@ -171,8 +187,11 @@ var GameObjects;
                     this.falling = true;
                     this.mapY = newY;
                     this.canvasY = newY;
-                    this.sprite.y = this.canvasY;
-                    this.sprite.x = this.canvasX;
+
+                    //                    this.sprite.y = this.canvasY;
+                    //                    this.sprite.x = this.canvasX;
+                    this.y = this.canvasY;
+                    this.x = this.canvasX;
                 } else {
                     this.falling = false;
                 }

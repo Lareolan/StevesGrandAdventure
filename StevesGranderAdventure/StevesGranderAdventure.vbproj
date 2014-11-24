@@ -199,6 +199,7 @@
     <TypeScriptCompile Include="Scripts\lib\preloadjs.d.ts" />
     <TypeScriptCompile Include="Scripts\lib\soundjs.d.ts" />
     <TypeScriptCompile Include="Scripts\lib\tweenjs.d.ts" />
+    <TypeScriptCompile Include="Scripts\MainGame.ts" />
     <TypeScriptCompile Include="Scripts\Managers\Assets.ts" />
     <TypeScriptCompile Include="Scripts\Managers\CloudManager.ts" />
     <TypeScriptCompile Include="Scripts\Managers\GUI.ts" />

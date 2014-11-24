@@ -34,6 +34,7 @@ module Managers {
                     this.mobs[index].name = "Zombie " + index;
                 }
             }
+
         }
 
         /*
@@ -52,7 +53,7 @@ module Managers {
                 }
             }
 
-            if (deadMobIdx!= -1) {
+            if (deadMobIdx != -1) {
                 this.mobs.splice(deadMobIdx, 1);
 
             }

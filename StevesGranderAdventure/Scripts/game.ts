@@ -55,7 +55,7 @@ interface document {
 // Global object references
 // TODO: Get rid of these in next version
 var stage: createjs.Stage;
-var queue;
+//var queue;
 
 // Game objects
 // TODO: Get rid of these in next version
@@ -116,9 +116,11 @@ var constants = {
 
 // Preload function used to load all the data and display progress report
 function preload(): void {
-    gui = new Managers.GUI(document.getElementById("canvas"));
-
     stage = new createjs.Stage(document.getElementById("canvas"));
+
+    gui = new Managers.GUI(stage);
+
+
     progressBar = new createjs.Shape();
     text = new createjs.Text();
     text.font = "bold 36px Arial";

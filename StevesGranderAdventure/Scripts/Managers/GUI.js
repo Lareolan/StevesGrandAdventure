@@ -12,6 +12,8 @@ var Managers;
     var GUI = (function () {
         // Initializes preload screen (not yet used, will be in v2)
         function GUI(canvas) {
+            this.stage = new createjs.Stage(canvas);
+
             this.preloadScreen = new GameObjects.GUIPreloadScreen();
             this.activeScreen = this.preloadScreen;
         }

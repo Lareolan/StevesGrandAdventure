@@ -5,18 +5,22 @@
  * Filename:            Monster.ts
  * Last Modified By:    Konstantin Koton
  * Date Last Modified:  Nov. 22, 2014
- * Revision History:    Too numerous to mention
+ * Revision History:
+ *      v1 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class
  */
 module GameObjects {
     // The Monster class
     export class Monster extends GameObjects.Entity {
         // Instance variable holding local reference to the Player object
         player: GameObjects.Player;
+        sound: Managers.Sound;
 
         // The constructor sets the local reference to the player object, and lets the superclass
         // constructor do the rest.
-        constructor(monster: Object, foreground: GameObjects.Layer, player: GameObjects.Player) {
-            super(monster, foreground);
+        constructor(spriteSheet: createjs.SpriteSheet, monster: Object, foreground: GameObjects.Layer, player: GameObjects.Player, frameNameOrNumber?: string);
+        constructor(spriteSheet: createjs.SpriteSheet, monster: Object, foreground: GameObjects.Layer, player: GameObjects.Player, frameNameOrNumber?: number);
+        constructor(spriteSheet: createjs.SpriteSheet, monster: Object, foreground: GameObjects.Layer, player: GameObjects.Player, frameNameOrNumber: any) {
+            super(spriteSheet, monster, foreground, frameNameOrNumber);
             this.player = player;
         }
 
@@ -32,7 +36,7 @@ module GameObjects {
                 return false;
             } else {
                 if (this instanceof GameObjects.Mobs.Zombie) {
-                    this.sound.zombieHurt(this, this.player);
+                    this.sound.zombieHurt(<GameObjects.Mobs.Zombie>this, this.player);
                 }
             }
             return true;
@@ -41,8 +45,9 @@ module GameObjects {
         // Make the monster die, play the appropriate death sound. Increase Steve's kill count.
         die(): void {
             if (this instanceof GameObjects.Mobs.Zombie) {
-                this.sound.zombieDeath(this, this.player);
-                stage.removeChild(this.sprite);
+                this.sound.zombieDeath(<GameObjects.Mobs.Zombie>this, this.player);
+                //                stage.removeChild(this.sprite);
+                stage.removeChild(this);
             }
             this.player.addKill();
         }

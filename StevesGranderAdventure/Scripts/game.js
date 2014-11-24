@@ -10,9 +10,8 @@
 
 // Global object references
 // TODO: Get rid of these in next version
-var stage;
-var queue;
-
+//var stage: createjs.Stage;
+//var queue;
 // Game objects
 // TODO: Get rid of these in next version
 var text;

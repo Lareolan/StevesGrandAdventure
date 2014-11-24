@@ -1,4 +1,10 @@
-﻿/**
+﻿var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+/**
 * This file contains the game's Entity object from which the game's mobs and Player objects subclass.
 * Author:              Konstantin Koton
 * Filename:            Entity.ts
@@ -9,9 +15,15 @@
 var GameObjects;
 (function (GameObjects) {
     // Entity class
-    var Entity = (function () {
-        // The constructor initializes all of the Entity's core data
-        function Entity(entity, foreground) {
+    var Entity = (function (_super) {
+        __extends(Entity, _super);
+        function Entity(spriteSheet, entity, foreground, frameNameOrNumber) {
+            if (frameNameOrNumber) {
+                _super.call(this, spriteSheet, frameNameOrNumber);
+            } else {
+                _super.call(this, spriteSheet, 0);
+            }
+
             this.mapData = foreground;
 
             var spriteName;
@@ -213,26 +225,30 @@ var GameObjects;
 
         // Update the entity's current position
         Entity.prototype.update = function () {
-            this.sprite.x = this.canvasX;
-            this.sprite.y = this.canvasY;
+            //            this.sprite.x = this.canvasX;
+            //            this.sprite.y = this.canvasY;
+            this.x = this.canvasX;
+            this.y = this.canvasY;
             return false;
         };
 
         // Show the entity by adding it to the stage
         Entity.prototype.show = function () {
-            if (this.sprite) {
-                stage.addChild(this.sprite);
-            }
+            //            if (this.sprite) {
+            //                stage.addChild(this.sprite);
+            //            }
+            stage.addChild(this);
         };
 
         // Hide the entity by removing it from the stage
         Entity.prototype.hide = function () {
-            if (this.sprite) {
-                stage.removeChild(this.sprite);
-            }
+            //            if (this.sprite) {
+            //                stage.removeChild(this.sprite);
+            //            }
+            stage.removeChild(this);
         };
         return Entity;
-    })();
+    })(createjs.Sprite);
     GameObjects.Entity = Entity;
 })(GameObjects || (GameObjects = {}));
 //# sourceMappingURL=Entity.js.map

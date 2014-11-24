@@ -8,13 +8,13 @@
  */
 module GameObjects {
     // Entity class
-    export class Entity {
+    export class Entity extends createjs.Sprite {
         // Instance variables
         name: string;
         sprites: Array<createjs.Sprite>;
-        sprite: createjs.Sprite;
+//        sprite: createjs.Sprite;
         spriteID: string;
-        
+
         canvasX: number;
         canvasY: number;
         mapX: number;
@@ -38,7 +38,15 @@ module GameObjects {
         dead: boolean;
 
         // The constructor initializes all of the Entity's core data
-        constructor(entity: Object, foreground: GameObjects.Layer) {
+        constructor(spriteSheet: createjs.SpriteSheet, entity: Object, foreground: GameObjects.Layer, frameNameOrNumber?: string);
+        constructor(spriteSheet: createjs.SpriteSheet, entity: Object, foreground: GameObjects.Layer, frameNameOrNumber?: number);
+        constructor(spriteSheet: createjs.SpriteSheet, entity: Object, foreground: GameObjects.Layer, frameNameOrNumber?: any) {
+            if (frameNameOrNumber) {
+                super(spriteSheet, frameNameOrNumber);
+            } else {
+                super(spriteSheet, 0);
+            }
+
             this.mapData = foreground;
 
             var spriteName: string;
@@ -245,23 +253,27 @@ module GameObjects {
 
         // Update the entity's current position
         update(): boolean {
-            this.sprite.x = this.canvasX;
-            this.sprite.y = this.canvasY;
+//            this.sprite.x = this.canvasX;
+//            this.sprite.y = this.canvasY;
+            this.x = this.canvasX;
+            this.y = this.canvasY;
             return false;
         }
 
         // Show the entity by adding it to the stage
         show(): void {
-            if (this.sprite) {
-                stage.addChild(this.sprite);
-            }
+//            if (this.sprite) {
+//                stage.addChild(this.sprite);
+//            }
+            stage.addChild(this);
         }
 
         // Hide the entity by removing it from the stage
         hide(): void {
-            if (this.sprite) {
-                stage.removeChild(this.sprite);
-            }
+//            if (this.sprite) {
+//                stage.removeChild(this.sprite);
+//            }
+            stage.removeChild(this);
         }
     }
 } 

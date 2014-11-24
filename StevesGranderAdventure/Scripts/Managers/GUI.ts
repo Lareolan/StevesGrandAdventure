@@ -10,6 +10,8 @@ module Managers {
     // The GUI manager class
     export class GUI {
         // Instance variables
+        stage: createjs.Stage;
+         
         player: GameObjects.Player;
         preloadScreen: GameObjects.GUIPreloadScreen;
         startScreen: GameObjects.GUIStartScreen;
@@ -17,11 +19,12 @@ module Managers {
         gameScreen: GameObjects.GUIGameScreen;
         deathScreen: GameObjects.GUIDeathScreen;
         victoryScreen: GameObjects.GUIVictoryScreen;
-        stage: createjs.Stage;
         activeScreen: GameObjects.Screen;
 
         // Initializes preload screen (not yet used, will be in v2)
-        constructor(canvas: Element) {
+        constructor(stage: createjs.Stage) {
+            this.stage = stage;
+
             this.preloadScreen = new GameObjects.GUIPreloadScreen();
             this.activeScreen = this.preloadScreen;
         }

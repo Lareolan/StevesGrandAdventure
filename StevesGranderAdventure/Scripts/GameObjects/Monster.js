@@ -11,17 +11,16 @@
 * Filename:            Monster.ts
 * Last Modified By:    Konstantin Koton
 * Date Last Modified:  Nov. 22, 2014
-* Revision History:    Too numerous to mention
+* Revision History:
+*      v1 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class
 */
 var GameObjects;
 (function (GameObjects) {
     // The Monster class
     var Monster = (function (_super) {
         __extends(Monster, _super);
-        // The constructor sets the local reference to the player object, and lets the superclass
-        // constructor do the rest.
-        function Monster(monster, foreground, player) {
-            _super.call(this, monster, foreground);
+        function Monster(spriteSheet, monster, foreground, player, frameNameOrNumber) {
+            _super.call(this, spriteSheet, monster, foreground, frameNameOrNumber);
             this.player = player;
         }
         /*
@@ -46,7 +45,9 @@ var GameObjects;
         Monster.prototype.die = function () {
             if (this instanceof GameObjects.Mobs.Zombie) {
                 this.sound.zombieDeath(this, this.player);
-                stage.removeChild(this.sprite);
+
+                //                stage.removeChild(this.sprite);
+                stage.removeChild(this);
             }
             this.player.addKill();
         };

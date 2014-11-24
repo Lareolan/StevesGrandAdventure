@@ -12,7 +12,8 @@ var __extends = this.__extends || function (d, b) {
 * Filename:            Screen.ts
 * Last Modified By:    Konstantin Koton
 * Date Last Modified:  Nov. 22, 2014
-* Revision History:    Too numerous to mention
+* Revision History:
+*      v1 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class
 */
 var GameObjects;
 (function (GameObjects) {
@@ -20,12 +21,12 @@ var GameObjects;
     var Player = (function (_super) {
         __extends(Player, _super);
         /*
-        * The constructor takes in an Object describing steve's attributes, the information
+        * The constructor takes in an Object describing Steve's attributes, the information
         * about the map's foreground and the sound manager instance to be kept in internal
         * variables. Then initializes the player's object instance and all its variables.
         */
         function Player(Steve, foreground, sound) {
-            _super.call(this, Steve, foreground);
+            _super.call(this, Managers.Assets.characters, Steve, foreground, 0);
             // Instance variables
             this.spriteNames = [
                 "steveStandRight",
@@ -45,22 +46,27 @@ var GameObjects;
             this.sound = sound;
 
             // Load all the different animation sprites
-            var spriteName;
-            for (var frameID = 0; frameID < this.spriteNames.length; frameID++) {
-                spriteName = this.spriteNames[frameID];
-                this.sprites[spriteName] = new createjs.Sprite(Managers.Assets.characters, spriteName);
-            }
-            this.sprites.length = this.spriteNames.length;
-
+            //            var spriteName: string;
+            //            for (var frameID = 0; frameID < this.spriteNames.length; frameID++) {
+            //                spriteName = this.spriteNames[frameID];
+            //                this.sprites[spriteName] = new createjs.Sprite(Managers.Assets.characters, spriteName);
+            //            }
+            //            this.sprites.length = this.spriteNames.length;
             // Initialize essential variables
             this.facing = constants.FACING_RIGHT;
             this.falling = true;
             this.jumping = false;
-            this.sprite = this.sprites[this.spriteNames[0]].clone();
-            this.sprite.x = this.canvasX;
-            this.sprite.y = this.canvasY;
-            this.sprite.regX = 0;
-            this.sprite.regY = 0;
+
+            //            this.sprite = this.sprites[this.spriteNames[0]].clone();
+            //            this.sprite.x = this.canvasX;
+            //            this.sprite.y = this.canvasY;
+            //            this.sprite.regX = 0;
+            //            this.sprite.regY = 0;
+            //            this = this.sprites[this.spriteNames[0]].clone();
+            this.x = this.canvasX;
+            this.y = this.canvasY;
+            this.regX = 0;
+            this.regY = 0;
 
             this.health = 10;
             this.attackCounter = 0;
@@ -69,7 +75,8 @@ var GameObjects;
             this.baseMovementSpeed = constants.MOVE_SPEED;
 
             // And add default (right facing standing Steve) sprite to the stage
-            stage.addChild(this.sprite);
+            //            stage.addChild(this.sprite);
+            stage.addChild(this);
         }
         /*
         * Move Steve right and play step sound.
@@ -91,7 +98,7 @@ var GameObjects;
 
         /*
         * If Steve is neither jumping, nor falling (i.e. is standing on the ground),
-        * then let steve jump and store what height Steve jumped from.
+        * then let Steve jump and store what height Steve jumped from.
         */
         Player.prototype.jump = function () {
             if ((!this.jumping) && (!this.falling)) {
@@ -195,7 +202,8 @@ var GameObjects;
             // If the sprite update flag is set, then it's time to change the current sprite
             if (this.spriteUpdate) {
                 // remove the old sprite from the stage
-                stage.removeChild(this.sprite);
+                //                stage.removeChild(this.sprite);
+                stage.removeChild(this);
 
                 if (this.facing === constants.FACING_LEFT) {
                     if (Math.floor((this.runDistance % (this.runDistanceIncrements * 4)) / this.runDistanceIncrements * 2)) {
@@ -204,9 +212,11 @@ var GameObjects;
                         // simulate Steve taking a step.
                         // If the player is also attacking, then choose the attacking step sprite.
                         if (this.attackFlag) {
-                            this.sprite = this.sprites["steveStepLeftAttack"].clone();
+                            //                            this.sprite = this.sprites["steveStepLeftAttack"].clone();
+                            this.gotoAndStop("steveStepLeftAttack");
                         } else {
-                            this.sprite = this.sprites["steveStepLeft"].clone();
+                            //                            this.sprite = this.sprites["steveStepLeft"].clone();
+                            this.gotoAndStop("steveStepLeft");
                         }
                     } else {
                         // If Steve is facing left and but has not been running long enough,
@@ -214,9 +224,11 @@ var GameObjects;
                         // simulate Steve taking another step.
                         // If the player is also attacking, then choose the attacking sprite.
                         if (this.attackFlag) {
-                            this.sprite = this.sprites["steveStandLeftAttack"].clone();
+                            //                            this.sprite = this.sprites["steveStandLeftAttack"].clone();
+                            this.gotoAndStop("steveStandLeftAttack");
                         } else {
-                            this.sprite = this.sprites["steveStandLeft"].clone();
+                            //                            this.sprite = this.sprites["steveStandLeft"].clone();
+                            this.gotoAndStop("steveStandLeft");
                         }
                     }
 
@@ -235,9 +247,11 @@ var GameObjects;
                         // simulate Steve taking a step.
                         // If the player is also attacking, then choose the attacking step sprite.
                         if (this.attackFlag) {
-                            this.sprite = this.sprites["steveStepRightAttack"].clone();
+                            //                            this.sprite = this.sprites["steveStepRightAttack"].clone();
+                            this.gotoAndStop("steveStepRightAttack");
                         } else {
-                            this.sprite = this.sprites["steveStepRight"].clone();
+                            //                            this.sprite = this.sprites["steveStepRight"].clone();
+                            this.gotoAndStop("steveStepRight");
                         }
                     } else {
                         // If Steve is facing right and but has not been running long enough,
@@ -245,9 +259,11 @@ var GameObjects;
                         // simulate Steve taking another step.
                         // If the player is also attacking, then choose the attacking sprite.
                         if (this.attackFlag) {
-                            this.sprite = this.sprites["steveStandRightAttack"].clone();
+                            //                            this.sprite = this.sprites["steveStandRightAttack"].clone();
+                            this.gotoAndStop("steveStandRightAttack");
                         } else {
-                            this.sprite = this.sprites["steveStandRight"].clone();
+                            //                            this.sprite = this.sprites["steveStandRight"].clone();
+                            this.gotoAndStop("steveStandRight");
                         }
                     }
 
@@ -262,9 +278,12 @@ var GameObjects;
                 }
 
                 // Update Steve's current position and add the new sprite to the stage
-                this.sprite.x = this.canvasX;
-                this.sprite.y = this.canvasY;
-                stage.addChild(this.sprite);
+                //                this.sprite.x = this.canvasX;
+                //                this.sprite.y = this.canvasY;
+                //                stage.addChild(this.sprite);
+                this.x = this.canvasX;
+                this.y = this.canvasY;
+                stage.addChild(this);
 
                 // Reset the sprite update flag
                 this.spriteUpdate = false;
@@ -293,8 +312,11 @@ var GameObjects;
                 // Change the player's position
                 this.mapY = newY;
                 this.canvasY = newY;
-                this.sprite.y = this.canvasY;
-                this.sprite.x = this.canvasX;
+
+                //                this.sprite.y = this.canvasY;
+                //                this.sprite.x = this.canvasX;
+                this.y = this.canvasY;
+                this.x = this.canvasX;
                 result = true;
             } else {
                 if (this.jumping) {
@@ -304,7 +326,8 @@ var GameObjects;
                 }
             }
 
-            this.sprite.x = this.canvasX;
+            //            this.sprite.x = this.canvasX;
+            this.x = this.canvasX;
 
             // Test if player falls into lava
             // xOffset is a hack due to imperfect Steve sprite.
@@ -319,7 +342,7 @@ var GameObjects;
             var charBottomIndex = this.mapData.width * (mapY + 1) + mapFrontX;
             var charBottomTile = this.mapData.data[charBottomIndex];
 
-            // If Steve's feet hit lava, then hit steve for 10 hearts (instant kill)
+            // If Steve's feet hit lava, then hit Steve for 10 hearts (instant kill)
             if (charBottomTile === constants.LAVA_BLOCK) {
                 this.takeDamage(10);
                 result = false;
@@ -336,6 +359,7 @@ var GameObjects;
 
         // Reset all of the player's essential states to initial values.
         Player.prototype.reset = function () {
+            /*
             this.facing = constants.FACING_RIGHT;
             this.sprite = this.sprites[this.spriteNames[0]].clone();
             this.sprite.x = this.canvasX;
@@ -347,6 +371,7 @@ var GameObjects;
             this.canvasY = parseInt(this.steveObject["y"]) - this.height;
             this.mapX = this.canvasX;
             this.mapY = this.canvasY;
+            */
         };
         return Player;
     })(GameObjects.Entity);
