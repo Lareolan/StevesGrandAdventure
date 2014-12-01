@@ -127,7 +127,7 @@ module GameObjects {
         }
 
         // Move all the map image to the right to reflect player moving left
-        moveLeft(): void {
+        shiftRight(): void {
             if (this.x <= -constants.MOVE_SPEED) {
                 this.x += constants.MOVE_SPEED;
             }
@@ -139,7 +139,7 @@ module GameObjects {
         }
 
         // Move all the map image to the left to reflect player moving right
-        moveRight(): void {
+        shiftLeft(): void {
             if (this.x >= -(this.mapWidth - Constants.SCREEN_WIDTH - constants.MOVE_SPEED)) {
                 this.x -= constants.MOVE_SPEED;
             }

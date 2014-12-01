@@ -89,7 +89,7 @@ var Managers;
         };
 
         // Move all the static objects to the right to reflect player moving left
-        CloudManager.prototype.moveLeft = function () {
+        CloudManager.prototype.shiftRight = function () {
             //            for (var index = 0; index < this.clouds.length; index++) {
             //                this.clouds[index].moveLeft();
             //            }
@@ -97,7 +97,7 @@ var Managers;
         };
 
         // Move all the static objects to the left to reflect player moving right
-        CloudManager.prototype.moveRight = function () {
+        CloudManager.prototype.shiftLeft = function () {
             //            for (var index = 0; index < this.clouds.length; index++) {
             //                this.clouds[index].moveRight();
             //            }

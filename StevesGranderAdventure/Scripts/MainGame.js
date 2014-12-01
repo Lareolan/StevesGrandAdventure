@@ -27,8 +27,6 @@ var MainGame = (function () {
 
         // Initializes mob manager object
         //        this.mobs = new Managers.Mobs(map.entities.getEntitiesByType("Mob"), map.getLayer(constants.FOREGROUND_LAYER_NAME), sound, player);
-        // Initializes the static game object manager
-        //        this.gameObjects = new Managers.Objects(map.entities.getAllEntities(), map.tileset);
         // Workaround for callback function scope issue
         var stage = this.stage;
 
@@ -114,6 +112,10 @@ var MainGame = (function () {
         this.player.setSound(this.sound);
         this.gui.setPlayer(this.player);
 
+        // Initializes the static game object manager
+        this.gameObjects = new Managers.Objects(this.map.entities.getAllEntities(), this.map.tileset);
+        this.gui.setGameObjects(this.gameObjects);
+
         // Initializes event listeners listening for player attack, player being hit and player being killed
         this.stage.addEventListener("playerAttack", { handleEvent: this.player.attack, player: this.player, mobs: this.mobs });
         this.stage.addEventListener("playerHit", { handleEvent: this.gui.playerHit, player: this.player, gui: this.gui });
@@ -131,10 +133,9 @@ var MainGame = (function () {
         // If player moves left, shift all drawn assets to the right
         if (input.keyboard.KEY_LEFT) {
             if (instance.player.moveLeft()) {
-                instance.map.moveLeft();
-
-                //                gameObjects.moveLeft()
-                instance.clouds.moveLeft();
+                instance.map.shiftRight();
+                instance.gameObjects.shiftRight();
+                instance.clouds.shiftRight();
                 //                mobs.shiftRight();
             }
         }
@@ -142,10 +143,9 @@ var MainGame = (function () {
         // If player moves right, shift all drawn assets to the left
         if (input.keyboard.KEY_RIGHT) {
             if (instance.player.moveRight()) {
-                instance.map.moveRight();
-
-                //                gameObjects.moveRight()
-                instance.clouds.moveRight();
+                instance.map.shiftLeft();
+                instance.gameObjects.shiftLeft();
+                instance.clouds.shiftLeft();
                 //                mobs.shiftLeft();
             }
         }

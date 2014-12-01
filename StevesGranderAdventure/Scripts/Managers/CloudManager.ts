@@ -85,7 +85,7 @@ module Managers {
         }
 
         // Move all the static objects to the right to reflect player moving left
-        moveLeft(): void {
+        shiftRight(): void {
 //            for (var index = 0; index < this.clouds.length; index++) {
 //                this.clouds[index].moveLeft();
 //            }
@@ -93,7 +93,7 @@ module Managers {
         }
 
         // Move all the static objects to the left to reflect player moving right
-        moveRight(): void {
+        shiftLeft(): void {
 //            for (var index = 0; index < this.clouds.length; index++) {
 //                this.clouds[index].moveRight();
 //            }

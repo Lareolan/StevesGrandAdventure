@@ -56,6 +56,7 @@ var Managers;
             this.gameScreen.addChild(this.sky);
             this.gameScreen.addChild(this.clouds);
             this.gameScreen.addChild(this.map);
+            this.gameScreen.addChild(this.gameObjects);
             this.gameScreen.addChild(this.player);
             this.gameScreen.init();
             //            this.gameScreen.show();

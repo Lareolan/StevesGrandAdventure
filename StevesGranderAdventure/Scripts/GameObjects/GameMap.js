@@ -119,7 +119,7 @@ var GameObjects;
         };
 
         // Move all the map image to the right to reflect player moving left
-        GameMap.prototype.moveLeft = function () {
+        GameMap.prototype.shiftRight = function () {
             if (this.x <= -constants.MOVE_SPEED) {
                 this.x += constants.MOVE_SPEED;
             }
@@ -131,7 +131,7 @@ var GameObjects;
         };
 
         // Move all the map image to the left to reflect player moving right
-        GameMap.prototype.moveRight = function () {
+        GameMap.prototype.shiftLeft = function () {
             if (this.x >= -(this.mapWidth - Constants.SCREEN_WIDTH - constants.MOVE_SPEED)) {
                 this.x -= constants.MOVE_SPEED;
             }
