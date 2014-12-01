@@ -8,7 +8,8 @@
  * Last Modified By:    Konstantin Koton
  * Date Last Modified:  Nov. 22, 2014
  * Revision History:
- *      v1 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class
+ *      v1 - Migrated file to Project 1
+ *      v2 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class
  */
 module GameObjects {
     // Player Class
@@ -26,10 +27,9 @@ module GameObjects {
         ];
         attackFlag: boolean;
         attackCounter: number;
-        sound: Managers.Sound;
         baseDamage: number = 5;
         killCount: number = 0;
-        steveObject: Object;
+        //        steveObject: Object;
 
         // Added to remove red squiggles
         player: any;
@@ -40,31 +40,31 @@ module GameObjects {
          * about the map's foreground and the sound manager instance to be kept in internal
          * variables. Then initializes the player's object instance and all its variables.
          */
-        constructor(Steve: Object, foreground: GameObjects.Layer, sound: Managers.Sound) {
-            super(Managers.Assets.characters, Steve, foreground, 0);
+        constructor() {
+            super(Managers.Assets.characters, 0);
 
-            this.steveObject = Steve;
+            //            this.steveObject = Steve;
             this.name = "Steve";
-            this.sound = sound;
+            //            this.sound = sound;
 
             // Load all the different animation sprites
-//            var spriteName: string;
-//            for (var frameID = 0; frameID < this.spriteNames.length; frameID++) {
-//                spriteName = this.spriteNames[frameID];
-//                this.sprites[spriteName] = new createjs.Sprite(Managers.Assets.characters, spriteName);
-//            }
-//            this.sprites.length = this.spriteNames.length;
+            //            var spriteName: string;
+            //            for (var frameID = 0; frameID < this.spriteNames.length; frameID++) {
+            //                spriteName = this.spriteNames[frameID];
+            //                this.sprites[spriteName] = new createjs.Sprite(Managers.Assets.characters, spriteName);
+            //            }
+            //            this.sprites.length = this.spriteNames.length;
 
             // Initialize essential variables
             this.facing = constants.FACING_RIGHT;
             this.falling = true;
             this.jumping = false;
 
-//            this.sprite = this.sprites[this.spriteNames[0]].clone();
-//            this.sprite.x = this.canvasX;
-//            this.sprite.y = this.canvasY;
-//            this.sprite.regX = 0;
-//            this.sprite.regY = 0;
+            //            this.sprite = this.sprites[this.spriteNames[0]].clone();
+            //            this.sprite.x = this.canvasX;
+            //            this.sprite.y = this.canvasY;
+            //            this.sprite.regX = 0;
+            //            this.sprite.regY = 0;
 
             //            this = this.sprites[this.spriteNames[0]].clone();
             this.x = this.canvasX;
@@ -77,11 +77,11 @@ module GameObjects {
             this.attackCounter = 0;
             this.runDistanceIncrements = 4;
             this.useXOffsetHack = true;
-            this.baseMovementSpeed = constants.MOVE_SPEED;
+            this.baseMovementSpeed = Constants.MOVE_SPEED;
 
             // And add default (right facing standing Steve) sprite to the stage
             //            stage.addChild(this.sprite);
-            stage.addChild(this);
+            //            stage.addChild(this);
         }
 
         /*
@@ -89,6 +89,7 @@ module GameObjects {
          * @returns true if player can move right, false if there's an obstacle on the right.
          */
         moveRight(): boolean {
+            var event = new createjs.Event("playerAttack", true, false);
             this.sound.playerWalk();
             return super.moveRight();
         }
@@ -133,10 +134,10 @@ module GameObjects {
             this.health -= hearts;
             if (this.health <= 0) {
                 var event = new createjs.Event("playerDeath", true, false);
-                stage.dispatchEvent(event);
+//                this.stage.dispatchEvent(event);
             } else {
                 var event = new createjs.Event("playerHit", true, false);
-                stage.dispatchEvent(event);
+//                this.stage.dispatchEvent(event);
             }
             return true;
         }
@@ -210,7 +211,7 @@ module GameObjects {
             if (this.spriteUpdate) {
                 // remove the old sprite from the stage
                 //                stage.removeChild(this.sprite);
-                stage.removeChild(this);
+                //                stage.removeChild(this);
 
                 if (this.facing === constants.FACING_LEFT) {
                     if (Math.floor((this.runDistance % (this.runDistanceIncrements * 4)) / this.runDistanceIncrements * 2)) {
@@ -290,7 +291,7 @@ module GameObjects {
                 //                stage.addChild(this.sprite);
                 this.x = this.canvasX;
                 this.y = this.canvasY;
-                stage.addChild(this);
+                //                stage.addChild(this);
 
                 // Reset the sprite update flag
                 this.spriteUpdate = false;
@@ -355,10 +356,10 @@ module GameObjects {
             }
 
             // Test if Steve reached the exit door, if he did change the game's state to victory.
-            if (gameObjects.checkExit(mapFrontX, mapY)) {
-                gameState = constants.GAME_STATE_VICTORY;
-                gui.show(constants.GAME_STATE_VICTORY);
-            }
+//            if (gameObjects.checkExit(mapFrontX, mapY)) {
+//                gameState = constants.GAME_STATE_VICTORY;
+//                gui.show(constants.GAME_STATE_VICTORY);
+//            }
 
             return result;
         }

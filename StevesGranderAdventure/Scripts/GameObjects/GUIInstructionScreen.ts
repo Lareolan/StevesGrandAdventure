@@ -47,14 +47,16 @@ module GameObjects {
         ];
 
         // Constructor simply calls the super class constructor
-        constructor() {
-            super();
+        constructor(stage: createjs.Stage) {
+            super(stage);
         }
 
         /*
          * Initializes all the instruction screen data.
          */
         init(): void {
+            var theStage = this.stage;
+
             var textLine,
                 index,
                 textSize = 32;
@@ -84,14 +86,16 @@ module GameObjects {
                 resource.y = instructionData.y;
                 this.screenObjects.push(resource);
             }
-            var btnX = stage.canvas.width - 240,
-                btnY = stage.canvas.height - 128;
+            var btnX = Constants.SCREEN_WIDTH - 240,
+                btnY = Constants.SCREEN_HEIGHT - 128;
             var btn = new GameObjects.Button("Back", 160, 64, btnX, btnY, GameObjects.Button.ROUNDED,
                 "black", "#5533DD", "rgba(100, 60, 200, 0.8)");
             btn.setFadeEffect();
             btn.setClickHandler(function () {
-                gameState = constants.GAME_STATE_START;
-                initGameStart();
+                var event = new createjs.Event("backButtonClicked", true, false);
+                theStage.dispatchEvent(event);
+//                gameState = Constants.GAME_STATE_START;
+//                initGameStart();
             });
             this.screenObjects.push(btn);
         }

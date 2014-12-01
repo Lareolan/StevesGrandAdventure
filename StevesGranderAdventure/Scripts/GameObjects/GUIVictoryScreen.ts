@@ -14,7 +14,7 @@ module GameObjects {
             line1: { text: "Due to your heroic efforts, Steve made it through...", textSize: 32, color: "#000000", x: 128, y: 64 },
             line2: { text: "...alive!", textSize: 32, color: "#000000", x: 128, y: 128 },
             line3: { text: "Great job Steve!", textSize: 32, color: "#ff0000", x: 128, y: 192 },
-            line4: { text: "FIN?", textSize: 128, color: "#ff0000", x: stage.canvas.width / 2, y: 256 }
+            line4: { text: "FIN?", textSize: 128, color: "#ff0000", x: Constants.HALF_SCREEN_WIDTH, y: 256 }
         };
         epilogueList: Array<string> = [
             "line1",
@@ -23,8 +23,8 @@ module GameObjects {
             "line4"
         ];
 
-        constructor() {
-            super();
+        constructor(stage: createjs.Stage) {
+            super(stage);
         }
 
         /*
@@ -60,7 +60,7 @@ module GameObjects {
             textLine.y = 512;
             this.screenObjects.push(textLine);
 
-            var btn = new GameObjects.Button("Play Again?", 256, 64, (stage.canvas.width / 2 - 128), 576, GameObjects.Button.ROUNDED, "black", "#5533DD", "rgba(100, 60, 200, 0.8)");
+            var btn = new GameObjects.Button("Play Again?", 256, 64, (Constants.HALF_SCREEN_WIDTH - 128), 576, GameObjects.Button.ROUNDED, "black", "#5533DD", "rgba(100, 60, 200, 0.8)");
             btn.setFadeEffect();
             btn.setClickHandler(function () {
                 gameState = constants.GAME_STATE_PLAY;

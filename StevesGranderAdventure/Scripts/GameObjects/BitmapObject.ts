@@ -34,9 +34,9 @@ module GameObjects {
             this.y = this.regY;
 
             if (positionIndex !== null) {
-                stage.addChildAt(this, positionIndex);
+//                stage.addChildAt(this, positionIndex);
             } else {
-                stage.addChild(this);
+//                stage.addChild(this);
             }
         }
 
@@ -47,12 +47,12 @@ module GameObjects {
 
         // Show the bitmap object by adding it to the stage
         show(): void {
-            stage.addChild(this);
+//            stage.addChild(this);
         }
 
         // Hide the bitmap object by removing it from the stage
         hide(): void {
-            stage.removeChild(this);
+//            stage.removeChild(this);
         }
     }
 }  

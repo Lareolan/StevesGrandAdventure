@@ -7,13 +7,15 @@
  * Filename:            GameMap.ts
  * Last Modified By:    Konstantin Koton
  * Date Last Modified:  Nov. 22, 2014
- * Revision History:    Too numerous to mention
+ * Revision History:
+ *      v1 - Migrated file to Project 1
+ *      v2 - Modified class to extend GameObjects.BitmapObject
  */
 module GameObjects {
     // GameMap class
-    export class GameMap {
+    export class GameMap extends GameObjects.BitmapObject {
         // Instance variables
-        map: createjs.Bitmap;
+//        map: createjs.Bitmap;
         layers: Array<GameObjects.Layer>;
         tileset: GameObjects.Tileset;
         entities: GameObjects.MapEntities;
@@ -24,6 +26,7 @@ module GameObjects {
 
         // The constructor initializes all of the map data, loads it, parses it, and displays it
         constructor() {
+            super();
             this.layers = [];
             var index, tileID;
             var tile: createjs.Bitmap;
@@ -97,9 +100,16 @@ module GameObjects {
 
             // Convert the data from the new canvas into a bitmap and use that bitmap as the
             // map from now on (Results in much faster and more efficient map operations).
-            this.map = new createjs.Bitmap(canvas);
-            this.map.name = "Map";
-            stage.addChild(this.map);
+
+            this.name = "Map";
+            this.image = canvas;
+//            super(null, new createjs.Bitmap(canvas));
+//            this.image = new createjs.Bitmap(canvas).image;
+
+//            this.map = new createjs.Bitmap(canvas);
+//            this.map.name = "Map";
+
+//            stage.addChild(this.map);
         }
 
         /*
@@ -118,37 +128,51 @@ module GameObjects {
 
         // Move all the map image to the right to reflect player moving left
         moveLeft(): void {
+            if (this.x <= -constants.MOVE_SPEED) {
+                this.x += constants.MOVE_SPEED;
+            }
+/*
             if (this.map.x <= -constants.MOVE_SPEED) {
                 this.map.x += constants.MOVE_SPEED;
             }
+*/
         }
 
         // Move all the map image to the left to reflect player moving right
         moveRight(): void {
-            if (this.map.x >= -(this.mapWidth - stage.canvas.width - constants.MOVE_SPEED)) {
+            if (this.x >= -(this.mapWidth - Constants.SCREEN_WIDTH - constants.MOVE_SPEED)) {
+                this.x -= constants.MOVE_SPEED;
+            }
+/*
+            if (this.map.x >= -(this.mapWidth - Constants.SCREEN_WIDTH - constants.MOVE_SPEED)) {
                 this.map.x -= constants.MOVE_SPEED;
             }
+*/
         }
 
         // Show all the map by adding it to the stage
         show(): void {
-            stage.addChild(this.map);
+//            stage.addChild(this.map);
         }
 
         // Hide all the map by removing it from the stage
         hide(): void {
-            stage.removeChild(this.map);
+//            stage.removeChild(this.map);
         }
 
         // Returns the map's bitmap image
-        getImage(): createjs.Bitmap {
-            return this.map;
-        }
+//        getImage(): createjs.Bitmap {
+//            return this.map;
+//        }
 
         // resets the map back to start
         reset(): void {
+            this.x = 0;
+            this.y = 0;
+/*
             this.map.x = 0;
             this.map.y = 0;
+*/
         }
     }
 } 

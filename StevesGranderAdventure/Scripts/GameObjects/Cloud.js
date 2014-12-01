@@ -10,7 +10,8 @@
 * Filename:            Cloud.ts
 * Last Modified By:    Konstantin Koton
 * Date Last Modified:  Nov. 22, 2014
-* Revision History:    Too numerous to mention
+* Revision History:
+*      v1 - Migrated file to Project 1
 */
 var GameObjects;
 (function (GameObjects) {
@@ -19,6 +20,7 @@ var GameObjects;
         __extends(Cloud, _super);
         // Create a cloud object
         function Cloud(cloudName, index) {
+            if (typeof index === "undefined") { index = null; }
             _super.call(this, cloudName, null, index);
             this.name = "Cloud";
             createjs.EventDispatcher.initialize(this);
@@ -27,7 +29,7 @@ var GameObjects;
         // appropriate event.
         Cloud.prototype.update = function () {
             this.x += this.dx;
-            if (this.x > (this.width + stage.canvas.width)) {
+            if ((this.x + this.parent.x) > (this.width + Constants.SCREEN_WIDTH)) {
                 var event = new createjs.Event("cloudOffScreen", true, false);
                 this.dispatchEvent(event);
             }

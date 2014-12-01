@@ -25,12 +25,12 @@ var GameObjects;
         }
         // Show the sky by adding it to the stage
         Sky.prototype.show = function () {
-            stage.addChildAt(this.image, 0);
+            //            stage.addChildAt(this.image, 0);
         };
 
         // Hit the sky by removing it from the stage
         Sky.prototype.hide = function () {
-            stage.removeChild(this.image);
+            //            stage.removeChild(this.image);
         };
         return Sky;
     })(GameObjects.BitmapObject);

@@ -10,25 +10,38 @@
 * Filename:            Entity.ts
 * Last Modified By:    Konstantin Koton
 * Date Last Modified:  Nov. 22, 2014
-* Revision History:    Too numerous to mention
+* Revision History:
+*      v1 - Migrated file to Project 1
+*      v2 - Modified the class to extend createjs.Sprite.
 */
 var GameObjects;
 (function (GameObjects) {
     // Entity class
     var Entity = (function (_super) {
         __extends(Entity, _super);
-        function Entity(spriteSheet, entity, foreground, frameNameOrNumber) {
+        function Entity(spriteSheet /*, entity: Object*/ , frameNameOrNumber) {
             if (frameNameOrNumber) {
                 _super.call(this, spriteSheet, frameNameOrNumber);
             } else {
                 _super.call(this, spriteSheet, 0);
             }
-
-            this.mapData = foreground;
-
-            var spriteName;
-            this.sprites = [];
-
+            //            this.mapData = foreground;
+            //            var spriteName: string;
+            //            this.sprites = [];
+            /*
+            this.height = parseInt(entity["height"]);
+            this.width = parseInt(entity["width"]);
+            this.canvasX = parseInt(entity["x"]);
+            this.canvasY = parseInt(entity["y"]) - this.height;
+            this.mapX = this.canvasX;
+            this.mapY = this.canvasY;
+            
+            this.spriteUpdate = false;
+            this.runDistance = 0;
+            this.baseMovementSpeed = 0;
+            */
+        }
+        Entity.prototype.setEntity = function (entity) {
             this.height = parseInt(entity["height"]);
             this.width = parseInt(entity["width"]);
             this.canvasX = parseInt(entity["x"]);
@@ -38,8 +51,17 @@ var GameObjects;
 
             this.spriteUpdate = false;
             this.runDistance = 0;
-            this.baseMovementSpeed = 0;
-        }
+            //            this.baseMovementSpeed = 0;
+        };
+
+        Entity.prototype.setMapData = function (foreground) {
+            this.mapData = foreground;
+        };
+
+        Entity.prototype.setSound = function (sound) {
+            this.sound = sound;
+        };
+
         /*
         * Move the entity to the right, check for collisions. Return a boolean value
         * indicating whether the movement was successful.
@@ -57,14 +79,14 @@ var GameObjects;
             var newX = this.mapX + this.baseMovementSpeed;
             if (this.testHorizontal(this.baseMovementSpeed)) {
                 if (this instanceof GameObjects.Player) {
-                    if (this.mapX <= (stage.canvas.width / 2)) {
+                    if (this.mapX <= Constants.HALF_SCREEN_WIDTH) {
                         this.canvasX = this.mapX;
                         result = false;
-                    } else if (this.mapX >= (this.mapData.width * 32) - (stage.canvas.width / 2)) {
-                        this.canvasX = (stage.canvas.width) - ((this.mapData.width * 32) - this.mapX);
+                    } else if (this.mapX >= (this.mapData.width * 32) - Constants.HALF_SCREEN_WIDTH) {
+                        this.canvasX = Constants.SCREEN_WIDTH - ((this.mapData.width * 32) - this.mapX);
                         result = false;
                     } else {
-                        this.canvasX = Math.floor((stage.canvas.width / 2) / 32) * 32;
+                        this.canvasX = Math.floor(Constants.HALF_SCREEN_WIDTH / 32) * 32;
                         result = true;
                     }
                 } else {
@@ -98,14 +120,14 @@ var GameObjects;
             var newX = this.mapX - this.baseMovementSpeed;
             if (this.testHorizontal(-this.baseMovementSpeed)) {
                 if (this instanceof GameObjects.Player) {
-                    if (this.mapX <= (stage.canvas.width / 2)) {
+                    if (this.mapX <= Constants.HALF_SCREEN_WIDTH) {
                         this.canvasX = this.mapX;
                         result = false;
-                    } else if (this.mapX >= (this.mapData.width * 32) - (stage.canvas.width / 2)) {
-                        this.canvasX = (stage.canvas.width) - ((this.mapData.width * 32) - this.mapX);
+                    } else if (this.mapX >= (this.mapData.width * 32) - Constants.HALF_SCREEN_WIDTH) {
+                        this.canvasX = Constants.SCREEN_WIDTH - ((this.mapData.width * 32) - this.mapX);
                         result = false;
                     } else {
-                        this.canvasX = Math.floor((stage.canvas.width / 2) / 32) * 32;
+                        this.canvasX = Math.floor(Constants.HALF_SCREEN_WIDTH / 32) * 32;
                         result = true;
                     }
                 } else {
@@ -237,7 +259,7 @@ var GameObjects;
             //            if (this.sprite) {
             //                stage.addChild(this.sprite);
             //            }
-            stage.addChild(this);
+            //            stage.addChild(this);
         };
 
         // Hide the entity by removing it from the stage
@@ -245,7 +267,7 @@ var GameObjects;
             //            if (this.sprite) {
             //                stage.removeChild(this.sprite);
             //            }
-            stage.removeChild(this);
+            //            stage.removeChild(this);
         };
         return Entity;
     })(createjs.Sprite);

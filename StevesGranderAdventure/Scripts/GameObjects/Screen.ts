@@ -15,26 +15,31 @@ module GameObjects {
         screenObjects: Array <createjs.DisplayObject>;
 
         // Constructor simply initializes the screen objects array
-        constructor() {
+        constructor(stage: createjs.Stage) {
+            this.stage = stage;
             this.screenObjects = [];
         }
 
         // Hides all screen objects by taking them out of the stage and into an internal
         // storage array, then clearing the stage.
         hide() {
-            for (var index = 0; index < stage.getNumChildren(); index++) {
-                this.screenObjects.push(stage.getChildAt(index));
+            for (var index = 0; index < this.stage.getNumChildren(); index++) {
+                this.screenObjects.push(this.stage.getChildAt(index));
             }
-            stage.removeAllChildren();
+            this.stage.removeAllChildren();
         }
 
         // Shows all the objects in this screen by adding them one by one to the stage after
         // clearing the stage's current objects first.
         show() {
-            stage.removeAllChildren();
+            this.stage.removeAllChildren();
             for (var index = 0; index < this.screenObjects.length; index++) {
-                stage.addChild(this.screenObjects[index]);
+                this.stage.addChild(this.screenObjects[index]);
             }
+        }
+
+        // Placeholder for init code for the inheriting screens
+        init() {
         }
 
         // Add an object to the screen

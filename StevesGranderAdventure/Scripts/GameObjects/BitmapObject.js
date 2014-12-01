@@ -38,9 +38,9 @@ var GameObjects;
             this.y = this.regY;
 
             if (positionIndex !== null) {
-                stage.addChildAt(this, positionIndex);
+                //                stage.addChildAt(this, positionIndex);
             } else {
-                stage.addChild(this);
+                //                stage.addChild(this);
             }
         }
         // Retrieve the Bitmap object
@@ -50,12 +50,12 @@ var GameObjects;
 
         // Show the bitmap object by adding it to the stage
         BitmapObject.prototype.show = function () {
-            stage.addChild(this);
+            //            stage.addChild(this);
         };
 
         // Hide the bitmap object by removing it from the stage
         BitmapObject.prototype.hide = function () {
-            stage.removeChild(this);
+            //            stage.removeChild(this);
         };
         return BitmapObject;
     })(createjs.Bitmap);

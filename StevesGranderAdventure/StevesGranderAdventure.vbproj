@@ -108,6 +108,7 @@
     <Content Include="css\normalize.css" />
     <Content Include="index.html" />
     <Content Include="Scripts\lib\base64.js" />
+    <Content Include="Scripts\lib\easeljs-0.7.1.combined.js" />
     <Content Include="Scripts\lib\easeljs-0.7.1.min.js" />
     <Content Include="Assets\data\Level1.tmx" />
     <Content Include="Assets\font\Minecrafter.Reg.ttf" />
@@ -172,6 +173,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Constants\Constants.ts" />
     <TypeScriptCompile Include="Scripts\game.ts" />
     <TypeScriptCompile Include="Scripts\GameObjects\BitmapObject.ts" />
     <TypeScriptCompile Include="Scripts\GameObjects\Button.ts" />

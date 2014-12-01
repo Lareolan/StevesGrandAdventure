@@ -8,3 +8,4 @@
 /// <reference path="lib/require.js" />
 /// <reference path="lib/r.js" />
 /// <reference path="lib/preloadjs-0.4.1.min.js" />
+/// <reference path="lib/easeljs-0.7.1.combined.js" />

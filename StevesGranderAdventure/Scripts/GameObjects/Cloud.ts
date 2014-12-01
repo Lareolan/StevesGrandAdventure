@@ -4,7 +4,8 @@
  * Filename:            Cloud.ts
  * Last Modified By:    Konstantin Koton
  * Date Last Modified:  Nov. 22, 2014
- * Revision History:    Too numerous to mention
+ * Revision History:
+ *      v1 - Migrated file to Project 1
  */
 module GameObjects {
     // Cloud Class
@@ -15,7 +16,7 @@ module GameObjects {
         name: string = "Cloud";
 
         // Create a cloud object
-        constructor(cloudName: string, index: number) {
+        constructor(cloudName: string, index: number = null) {
             super(cloudName, null, index);
             createjs.EventDispatcher.initialize(this);
         }
@@ -24,7 +25,7 @@ module GameObjects {
         // appropriate event.
         update(): void {
             this.x += this.dx;
-            if (this.x > (this.width + stage.canvas.width)) {
+            if ((this.x + this.parent.x) > (this.width + Constants.SCREEN_WIDTH)) {
                 var event = new createjs.Event("cloudOffScreen", true, false);
                 this.dispatchEvent(event);
             }

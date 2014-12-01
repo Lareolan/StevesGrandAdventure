@@ -19,12 +19,12 @@ module GameObjects {
 
         // Show the sky by adding it to the stage
         show(): void {
-            stage.addChildAt(this.image, 0);
+//            stage.addChildAt(this.image, 0);
         }
 
         // Hit the sky by removing it from the stage
         hide(): void {
-            stage.removeChild(this.image);
+//            stage.removeChild(this.image);
         }
     }
 } 

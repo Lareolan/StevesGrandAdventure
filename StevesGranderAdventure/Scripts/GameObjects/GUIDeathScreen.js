@@ -18,13 +18,13 @@ var GameObjects;
     var GUIDeathScreen = (function (_super) {
         __extends(GUIDeathScreen, _super);
         // Constructor simply calls the super class constructor
-        function GUIDeathScreen() {
-            _super.call(this);
+        function GUIDeathScreen(stage) {
+            _super.call(this, stage);
             this.epilogue = {
                 line1: { text: "Despite your best efforts, Steve is dead.", textSize: 32, color: "#000000", x: 128, y: 64 },
                 line2: { text: "You have Failed Steve after all...", textSize: 32, color: "#000000", x: 128, y: 128 },
                 line3: { text: "R.I.P Steve", textSize: 32, color: "#ff0000", x: 128, y: 192 },
-                line4: { text: "Game Over", textSize: 128, color: "#ff0000", x: stage.canvas.width / 2, y: 256 }
+                line4: { text: "Game Over", textSize: 128, color: "#ff0000", x: Constants.HALF_SCREEN_WIDTH, y: 256 }
             };
             this.epilogueList = [
                 "line1",

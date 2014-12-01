@@ -14,18 +14,19 @@
 //var queue;
 // Game objects
 // TODO: Get rid of these in next version
-var text;
-var progressBar;
-var sky;
-var cloudManager;
-var player;
-var map;
-var gui;
-var sound;
-var mobs;
+//var text: createjs.Text;
+//var progressBar: createjs.Shape;
+//var sky: GameObjects.Sky;
+//var cloudManager: Managers.CloudManager;
+//var player: GameObjects.Player;
+//var map: GameObjects.GameMap;
+//var gui: Managers.GUI;
+//var sound: Managers.Sound;
+//var mobs: Managers.Mobs;
 var gameState;
 var worldTimer;
-var gameObjects;
+
+//var gameObjects: Managers.Objects;
 var startButton;
 var instructionsButton;
 
@@ -62,29 +63,35 @@ var constants = {
     AI_ACTION_MOVE_RIGHT: 1,
     AI_ACTION_MOVE_LEFT: 2,
     AI_ACTION_ATTACK: 3,
-    GAME_STATE_START: 1,
-    GAME_STATE_INSTRUCTIONS: 2,
-    GAME_STATE_PLAY: 3,
-    GAME_STATE_DEATH: 4,
-    GAME_STATE_VICTORY: 5
+    GAME_STATE_PRELOAD: 1,
+    GAME_STATE_START: 2,
+    GAME_STATE_INSTRUCTIONS: 3,
+    GAME_STATE_PLAY: 4,
+    GAME_STATE_DEATH: 5,
+    GAME_STATE_VICTORY: 6
 };
 
 // Preload function used to load all the data and display progress report
 function preload() {
-    gui = new Managers.GUI(document.getElementById("canvas"));
-
+    var game = new MainGame(document.getElementById("canvas"));
+    /*
     stage = new createjs.Stage(document.getElementById("canvas"));
+    
+    gui = new Managers.GUI(stage);
+    
+    
     progressBar = new createjs.Shape();
     text = new createjs.Text();
     text.font = "bold 36px Arial";
     text.color = "#C33";
-
+    
     stage.addChild(progressBar);
     stage.addChild(text);
-
+    
     Managers.Assets.init();
     Managers.Assets.loader.addEventListener("progress", handleProgress);
     Managers.Assets.loader.addEventListener("complete", handleComplete);
+    */
 }
 
 // Display a loading progress bar
@@ -320,189 +327,186 @@ $("#fullscreen").click(function () {
 // TODO: Change this code to use stage.mouseX/stage.mouseY and other stage mouse hooks.
 // TODO: Ensure mouse and touch operations are fully functional in next version of the game
 // Bind mousedown event on canvas and update input states accordingly.
-$("canvas").mousedown(function (e) {
-    var middle = $(window).outerWidth() / 2;
-    var rect = this.getBoundingClientRect();
-    var mouse = {
-        x: (e.clientX - rect.left) / (rect.right - rect.left) * this.width,
-        y: (e.clientY - rect.top) / (rect.bottom - rect.top) * this.height
-    };
-
-    if (mouse.x >= middle) {
-        input.keyboard.KEY_RIGHT = true;
-        input.keyboard.KEY_LEFT = false;
-    } else if (mouse.x < middle) {
-        input.keyboard.KEY_RIGHT = false;
-        input.keyboard.KEY_LEFT = true;
-    }
-
-    switch (e.which) {
-        case 1:
-            input.mouse.LEFT_BUTTON = true;
-            break;
-        case 2:
-            input.mouse.MIDDLE_BUTTON = true;
-            break;
-        case 3:
-            input.mouse.RIGHT_BUTTON = true;
-            break;
-    }
+/*
+$("canvas").mousedown(function (e: Event) {
+var middle = $(window).outerWidth() / 2;
+var rect = this.getBoundingClientRect();
+var mouse = {
+x: (e.clientX - rect.left) / (rect.right - rect.left) * this.width,
+y: (e.clientY - rect.top) / (rect.bottom - rect.top) * this.height
+};
+if (mouse.x >= middle) {
+input.keyboard.KEY_RIGHT = true;
+input.keyboard.KEY_LEFT = false;
+} else if (mouse.x < middle) {
+input.keyboard.KEY_RIGHT = false;
+input.keyboard.KEY_LEFT = true;
+}
+switch (e.which) {
+case 1:
+input.mouse.LEFT_BUTTON = true;
+break;
+case 2:
+input.mouse.MIDDLE_BUTTON = true;
+break;
+case 3:
+input.mouse.RIGHT_BUTTON = true;
+break;
+}
 });
-
+*/
 // Bind mouseup event on canvas and update input states accordingly.
-$("canvas").mouseup(function (e) {
-    input.keyboard.KEY_RIGHT = false;
-    input.keyboard.KEY_LEFT = false;
-
-    switch (e.which) {
-        case 1:
-            input.mouse.LEFT_BUTTON = false;
-            break;
-        case 2:
-            input.mouse.MIDDLE_BUTTON = false;
-            break;
-        case 3:
-            input.mouse.RIGHT_BUTTON = false;
-            break;
-    }
+/*
+$("canvas").mouseup(function (e: Event) {
+input.keyboard.KEY_RIGHT = false;
+input.keyboard.KEY_LEFT = false;
+switch (e.which) {
+case 1:
+input.mouse.LEFT_BUTTON = false;
+break;
+case 2:
+input.mouse.MIDDLE_BUTTON = false;
+break;
+case 3:
+input.mouse.RIGHT_BUTTON = false;
+break;
+}
 });
-
+*/
 /*  Bind mousemove event on canvas and update input states accordingly.
 * (This ensures that if player moves from left to right, the character starts moving right
 * and not continues moving left)
 */
-$("canvas").mousemove(function (e) {
-    var middle = $(window).outerWidth() / 2;
-    var rect = this.getBoundingClientRect();
-    var mouse = {
-        x: (e.clientX - rect.left) / (rect.right - rect.left) * this.width,
-        y: (e.clientY - rect.top) / (rect.bottom - rect.top) * this.height
-    };
-
-    if (input.mouse.LEFT_BUTTON) {
-        if ((input.keyboard.KEY_LEFT) && (mouse.x >= middle)) {
-            input.keyboard.KEY_LEFT = false;
-            input.keyboard.KEY_RIGHT = true;
-        } else if ((input.keyboard.KEY_RIGHT) && (mouse.x < middle)) {
-            input.keyboard.KEY_LEFT = true;
-            input.keyboard.KEY_RIGHT = false;
-        }
-    }
+/*
+$("canvas").mousemove(function (e: Event) {
+var middle = $(window).outerWidth() / 2;
+var rect = this.getBoundingClientRect();
+var mouse = {
+x: (e.clientX - rect.left) / (rect.right - rect.left) * this.width,
+y: (e.clientY - rect.top) / (rect.bottom - rect.top) * this.height
+};
+if (input.mouse.LEFT_BUTTON) {
+if ((input.keyboard.KEY_LEFT) && (mouse.x >= middle)) {
+input.keyboard.KEY_LEFT = false;
+input.keyboard.KEY_RIGHT = true;
+} else if ((input.keyboard.KEY_RIGHT) && (mouse.x < middle)) {
+input.keyboard.KEY_LEFT = true;
+input.keyboard.KEY_RIGHT = false;
+}
+}
 });
-
+*/
 /* Bind touchstart event on canvas and update input states accordingly.
 * Essentially the same as the mousedown above but for touch enabled devices.
 */
-$("canvas").bind("touchstart", function (e) {
-    var middle = $(window).outerWidth() / 2;
-    var touch = e.originalEvent.touches[0];
-
-    var rect = this.getBoundingClientRect();
-    var touchPoint = {
-        x: (touch.clientX - rect.left) / (rect.right - rect.left) * this.width,
-        y: (touch.clientY - rect.top) / (rect.bottom - rect.top) * this.height
-    };
-
-    if (touchPoint.x >= middle) {
-        input.keyboard.KEY_RIGHT = true;
-        input.keyboard.KEY_LEFT = false;
-    } else if (touchPoint.x < middle) {
-        input.keyboard.KEY_RIGHT = false;
-        input.keyboard.KEY_LEFT = true;
-    }
-
-    /*
-    if (input.touch.TOUCH) {
-    var touch2 = e.originalEvent.touches[1];
-    alert("Second touch event at (" + touch2.clientX + ", " + touch2.clientY + ")\n Touches: " + e.originalEvent.touches.length);
-    }
-    */
-    input.touch.TOUCH = true;
+/*
+$("canvas").bind("touchstart", function (e: Event) {
+var middle = $(window).outerWidth() / 2;
+var touch = e.originalEvent.touches[0];
+var rect = this.getBoundingClientRect();
+var touchPoint = {
+x: (touch.clientX - rect.left) / (rect.right - rect.left) * this.width,
+y: (touch.clientY - rect.top) / (rect.bottom - rect.top) * this.height
+};
+if (touchPoint.x >= middle) {
+input.keyboard.KEY_RIGHT = true;
+input.keyboard.KEY_LEFT = false;
+} else if (touchPoint.x < middle) {
+input.keyboard.KEY_RIGHT = false;
+input.keyboard.KEY_LEFT = true;
+}
+/*
+if (input.touch.TOUCH) {
+var touch2 = e.originalEvent.touches[1];
+alert("Second touch event at (" + touch2.clientX + ", " + touch2.clientY + ")\n Touches: " + e.originalEvent.touches.length);
+}
+* /
+input.touch.TOUCH = true;
 });
-
+*/
 /* Bind touchmove event on canvas and update input states accordingly.
 * Essentially the same as the mousemove above but for touch enabled devices.
 */
-$("canvas").bind("touchmove", function (e) {
-    var middle = $(window).outerWidth() / 2;
-    var touch = e.originalEvent.touches[0];
-
-    var rect = this.getBoundingClientRect();
-    var touchPoint = {
-        x: (touch.clientX - rect.left) / (rect.right - rect.left) * this.width,
-        y: (touch.clientY - rect.top) / (rect.bottom - rect.top) * this.height
-    };
-
-    if (input.touch.TOUCH) {
-        if ((input.keyboard.KEY_LEFT) && (touchPoint.x >= middle)) {
-            input.keyboard.KEY_LEFT = false;
-            input.keyboard.KEY_RIGHT = true;
-        } else if ((input.keyboard.KEY_RIGHT) && (touchPoint.x < middle)) {
-            input.keyboard.KEY_LEFT = true;
-            input.keyboard.KEY_RIGHT = false;
-        }
-    }
+/*
+$("canvas").bind("touchmove", function (e: Event) {
+var middle = $(window).outerWidth() / 2;
+var touch = e.originalEvent.touches[0];
+var rect = this.getBoundingClientRect();
+var touchPoint = {
+x: (touch.clientX - rect.left) / (rect.right - rect.left) * this.width,
+y: (touch.clientY - rect.top) / (rect.bottom - rect.top) * this.height
+};
+if (input.touch.TOUCH) {
+if ((input.keyboard.KEY_LEFT) && (touchPoint.x >= middle)) {
+input.keyboard.KEY_LEFT = false;
+input.keyboard.KEY_RIGHT = true;
+} else if ((input.keyboard.KEY_RIGHT) && (touchPoint.x < middle)) {
+input.keyboard.KEY_LEFT = true;
+input.keyboard.KEY_RIGHT = false;
+}
+}
 });
-
+*/
 /* Bind touchend event on canvas and update input states accordingly.
 * Essentially the same as the mouseup above but for touch enabled devices.
 */
-$("canvas").bind("touchend", function (e) {
-    input.keyboard.KEY_RIGHT = false;
-    input.keyboard.KEY_LEFT = false;
-    input.touch.TOUCH = false;
+/*
+$("canvas").bind("touchend", function (e: Event) {
+input.keyboard.KEY_RIGHT = false;
+input.keyboard.KEY_LEFT = false;
+input.touch.TOUCH = false;
 });
-
+*/
+/*
 // Bind document-wide keydown event, and update key states accordingly for keyboard input
-$(document).keydown(function (e) {
-    switch (e.keyCode) {
-        case 27:
-            break;
-        case 37:
-        case 65:
-            input.keyboard.KEY_LEFT = true;
-            break;
-        case 39:
-        case 68:
-            input.keyboard.KEY_RIGHT = true;
-            break;
-        case 38:
-        case 87:
-            input.keyboard.KEY_UP = true;
-            break;
-        case 32:
-            if (!input.keyboard.KEY_SPACE) {
-                input.keyboard.KEY_SPACE = true;
-                var event = new createjs.Event("playerAttack", true, false);
-                stage.dispatchEvent(event);
-            }
-            break;
-    }
+$(document).keydown(function (e: Event) {
+switch (e.keyCode) {
+case 27:        // ESC
+break;
+case 37:        // Left Arrow
+case 65:        // "a" Key
+input.keyboard.KEY_LEFT = true;
+break;
+case 39:        // Right Arrow
+case 68:        // "d" Key
+input.keyboard.KEY_RIGHT = true;
+break;
+case 38:        // Up Arrow
+case 87:        // "w" Key
+input.keyboard.KEY_UP = true;
+break;
+case 32:        // Space Key
+if (!input.keyboard.KEY_SPACE) {
+input.keyboard.KEY_SPACE = true;
+var event = new createjs.Event("playerAttack", true, false);
+stage.dispatchEvent(event);
+}
+break;
+}
 });
-
 // Bind document-wide keyup event, and update key states accordingly for keyboard input
-$(document).keyup(function (e) {
-    switch (e.keyCode) {
-        case 27:
-            break;
-        case 37:
-        case 65:
-            input.keyboard.KEY_LEFT = false;
-            break;
-        case 39:
-        case 68:
-            input.keyboard.KEY_RIGHT = false;
-            break;
-        case 38:
-        case 87:
-            input.keyboard.KEY_UP = false;
-            break;
-        case 32:
-            input.keyboard.KEY_SPACE = false;
-            break;
-    }
+$(document).keyup(function (e: Event) {
+switch (e.keyCode) {
+case 27:        // ESC
+break;
+case 37:        // Left Arrow
+case 65:        // "a" Key
+input.keyboard.KEY_LEFT = false;
+break;
+case 39:        // Right Arrow
+case 68:        // "d" Key
+input.keyboard.KEY_RIGHT = false;
+break;
+case 38:        // Up Arrow
+case 87:        // "w" Key
+input.keyboard.KEY_UP = false;
+break;
+case 32:        // Space Key
+input.keyboard.KEY_SPACE = false;
+break;
+}
 });
-
+*/
 /*
 * This function was supposed to rotate view on mobile devices to ensure that the game was always in
 * landscape mode even if user turns their device to portrait mode direction. However it doesn't seem to work.

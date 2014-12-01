@@ -1,19 +1,29 @@
 ﻿/// <reference path="tileset.ts" />
 /// <reference path="../managers/assets.ts" />
+var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
 /**
 * This file contains the game's game map object
 * Author:              Konstantin Koton
 * Filename:            GameMap.ts
 * Last Modified By:    Konstantin Koton
 * Date Last Modified:  Nov. 22, 2014
-* Revision History:    Too numerous to mention
+* Revision History:
+*      v1 - Migrated file to Project 1
+*      v2 - Modified class to extend GameObjects.BitmapObject
 */
 var GameObjects;
 (function (GameObjects) {
     // GameMap class
-    var GameMap = (function () {
+    var GameMap = (function (_super) {
+        __extends(GameMap, _super);
         // The constructor initializes all of the map data, loads it, parses it, and displays it
         function GameMap() {
+            _super.call(this);
             this.layers = [];
             var index, tileID;
             var tile;
@@ -86,9 +96,13 @@ var GameObjects;
 
             // Convert the data from the new canvas into a bitmap and use that bitmap as the
             // map from now on (Results in much faster and more efficient map operations).
-            this.map = new createjs.Bitmap(canvas);
-            this.map.name = "Map";
-            stage.addChild(this.map);
+            this.name = "Map";
+            this.image = canvas;
+            //            super(null, new createjs.Bitmap(canvas));
+            //            this.image = new createjs.Bitmap(canvas).image;
+            //            this.map = new createjs.Bitmap(canvas);
+            //            this.map.name = "Map";
+            //            stage.addChild(this.map);
         }
         /*
         * Returns layer information for a specific map layer
@@ -106,40 +120,53 @@ var GameObjects;
 
         // Move all the map image to the right to reflect player moving left
         GameMap.prototype.moveLeft = function () {
-            if (this.map.x <= -constants.MOVE_SPEED) {
-                this.map.x += constants.MOVE_SPEED;
+            if (this.x <= -constants.MOVE_SPEED) {
+                this.x += constants.MOVE_SPEED;
             }
+            /*
+            if (this.map.x <= -constants.MOVE_SPEED) {
+            this.map.x += constants.MOVE_SPEED;
+            }
+            */
         };
 
         // Move all the map image to the left to reflect player moving right
         GameMap.prototype.moveRight = function () {
-            if (this.map.x >= -(this.mapWidth - stage.canvas.width - constants.MOVE_SPEED)) {
-                this.map.x -= constants.MOVE_SPEED;
+            if (this.x >= -(this.mapWidth - Constants.SCREEN_WIDTH - constants.MOVE_SPEED)) {
+                this.x -= constants.MOVE_SPEED;
             }
+            /*
+            if (this.map.x >= -(this.mapWidth - Constants.SCREEN_WIDTH - constants.MOVE_SPEED)) {
+            this.map.x -= constants.MOVE_SPEED;
+            }
+            */
         };
 
         // Show all the map by adding it to the stage
         GameMap.prototype.show = function () {
-            stage.addChild(this.map);
+            //            stage.addChild(this.map);
         };
 
         // Hide all the map by removing it from the stage
         GameMap.prototype.hide = function () {
-            stage.removeChild(this.map);
+            //            stage.removeChild(this.map);
         };
 
         // Returns the map's bitmap image
-        GameMap.prototype.getImage = function () {
-            return this.map;
-        };
-
+        //        getImage(): createjs.Bitmap {
+        //            return this.map;
+        //        }
         // resets the map back to start
         GameMap.prototype.reset = function () {
+            this.x = 0;
+            this.y = 0;
+            /*
             this.map.x = 0;
             this.map.y = 0;
+            */
         };
         return GameMap;
-    })();
+    })(GameObjects.BitmapObject);
     GameObjects.GameMap = GameMap;
 })(GameObjects || (GameObjects = {}));
 //# sourceMappingURL=GameMap.js.map

@@ -6,7 +6,8 @@
  * Last Modified By:    Konstantin Koton
  * Date Last Modified:  Nov. 22, 2014
  * Revision History:
- *      v1 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class
+ *      v1 - Migrated file to Project 1
+ *      v2 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class
  */
 module GameObjects {
     // The Monster class

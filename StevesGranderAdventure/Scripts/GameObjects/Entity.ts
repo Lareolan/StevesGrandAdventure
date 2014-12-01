@@ -4,14 +4,16 @@
  * Filename:            Entity.ts
  * Last Modified By:    Konstantin Koton
  * Date Last Modified:  Nov. 22, 2014
- * Revision History:    Too numerous to mention
+ * Revision History:
+ *      v1 - Migrated file to Project 1
+ *      v2 - Modified the class to extend createjs.Sprite.
  */
 module GameObjects {
     // Entity class
     export class Entity extends createjs.Sprite {
         // Instance variables
         name: string;
-        sprites: Array<createjs.Sprite>;
+//        sprites: Array<createjs.Sprite>;
 //        sprite: createjs.Sprite;
         spriteID: string;
 
@@ -28,6 +30,7 @@ module GameObjects {
         jumpedFrom: number;
         falling: boolean;
         mapData: GameObjects.Layer;
+        sound: Managers.Sound;
         health: number;
         baseMovementSpeed: number;
         runDistance: number;
@@ -38,20 +41,20 @@ module GameObjects {
         dead: boolean;
 
         // The constructor initializes all of the Entity's core data
-        constructor(spriteSheet: createjs.SpriteSheet, entity: Object, foreground: GameObjects.Layer, frameNameOrNumber?: string);
-        constructor(spriteSheet: createjs.SpriteSheet, entity: Object, foreground: GameObjects.Layer, frameNameOrNumber?: number);
-        constructor(spriteSheet: createjs.SpriteSheet, entity: Object, foreground: GameObjects.Layer, frameNameOrNumber?: any) {
+        constructor(spriteSheet: createjs.SpriteSheet /*, entity: Object*/, frameNameOrNumber?: string);
+        constructor(spriteSheet: createjs.SpriteSheet /*, entity: Object*/, frameNameOrNumber?: number);
+        constructor(spriteSheet: createjs.SpriteSheet /*, entity: Object*/, frameNameOrNumber?: any) {
             if (frameNameOrNumber) {
                 super(spriteSheet, frameNameOrNumber);
             } else {
                 super(spriteSheet, 0);
             }
 
-            this.mapData = foreground;
+//            this.mapData = foreground;
 
-            var spriteName: string;
-            this.sprites = [];
-
+//            var spriteName: string;
+//            this.sprites = [];
+/*
             this.height = parseInt(entity["height"]);
             this.width = parseInt(entity["width"]);
             this.canvasX = parseInt(entity["x"]);
@@ -62,6 +65,28 @@ module GameObjects {
             this.spriteUpdate = false;
             this.runDistance = 0;
             this.baseMovementSpeed = 0;
+*/
+        }
+
+        setEntity(entity: Object) {
+            this.height = parseInt(entity["height"]);
+            this.width = parseInt(entity["width"]);
+            this.canvasX = parseInt(entity["x"]);
+            this.canvasY = parseInt(entity["y"]) - this.height;
+            this.mapX = this.canvasX;
+            this.mapY = this.canvasY;
+
+            this.spriteUpdate = false;
+            this.runDistance = 0;
+//            this.baseMovementSpeed = 0;
+        }
+
+        setMapData(foreground: GameObjects.Layer) {
+            this.mapData = foreground;
+        }
+
+        setSound(sound: Managers.Sound) {
+            this.sound = sound;
         }
 
         /*
@@ -81,14 +106,14 @@ module GameObjects {
             var newX = this.mapX + this.baseMovementSpeed;
             if (this.testHorizontal(this.baseMovementSpeed)) {
                 if (this instanceof GameObjects.Player) {
-                    if (this.mapX <= (stage.canvas.width / 2)) {
+                    if (this.mapX <= Constants.HALF_SCREEN_WIDTH) {
                         this.canvasX = this.mapX;
                         result = false;
-                    } else if (this.mapX >= (this.mapData.width * 32) - (stage.canvas.width / 2)) {
-                        this.canvasX = (stage.canvas.width) - ((this.mapData.width * 32) - this.mapX);
+                    } else if (this.mapX >= (this.mapData.width * 32) - Constants.HALF_SCREEN_WIDTH) {
+                        this.canvasX = Constants.SCREEN_WIDTH - ((this.mapData.width * 32) - this.mapX);
                         result = false;
                     } else {
-                        this.canvasX = Math.floor((stage.canvas.width / 2) / 32) * 32;
+                        this.canvasX = Math.floor(Constants.HALF_SCREEN_WIDTH / 32) * 32;
                         result = true;
                     }
                 } else {
@@ -122,14 +147,14 @@ module GameObjects {
             var newX = this.mapX - this.baseMovementSpeed;
             if (this.testHorizontal(-this.baseMovementSpeed)) {
                 if (this instanceof GameObjects.Player) {
-                    if (this.mapX <= (stage.canvas.width / 2)) {
+                    if (this.mapX <= Constants.HALF_SCREEN_WIDTH) {
                         this.canvasX = this.mapX;
                         result = false;
-                    } else if (this.mapX >= (this.mapData.width * 32) - (stage.canvas.width / 2)) {
-                        this.canvasX = (stage.canvas.width) - ((this.mapData.width * 32) - this.mapX);
+                    } else if (this.mapX >= (this.mapData.width * 32) - Constants.HALF_SCREEN_WIDTH) {
+                        this.canvasX = Constants.SCREEN_WIDTH - ((this.mapData.width * 32) - this.mapX);
                         result = false;
                     } else {
-                        this.canvasX = Math.floor((stage.canvas.width / 2) / 32) * 32;
+                        this.canvasX = Math.floor(Constants.HALF_SCREEN_WIDTH / 32) * 32;
                         result = true;
                     }
                 } else {
@@ -265,7 +290,7 @@ module GameObjects {
 //            if (this.sprite) {
 //                stage.addChild(this.sprite);
 //            }
-            stage.addChild(this);
+//            stage.addChild(this);
         }
 
         // Hide the entity by removing it from the stage
@@ -273,7 +298,7 @@ module GameObjects {
 //            if (this.sprite) {
 //                stage.removeChild(this.sprite);
 //            }
-            stage.removeChild(this);
+//            stage.removeChild(this);
         }
     }
 } 

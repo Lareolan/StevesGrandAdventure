@@ -54,23 +54,23 @@ interface document {
 
 // Global object references
 // TODO: Get rid of these in next version
-var stage: createjs.Stage;
+//var stage: createjs.Stage;
 //var queue;
 
 // Game objects
 // TODO: Get rid of these in next version
-var text: createjs.Text;
-var progressBar: createjs.Shape;
-var sky: GameObjects.Sky;
-var cloudManager: Managers.CloudManager;
-var player: GameObjects.Player;
-var map: GameObjects.GameMap;
-var gui: Managers.GUI;
-var sound: Managers.Sound;
-var mobs: Managers.Mobs;
+//var text: createjs.Text;
+//var progressBar: createjs.Shape;
+//var sky: GameObjects.Sky;
+//var cloudManager: Managers.CloudManager;
+//var player: GameObjects.Player;
+//var map: GameObjects.GameMap;
+//var gui: Managers.GUI;
+//var sound: Managers.Sound;
+//var mobs: Managers.Mobs;
 var gameState: number;
 var worldTimer: number;
-var gameObjects: Managers.Objects;
+//var gameObjects: Managers.Objects;
 var startButton: Array<createjs.DisplayObject>;
 var instructionsButton: Array<createjs.DisplayObject>;
 
@@ -107,15 +107,19 @@ var constants = {
     AI_ACTION_MOVE_RIGHT: 1,
     AI_ACTION_MOVE_LEFT: 2,
     AI_ACTION_ATTACK: 3,
-    GAME_STATE_START: 1,
-    GAME_STATE_INSTRUCTIONS: 2,
-    GAME_STATE_PLAY: 3,
-    GAME_STATE_DEATH: 4,
-    GAME_STATE_VICTORY: 5
+    GAME_STATE_PRELOAD: 1,
+    GAME_STATE_START: 2,
+    GAME_STATE_INSTRUCTIONS: 3,
+    GAME_STATE_PLAY: 4,
+    GAME_STATE_DEATH: 5,
+    GAME_STATE_VICTORY: 6
 };
 
 // Preload function used to load all the data and display progress report
 function preload(): void {
+    var game = new MainGame(document.getElementById("canvas"));
+
+/*
     stage = new createjs.Stage(document.getElementById("canvas"));
 
     gui = new Managers.GUI(stage);
@@ -132,6 +136,7 @@ function preload(): void {
     Managers.Assets.init();
     Managers.Assets.loader.addEventListener("progress", handleProgress);
     Managers.Assets.loader.addEventListener("complete", handleComplete);
+*/
 }
 
 // Display a loading progress bar
@@ -373,6 +378,7 @@ $("#fullscreen").click(function () {
 // TODO: Ensure mouse and touch operations are fully functional in next version of the game
 
 // Bind mousedown event on canvas and update input states accordingly.
+/*
 $("canvas").mousedown(function (e: Event) {
     var middle = $(window).outerWidth() / 2;
     var rect = this.getBoundingClientRect();
@@ -401,8 +407,10 @@ $("canvas").mousedown(function (e: Event) {
             break;
     }
 });
+*/
 
 // Bind mouseup event on canvas and update input states accordingly.
+/*
 $("canvas").mouseup(function (e: Event) {
     input.keyboard.KEY_RIGHT = false;
     input.keyboard.KEY_LEFT = false;
@@ -419,11 +427,13 @@ $("canvas").mouseup(function (e: Event) {
             break;
     }
 });
+*/
 
 /*  Bind mousemove event on canvas and update input states accordingly.
  * (This ensures that if player moves from left to right, the character starts moving right
  * and not continues moving left)
  */
+/*
 $("canvas").mousemove(function (e: Event) {
     var middle = $(window).outerWidth() / 2;
     var rect = this.getBoundingClientRect();
@@ -442,10 +452,14 @@ $("canvas").mousemove(function (e: Event) {
         }
     }
 });
+*/
+
 
 /* Bind touchstart event on canvas and update input states accordingly.
  * Essentially the same as the mousedown above but for touch enabled devices.
  */
+
+/*
 $("canvas").bind("touchstart", function (e: Event) {
     var middle = $(window).outerWidth() / 2;
     var touch = e.originalEvent.touches[0];
@@ -469,14 +483,16 @@ $("canvas").bind("touchstart", function (e: Event) {
             var touch2 = e.originalEvent.touches[1];
             alert("Second touch event at (" + touch2.clientX + ", " + touch2.clientY + ")\n Touches: " + e.originalEvent.touches.length);
         }
-    */
+    * /
 
     input.touch.TOUCH = true;
 });
+*/
 
 /* Bind touchmove event on canvas and update input states accordingly.
  * Essentially the same as the mousemove above but for touch enabled devices.
  */
+/*
 $("canvas").bind("touchmove", function (e: Event) {
     var middle = $(window).outerWidth() / 2;
     var touch = e.originalEvent.touches[0];
@@ -497,16 +513,34 @@ $("canvas").bind("touchmove", function (e: Event) {
         }
     }
 });
+*/
 
 /* Bind touchend event on canvas and update input states accordingly.
  * Essentially the same as the mouseup above but for touch enabled devices.
  */
+/*
 $("canvas").bind("touchend", function (e: Event) {
     input.keyboard.KEY_RIGHT = false;
     input.keyboard.KEY_LEFT = false;
     input.touch.TOUCH = false;
 });
+*/
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 // Bind document-wide keydown event, and update key states accordingly for keyboard input
 $(document).keydown(function (e: Event) {
     switch (e.keyCode) {
@@ -556,6 +590,13 @@ $(document).keyup(function (e: Event) {
             break;
     }
 });
+*/
+
+
+
+
+
+
 
 /*
  * This function was supposed to rotate view on mobile devices to ensure that the game was always in
