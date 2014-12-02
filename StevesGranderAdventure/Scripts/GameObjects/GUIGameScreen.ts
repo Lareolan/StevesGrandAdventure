@@ -20,10 +20,10 @@ module GameObjects {
 
         // Initializes the game play screen's GUI components such as player's health
         // and kill count display objects.
-        constructor(stage: createjs.Stage, player: GameObjects.Player) {
+        constructor(stage: createjs.Stage/*, player: GameObjects.Player*/) {
             super(stage);
             this.healthSprites = [];
-            this.player = player;
+//            this.player = player;
         }
 
         init(): void {
@@ -56,10 +56,15 @@ module GameObjects {
             this.screenObjects.push(this.killDisplay);
         }
 
-        // Shows the victory screen
-        show() {
-            super.show();
+        // Sets internal reference to player object
+        setPlayer(player: GameObjects.Player): void {
+            this.player = player;
         }
+
+        // Shows the victory screen
+//        show() {
+//            super.show();
+//        }
 
         // Resets the game play screen back to initial state
         reset(): void {
@@ -101,21 +106,20 @@ module GameObjects {
                 }
             }
 
-            if (this.lastKillCount != this.player.getKillcount()) {
-                this.lastKillCount = this.player.getKillcount();
+            if (this.lastKillCount != this.player.getKillCount()) {
+                this.lastKillCount = this.player.getKillCount();
                 this.killDisplay.text = "Kill Count: " + this.lastKillCount;
 //                stage.update();
             }
         }
 
         // When the player is hit, flash the screen with a red overlay for 100ms
-        playerHit(stage: createjs.Stage, instance: GameObjects.GUIGameScreen) {
+        playerHit(stage: createjs.Stage, instance: GameObjects.GUIGameScreen): void {
             stage.addChild(instance.hitShape);
             setTimeout(function () {
-                this.stage.removeChild(instance.hitShape);
+                stage.removeChild(instance.hitShape);
 //                stage.update();
             }, 100);
-            
         }
     }
 } 

@@ -13,17 +13,24 @@
 * Date Last Modified:  Nov. 22, 2014
 * Revision History:
 *      v1 - Migrated file to Project 1
-*      v2 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class
+*      v2 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class)
 */
 var GameObjects;
 (function (GameObjects) {
     // The Monster class
     var Monster = (function (_super) {
         __extends(Monster, _super);
-        function Monster(spriteSheet, monster, foreground, player, frameNameOrNumber) {
-            _super.call(this, spriteSheet, monster, foreground, frameNameOrNumber);
-            this.player = player;
+        function Monster(spriteSheet, frameNameOrNumber) {
+            _super.call(this, spriteSheet, frameNameOrNumber);
         }
+        /*
+        * Sets an internal reference to the Player object (for combat purposes).
+        * @param player The Player object to store the reference to.
+        */
+        Monster.prototype.setPlayer = function (player) {
+            this.player = player;
+        };
+
         /*
         * Causes damage to the monster according to the passed parameter and returns whether the
         * monster died from the attack or not. If it didn't die, make it groan in pain.
@@ -46,9 +53,8 @@ var GameObjects;
         Monster.prototype.die = function () {
             if (this instanceof GameObjects.Mobs.Zombie) {
                 this.sound.zombieDeath(this, this.player);
-
                 //                stage.removeChild(this.sprite);
-                stage.removeChild(this);
+                //                stage.removeChild(this);
             }
             this.player.addKill();
         };

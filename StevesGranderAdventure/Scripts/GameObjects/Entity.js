@@ -19,28 +19,17 @@ var GameObjects;
     // Entity class
     var Entity = (function (_super) {
         __extends(Entity, _super);
-        function Entity(spriteSheet /*, entity: Object*/ , frameNameOrNumber) {
+        function Entity(spriteSheet, frameNameOrNumber) {
             if (frameNameOrNumber) {
                 _super.call(this, spriteSheet, frameNameOrNumber);
             } else {
                 _super.call(this, spriteSheet, 0);
             }
-            //            this.mapData = foreground;
-            //            var spriteName: string;
-            //            this.sprites = [];
-            /*
-            this.height = parseInt(entity["height"]);
-            this.width = parseInt(entity["width"]);
-            this.canvasX = parseInt(entity["x"]);
-            this.canvasY = parseInt(entity["y"]) - this.height;
-            this.mapX = this.canvasX;
-            this.mapY = this.canvasY;
-            
-            this.spriteUpdate = false;
-            this.runDistance = 0;
-            this.baseMovementSpeed = 0;
-            */
         }
+        /*
+        * Sets an internal values based on entity properties retrieved from the level data file.
+        * @param entity The entity Object to get the information from.
+        */
         Entity.prototype.setEntity = function (entity) {
             this.height = parseInt(entity["height"]);
             this.width = parseInt(entity["width"]);
@@ -48,18 +37,38 @@ var GameObjects;
             this.canvasY = parseInt(entity["y"]) - this.height;
             this.mapX = this.canvasX;
             this.mapY = this.canvasY;
+            this.x = this.canvasX;
+            this.y = this.canvasY;
+            this.regX = 0;
+            this.regY = 0;
 
             this.spriteUpdate = false;
             this.runDistance = 0;
-            //            this.baseMovementSpeed = 0;
+            this.entityObject = entity;
         };
 
+        /*
+        * Sets an internal reference to the map's foreground Layer object (for collision detection purposes).
+        * @param foreground The foreground Layer object to store the reference to.
+        */
         Entity.prototype.setMapData = function (foreground) {
             this.mapData = foreground;
         };
 
+        /*
+        * Sets an internal reference to the Sound object (so the entity can vocalize/make noise).
+        * @param sound The Sound object to store the reference to.
+        */
         Entity.prototype.setSound = function (sound) {
             this.sound = sound;
+        };
+
+        /*
+        * Sets an internal reference to the Stage object (Primarily for dispatching events onto the stage).
+        * @param stage The Stage object to store the reference to.
+        */
+        Entity.prototype.setStage = function (stage) {
+            this.stage = stage;
         };
 
         /*

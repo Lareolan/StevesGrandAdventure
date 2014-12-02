@@ -28,7 +28,7 @@ class MainGame {
     worldTimer: number;
 
     // Fix squiggly lines, not actually used
-    instance: any;
+    instance: MainGame;
 
 
     constructor(canvas: Element) {
@@ -46,13 +46,6 @@ class MainGame {
         this.gameState = Constants.GAME_STATE_PRELOAD;
         this.gui.display(this.gameState);
 
-
-        // Initialize sound manager
-        this.sound = new Managers.Sound();
-
-
-        // Initializes mob manager object
-//        this.mobs = new Managers.Mobs(map.entities.getEntitiesByType("Mob"), map.getLayer(constants.FOREGROUND_LAYER_NAME), sound, player);
 
         // Workaround for callback function scope issue
         var stage = this.stage;
@@ -110,6 +103,7 @@ class MainGame {
         this.stage.addEventListener("startGameClicked", { handleEvent: this.startGame, instance: this });
         this.stage.addEventListener("instructionsClicked", { handleEvent: this.showInstructions, instance: this });
         this.stage.addEventListener("backButtonClicked", { handleEvent: this.showStartScreen, instance: this });
+        this.stage.addEventListener("playAgainButtonClicked", { handleEvent: this.restartGame, instance: this });
     }
 
     preloadComplete(event: Event): void {
@@ -120,6 +114,9 @@ class MainGame {
     }
 
     initGameStart(): void {
+        // Initialize sound manager
+        this.sound = new Managers.Sound();
+
         // Initialize sky
         this.sky = new GameObjects.Sky();
         this.gui.setSky(this.sky);
@@ -137,7 +134,12 @@ class MainGame {
         this.player.setMapData(this.map.getLayer(constants.FOREGROUND_LAYER_NAME));
         this.player.setEntity(this.map.entities.getEntityByName("Steve"));
         this.player.setSound(this.sound);
+        this.player.setStage(this.stage);
         this.gui.setPlayer(this.player);
+
+        // Initializes mob manager object
+        this.mobs = new Managers.Mobs(this.map.entities.getEntitiesByType("Mob"), this.map.getLayer(constants.FOREGROUND_LAYER_NAME), this.sound, this.player);
+        this.gui.setMobManager(this.mobs);
 
         // Initializes the static game object manager
         this.gameObjects = new Managers.Objects(this.map.entities.getAllEntities(), this.map.tileset);
@@ -146,7 +148,8 @@ class MainGame {
         // Initializes event listeners listening for player attack, player being hit and player being killed
         this.stage.addEventListener("playerAttack", { handleEvent: this.player.attack, player: this.player, mobs: this.mobs });
         this.stage.addEventListener("playerHit", { handleEvent: this.gui.playerHit, player: this.player, gui: this.gui });
-        this.stage.addEventListener("playerDeath", { handleEvent: this.gui.playerDeath, player: this.player, gui: this.gui });
+//        this.stage.addEventListener("playerDeath", { handleEvent: this.gui.playerDeath, player: this.player, gui: this.gui });
+        this.stage.addEventListener("playerDeath", { handleEvent: this.playerDeath, instance: this });
 
         this.gui.init();
 
@@ -163,7 +166,7 @@ class MainGame {
                 instance.map.shiftRight();
                 instance.gameObjects.shiftRight()
                 instance.clouds.shiftRight();
-//                mobs.shiftRight();
+                instance.mobs.shiftRight();
             }
         }
 
@@ -173,7 +176,7 @@ class MainGame {
                 instance.map.shiftLeft();
                 instance.gameObjects.shiftLeft()
                 instance.clouds.shiftLeft();
-//                mobs.shiftLeft();
+                instance.mobs.shiftLeft();
             }
         }
 
@@ -194,6 +197,12 @@ class MainGame {
             case Constants.GAME_STATE_PLAY:
                 instance.clouds.update();
                 instance.player.update();
+                instance.mobs.update();
+                instance.sound.update(instance.player, instance.map);
+                instance.gui.update();
+                break;
+            case Constants.GAME_STATE_DEATH:
+                instance.clouds.update();
                 break;
         }
         instance.stage.update();
@@ -222,5 +231,30 @@ class MainGame {
         instance.gameState = Constants.GAME_STATE_START;
         instance.gui.display(instance.gameState);
     }
+
+    // Handle player being killed, switch game state to dead state
+    playerDeath(e: Event): void {
+        var instance = this.instance;
+        instance.gameState = Constants.GAME_STATE_DEATH;
+        instance.player.die();
+        instance.gui.deathScreen.setKillCount(instance.player.getKillCount());
+        instance.gui.display(instance.gameState);
+    }
+
+    restartGame(event: Event): void {
+        var instance = this.instance;
+
+        // TODO: Change this
+        instance.gameState = Constants.GAME_STATE_PLAY;
+        instance.gui.display(instance.gameState);
+
+//                cloudManager.reset();
+//                player.reset();
+//                map.reset();
+//                gameObjects.reset();
+//                mobs.reset();
+//                gui.gameScreen.reset();
+    }
+
 }
 

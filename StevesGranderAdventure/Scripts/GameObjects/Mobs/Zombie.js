@@ -12,7 +12,7 @@
 * Date Last Modified:  Nov. 22, 2014
 * Revision History:
 *      v1 - Migrated file to Project 1
-*      v2 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class
+*      v2 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class)
 */
 var GameObjects;
 (function (GameObjects) {
@@ -26,8 +26,9 @@ var GameObjects;
             * to be kept in internal variables. Then initializes the Zombie object instance
             * and all its variables.
             */
-            function Zombie(zombie, foreground, sound, player) {
-                _super.call(this, Managers.Assets.characters, zombie, foreground, player);
+            //            constructor(zombie: Object, foreground: GameObjects.Layer, sound: Managers.Sound, player: GameObjects.Player) {
+            function Zombie() {
+                _super.call(this, Managers.Assets.characters, "zombieStandRight");
                 // Instance variables
                 this.spriteNames = [
                     "zombieStandRight",
@@ -39,8 +40,11 @@ var GameObjects;
                 this.damage = 2;
 
                 this.name = "Zombie";
-                this.sound = sound;
 
+                //                this.sound = sound;
+                //                this.setEntity(zombie);
+                //                this.setMapData(foreground);
+                //                this.setPlayer(player);
                 /*
                 var spriteName: string;
                 for (var frameID = 0; frameID < this.spriteNames.length; frameID++) {
@@ -58,14 +62,12 @@ var GameObjects;
                 //                this.sprite.y = this.canvasY;
                 //                this.sprite.regX = 0;
                 //                this.sprite.regY = 0;
-                this.x = this.canvasX;
-                this.y = this.canvasY;
-                this.regX = 0;
-                this.regY = 0;
-
+                //                this.x = this.canvasX;
+                //                this.y = this.canvasY;
+                //                this.regX = 0;
+                //                this.regY = 0;
                 //                stage.addChild(this.sprite);
-                stage.addChild(this);
-
+                //                stage.addChild(this);
                 this.health = 10;
                 this.attackTimer = 0;
                 this.runDistanceIncrements = 16;
@@ -106,8 +108,7 @@ var GameObjects;
                 // Animate zombie facing/walking sprites
                 if (this.spriteUpdate) {
                     //                    stage.removeChild(this.sprite);
-                    stage.removeChild(this);
-
+                    //                    stage.removeChild(this);
                     if (this.facing === constants.FACING_LEFT) {
                         if (Math.floor((this.runDistance % (this.runDistanceIncrements * 4)) / this.runDistanceIncrements * 2)) {
                             //                            this.sprite = this.sprites["zombieStepLeft"].clone();
@@ -131,8 +132,8 @@ var GameObjects;
                     //                    stage.addChild(this.sprite);
                     this.x = this.canvasX;
                     this.y = this.canvasY;
-                    stage.addChild(this);
 
+                    //                    stage.addChild(this);
                     this.spriteUpdate = false;
                 }
 

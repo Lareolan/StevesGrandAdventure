@@ -20,10 +20,10 @@ var GameObjects;
         __extends(GUIGameScreen, _super);
         // Initializes the game play screen's GUI components such as player's health
         // and kill count display objects.
-        function GUIGameScreen(stage, player) {
+        function GUIGameScreen(stage /*, player: GameObjects.Player*/ ) {
             _super.call(this, stage);
             this.healthSprites = [];
-            this.player = player;
+            //            this.player = player;
         }
         GUIGameScreen.prototype.init = function () {
             this.healthBar = new createjs.Sprite(Managers.Assets.guiComponents, "MeterBackground");
@@ -58,11 +58,15 @@ var GameObjects;
             this.screenObjects.push(this.killDisplay);
         };
 
-        // Shows the victory screen
-        GUIGameScreen.prototype.show = function () {
-            _super.prototype.show.call(this);
+        // Sets internal reference to player object
+        GUIGameScreen.prototype.setPlayer = function (player) {
+            this.player = player;
         };
 
+        // Shows the victory screen
+        //        show() {
+        //            super.show();
+        //        }
         // Resets the game play screen back to initial state
         GUIGameScreen.prototype.reset = function () {
             /*
@@ -103,8 +107,8 @@ var GameObjects;
                 }
             }
 
-            if (this.lastKillCount != this.player.getKillcount()) {
-                this.lastKillCount = this.player.getKillcount();
+            if (this.lastKillCount != this.player.getKillCount()) {
+                this.lastKillCount = this.player.getKillCount();
                 this.killDisplay.text = "Kill Count: " + this.lastKillCount;
                 //                stage.update();
             }
@@ -114,7 +118,7 @@ var GameObjects;
         GUIGameScreen.prototype.playerHit = function (stage, instance) {
             stage.addChild(instance.hitShape);
             setTimeout(function () {
-                this.stage.removeChild(instance.hitShape);
+                stage.removeChild(instance.hitShape);
                 //                stage.update();
             }, 100);
         };

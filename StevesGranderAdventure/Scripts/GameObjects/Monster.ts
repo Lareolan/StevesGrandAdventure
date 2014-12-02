@@ -7,7 +7,7 @@
  * Date Last Modified:  Nov. 22, 2014
  * Revision History:
  *      v1 - Migrated file to Project 1
- *      v2 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class
+ *      v2 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class)
  */
 module GameObjects {
     // The Monster class
@@ -18,10 +18,17 @@ module GameObjects {
 
         // The constructor sets the local reference to the player object, and lets the superclass
         // constructor do the rest.
-        constructor(spriteSheet: createjs.SpriteSheet, monster: Object, foreground: GameObjects.Layer, player: GameObjects.Player, frameNameOrNumber?: string);
-        constructor(spriteSheet: createjs.SpriteSheet, monster: Object, foreground: GameObjects.Layer, player: GameObjects.Player, frameNameOrNumber?: number);
-        constructor(spriteSheet: createjs.SpriteSheet, monster: Object, foreground: GameObjects.Layer, player: GameObjects.Player, frameNameOrNumber: any) {
-            super(spriteSheet, monster, foreground, frameNameOrNumber);
+        constructor(spriteSheet: createjs.SpriteSheet, frameNameOrNumber?: string);
+        constructor(spriteSheet: createjs.SpriteSheet, frameNameOrNumber?: number);
+        constructor(spriteSheet: createjs.SpriteSheet, frameNameOrNumber: any) {
+            super(spriteSheet, frameNameOrNumber);
+        }
+
+        /*
+         * Sets an internal reference to the Player object (for combat purposes).
+         * @param player The Player object to store the reference to.
+         */
+        setPlayer(player: GameObjects.Player): void {
             this.player = player;
         }
 
@@ -48,7 +55,7 @@ module GameObjects {
             if (this instanceof GameObjects.Mobs.Zombie) {
                 this.sound.zombieDeath(<GameObjects.Mobs.Zombie>this, this.player);
                 //                stage.removeChild(this.sprite);
-                stage.removeChild(this);
+//                stage.removeChild(this);
             }
             this.player.addKill();
         }

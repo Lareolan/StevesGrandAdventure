@@ -14,7 +14,7 @@ var __extends = this.__extends || function (d, b) {
 * Date Last Modified:  Nov. 22, 2014
 * Revision History:
 *      v1 - Migrated file to Project 1
-*      v2 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class
+*      v2 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class)
 */
 var GameObjects;
 (function (GameObjects) {
@@ -27,7 +27,7 @@ var GameObjects;
         * variables. Then initializes the player's object instance and all its variables.
         */
         function Player() {
-            _super.call(this, Managers.Assets.characters, 0);
+            _super.call(this, Managers.Assets.characters, "steveStandRight");
             // Instance variables
             this.spriteNames = [
                 "steveStandRight",
@@ -64,16 +64,15 @@ var GameObjects;
             //            this.sprite.regX = 0;
             //            this.sprite.regY = 0;
             //            this = this.sprites[this.spriteNames[0]].clone();
-            this.x = this.canvasX;
-            this.y = this.canvasY;
-            this.regX = 0;
-            this.regY = 0;
-
+            //            this.x = this.canvasX;
+            //            this.y = this.canvasY;
+            //            this.regX = 0;
+            //            this.regY = 0;
             this.health = 10;
             this.attackCounter = 0;
             this.runDistanceIncrements = 4;
             this.useXOffsetHack = true;
-            this.baseMovementSpeed = constants.MOVE_SPEED;
+            this.baseMovementSpeed = Constants.MOVE_SPEED;
             // And add default (right facing standing Steve) sprite to the stage
             //            stage.addChild(this.sprite);
             //            stage.addChild(this);
@@ -116,7 +115,7 @@ var GameObjects;
         Player.prototype.attack = function (event) {
             this.player.attackFlag = true;
             this.player.spriteUpdate = true;
-            this.mobs.hitTest(this.player.baseDamage);
+            this.mobs.testMobHit(this.player.baseDamage);
         };
 
         /*
@@ -128,17 +127,14 @@ var GameObjects;
             this.health -= hearts;
             if (this.health <= 0) {
                 var event = new createjs.Event("playerDeath", true, false);
-                //                this.stage.dispatchEvent(event);
+                this.stage.dispatchEvent(event);
             } else {
                 var event = new createjs.Event("playerHit", true, false);
-                //                this.stage.dispatchEvent(event);
+                this.stage.dispatchEvent(event);
             }
             return true;
         };
 
-        //        setSound(sound: Managers.Sound): void {
-        //            this.sound = sound;
-        //        }
         // Set the player's dead flag to true
         Player.prototype.die = function () {
             this.dead = true;
@@ -153,7 +149,7 @@ var GameObjects;
         * Retrieve the player's current kill count.
         * @returns The current kill count.
         */
-        Player.prototype.getKillcount = function () {
+        Player.prototype.getKillCount = function () {
             return this.killCount;
         };
 

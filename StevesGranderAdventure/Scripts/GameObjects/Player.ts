@@ -9,7 +9,7 @@
  * Date Last Modified:  Nov. 22, 2014
  * Revision History:
  *      v1 - Migrated file to Project 1
- *      v2 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class
+ *      v2 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class)
  */
 module GameObjects {
     // Player Class
@@ -29,7 +29,6 @@ module GameObjects {
         attackCounter: number;
         baseDamage: number = 5;
         killCount: number = 0;
-        //        steveObject: Object;
 
         // Added to remove red squiggles
         player: any;
@@ -41,7 +40,8 @@ module GameObjects {
          * variables. Then initializes the player's object instance and all its variables.
          */
         constructor() {
-            super(Managers.Assets.characters, 0);
+            super(Managers.Assets.characters, "steveStandRight");
+            
 
             //            this.steveObject = Steve;
             this.name = "Steve";
@@ -67,10 +67,10 @@ module GameObjects {
             //            this.sprite.regY = 0;
 
             //            this = this.sprites[this.spriteNames[0]].clone();
-            this.x = this.canvasX;
-            this.y = this.canvasY;
-            this.regX = 0;
-            this.regY = 0;
+//            this.x = this.canvasX;
+//            this.y = this.canvasY;
+//            this.regX = 0;
+//            this.regY = 0;
 
 
             this.health = 10;
@@ -122,7 +122,7 @@ module GameObjects {
         attack(event: Event): void {
             this.player.attackFlag = true;
             this.player.spriteUpdate = true;
-            this.mobs.hitTest(this.player.baseDamage);
+            this.mobs.testMobHit(this.player.baseDamage);
         }
 
         /*
@@ -134,10 +134,10 @@ module GameObjects {
             this.health -= hearts;
             if (this.health <= 0) {
                 var event = new createjs.Event("playerDeath", true, false);
-//                this.stage.dispatchEvent(event);
+                this.stage.dispatchEvent(event);
             } else {
                 var event = new createjs.Event("playerHit", true, false);
-//                this.stage.dispatchEvent(event);
+                this.stage.dispatchEvent(event);
             }
             return true;
         }
@@ -156,7 +156,7 @@ module GameObjects {
          * Retrieve the player's current kill count.
          * @returns The current kill count.
          */
-        getKillcount(): number {
+        getKillCount(): number {
             return this.killCount;
         }
 

@@ -6,7 +6,7 @@
  * Date Last Modified:  Nov. 22, 2014
  * Revision History:
  *      v1 - Migrated file to Project 1
- *      v2 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class
+ *      v2 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class)
  */
 module GameObjects {
     export module Mobs {
@@ -32,11 +32,16 @@ module GameObjects {
              * to be kept in internal variables. Then initializes the Zombie object instance
              * and all its variables.
              */
-            constructor(zombie: Object, foreground: GameObjects.Layer, sound: Managers.Sound, player: GameObjects.Player) {
-                super(Managers.Assets.characters, zombie, foreground, player);
+//            constructor(zombie: Object, foreground: GameObjects.Layer, sound: Managers.Sound, player: GameObjects.Player) {
+            constructor() {
+                super(Managers.Assets.characters, "zombieStandRight");
 
                 this.name = "Zombie";
-                this.sound = sound;
+//                this.sound = sound;
+//                this.setEntity(zombie);
+//                this.setMapData(foreground);
+//                this.setPlayer(player);
+
 
                 /*
                 var spriteName: string;
@@ -57,13 +62,13 @@ module GameObjects {
                 //                this.sprite.regX = 0;
                 //                this.sprite.regY = 0;
 
-                this.x = this.canvasX;
-                this.y = this.canvasY;
-                this.regX = 0;
-                this.regY = 0;
+//                this.x = this.canvasX;
+//                this.y = this.canvasY;
+//                this.regX = 0;
+//                this.regY = 0;
 
                 //                stage.addChild(this.sprite);
-                stage.addChild(this);
+//                stage.addChild(this);
 
                 this.health = 10;
                 this.attackTimer = 0;
@@ -106,7 +111,7 @@ module GameObjects {
                 // Animate zombie facing/walking sprites
                 if (this.spriteUpdate) {
                     //                    stage.removeChild(this.sprite);
-                    stage.removeChild(this);
+//                    stage.removeChild(this);
 
                     if (this.facing === constants.FACING_LEFT) {
                         if (Math.floor((this.runDistance % (this.runDistanceIncrements * 4)) / this.runDistanceIncrements * 2)) {
@@ -131,7 +136,7 @@ module GameObjects {
 //                    stage.addChild(this.sprite);
                     this.x = this.canvasX;
                     this.y = this.canvasY;
-                    stage.addChild(this);
+//                    stage.addChild(this);
 
                     this.spriteUpdate = false;
                 }

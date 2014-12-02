@@ -33,7 +33,7 @@ module Managers {
         gui: any;
 
 
-        // Initializes preload screen (not yet used, will be in v2)
+        // Initializes preload screen
         constructor(stage: createjs.Stage) {
             this.stage = stage;
 
@@ -42,7 +42,7 @@ module Managers {
 
             this.startScreen = new GameObjects.GUIStartScreen(this.stage);
             this.instructionScreen = new GameObjects.GUIInstructionScreen(this.stage);
-            this.gameScreen = new GameObjects.GUIGameScreen(this.stage, this.player);
+            this.gameScreen = new GameObjects.GUIGameScreen(this.stage/*, this.player*/);
             this.deathScreen = new GameObjects.GUIDeathScreen(this.stage);
             this.victoryScreen = new GameObjects.GUIVictoryScreen(this.stage);
 //            this.init();
@@ -73,16 +73,23 @@ module Managers {
             this.instructionScreen.addChild(this.clouds);
  //           this.instructionScreen.addChild(this.map);
             this.instructionScreen.init();
-//            this.instructionScreen.show();
+            //            this.instructionScreen.show();
 
             // Initialize Game Screen
+            this.gameScreen.setPlayer(this.player);
             this.gameScreen.addChild(this.sky);
             this.gameScreen.addChild(this.clouds);
             this.gameScreen.addChild(this.map);
             this.gameScreen.addChild(this.gameObjects);
+            this.gameScreen.addChild(this.mobs);
             this.gameScreen.addChild(this.player);
             this.gameScreen.init();
 //            this.gameScreen.show();
+
+            // Initialize Death Screen
+            this.deathScreen.addChild(this.sky);
+            this.deathScreen.addChild(this.clouds);
+            this.deathScreen.init();
         }
 
         // Sets internal reference to the stage object
@@ -130,12 +137,14 @@ module Managers {
             this.gui.gameScreen.playerHit(this.gui.stage, this.gui.gameScreen);
         }
 
+/*
         // Handle player being killed, switch game state to dead state
         playerDeath(e: Event): void {
             gameState = constants.GAME_STATE_DEATH;
             this.player.die();
-            this.gui.show(constants.GAME_STATE_DEATH);
+            this.gui.display(Constants.GAME_STATE_DEATH);
         }
+*/
 
         // Show appropriate screen depending on game state
         // used when switching states, takes a game state as a parameter
@@ -220,6 +229,11 @@ module Managers {
                 case Constants.GAME_STATE_PLAY:
                     this.activeScreen.hide();
                     this.activeScreen = this.gameScreen;
+                    this.activeScreen.show();
+                    break;
+                case Constants.GAME_STATE_DEATH:
+                    this.activeScreen.hide();
+                    this.activeScreen = this.deathScreen;
                     this.activeScreen.show();
                     break;
             }
