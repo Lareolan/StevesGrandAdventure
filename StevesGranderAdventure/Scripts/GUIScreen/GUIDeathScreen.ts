@@ -6,10 +6,11 @@
  * Date Last Modified:  Nov. 22, 2014
  * Revision History:
  *      v1 - Migrated file to Project 1
+ *      v2 - Moved class into GUIScreen module
  */
-module GameObjects {
+module GUIScreen {
     // GUIDeathScreen Class
-    export class GUIDeathScreen extends GameObjects.Screen {
+    export class GUIDeathScreen extends GUIScreen.Screen {
         // Instance variables holding information
         redOverlay: createjs.Shape;
         killLine: createjs.Text;

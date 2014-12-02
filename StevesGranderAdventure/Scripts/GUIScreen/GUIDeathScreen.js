@@ -12,9 +12,10 @@
 * Date Last Modified:  Nov. 22, 2014
 * Revision History:
 *      v1 - Migrated file to Project 1
+*      v2 - Moved class into GUIScreen module
 */
-var GameObjects;
-(function (GameObjects) {
+var GUIScreen;
+(function (GUIScreen) {
     // GUIDeathScreen Class
     var GUIDeathScreen = (function (_super) {
         __extends(GUIDeathScreen, _super);
@@ -89,7 +90,7 @@ var GameObjects;
             _super.prototype.show.call(this);
         };
         return GUIDeathScreen;
-    })(GameObjects.Screen);
-    GameObjects.GUIDeathScreen = GUIDeathScreen;
-})(GameObjects || (GameObjects = {}));
+    })(GUIScreen.Screen);
+    GUIScreen.GUIDeathScreen = GUIDeathScreen;
+})(GUIScreen || (GUIScreen = {}));
 //# sourceMappingURL=GUIDeathScreen.js.map

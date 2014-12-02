@@ -13,9 +13,10 @@
 * Revision History:
 *      v1 - Migrated file to Project 1
 *      v2 - Added code for button initialization
+*      v3 - Moved class into GUIScreen module
 */
-var GameObjects;
-(function (GameObjects) {
+var GUIScreen;
+(function (GUIScreen) {
     // GUIStartScreen class
     var GUIStartScreen = (function (_super) {
         __extends(GUIStartScreen, _super);
@@ -70,7 +71,7 @@ var GameObjects;
             this.screenObjects.push(instructBtn);
         };
         return GUIStartScreen;
-    })(GameObjects.Screen);
-    GameObjects.GUIStartScreen = GUIStartScreen;
-})(GameObjects || (GameObjects = {}));
+    })(GUIScreen.Screen);
+    GUIScreen.GUIStartScreen = GUIStartScreen;
+})(GUIScreen || (GUIScreen = {}));
 //# sourceMappingURL=GUIStartScreen.js.map

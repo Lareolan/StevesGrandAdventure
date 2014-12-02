@@ -1,7 +1,7 @@
 ﻿/**
- * This file contains game initialization code, input code and primary game loop.
+ * This file contains all the game constants.
  * Author:              Konstantin Koton
- * Filename:            MainGame.ts
+ * Filename:            Constants.ts
  * Last Modified By:    Konstantin Koton
  * Date Last Modified:  Nov. 22, 2014
  * Revision History:    

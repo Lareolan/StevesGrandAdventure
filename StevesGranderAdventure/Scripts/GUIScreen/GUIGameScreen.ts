@@ -6,10 +6,11 @@
  * Date Last Modified:  Nov. 22, 2014
  * Revision History:
  *      v1 - Migrated file to Project 1
+ *      v2 - Moved class into GUIScreen module
  */
-module GameObjects {
+module GUIScreen {
     // GUIGameScreen Class
-    export class GUIGameScreen extends GameObjects.Screen {
+    export class GUIGameScreen extends GUIScreen.Screen {
         // Instance variables
         healthBar: createjs.Sprite;
         healthSprites: Array<createjs.Sprite>;
@@ -68,6 +69,14 @@ module GameObjects {
 
         // Resets the game play screen back to initial state
         reset(): void {
+            this.killDisplay.text = "Kill Count: 0";
+
+            for (var i = 0; i < 10; i++) {
+                this.stage.addChild(this.healthSprites[i]);
+            }
+
+//            this.init();
+
 /*
             this.healthBar.x = Constants.HALF_SCREEN_WIDTH - 160;
             this.healthBar.y = 640;
@@ -91,7 +100,7 @@ module GameObjects {
             this.killDisplay.textBaseline = "middle";
             this.killDisplay.name = "Kill Display";
             stage.addChild(this.killDisplay);
-*/
+//*/
         }
 
         // Updates the player's health display and kill count
@@ -102,7 +111,7 @@ module GameObjects {
                 for (var i = this.healthSprites.length - 1; i >= health; i--) {
 //                    stage.removeChild(this.healthSprites[i]);
                     this.stage.removeChild(this.healthSprites[i]);
-                    this.healthSprites.length = i;
+//                    this.healthSprites.length = i;
                 }
             }
 

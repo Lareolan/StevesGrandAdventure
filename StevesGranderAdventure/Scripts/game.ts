@@ -68,13 +68,14 @@ interface document {
 //var gui: Managers.GUI;
 //var sound: Managers.Sound;
 //var mobs: Managers.Mobs;
-var gameState: number;
-var worldTimer: number;
+//var gameState: number;
+//var worldTimer: number;
 //var gameObjects: Managers.Objects;
-var startButton: Array<createjs.DisplayObject>;
-var instructionsButton: Array<createjs.DisplayObject>;
+//var startButton: Array<createjs.DisplayObject>;
+//var instructionsButton: Array<createjs.DisplayObject>;
 
 // This JavaScript Object holds user input states
+/*
 var input = {
     keyboard: {
         KEY_LEFT: false,
@@ -114,9 +115,10 @@ var constants = {
     GAME_STATE_DEATH: 5,
     GAME_STATE_VICTORY: 6
 };
+*/
 
 // Preload function used to load all the data and display progress report
-function preload(): void {
+function start(): void {
     var game = new MainGame(document.getElementById("canvas"));
 
 /*
@@ -139,6 +141,140 @@ function preload(): void {
 */
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// If fullscreen button is clicked, initialize fullscreen mode
+$("#fullscreen").click(function () {
+    if (!isFullscreen()) {
+        var $canvas = $("canvas");
+        launchIntoFullscreen($canvas[0]);
+        var width = $(window).outerWidth();
+        var scale = width / $canvas.innerWidth();
+        $canvas.attr("style", "transform: scale(" + scale + ")");
+        $canvas.addClass("fullscreen");
+    }
+});
+
+/*
+ * This function determines if the game is in fullscreen mode and returns a boolean indicator.
+ * @returns true if game is fullscreen, otherwise false.
+ */
+function isFullscreen() {
+    return document.fullscreen || document.mozFullScreen || document.webkitIsFullScreen || document.msFullscreenElement;
+}
+
+// Because fullscreen mode for browsers is still a new feature, the following 4 functions
+// bind vendor-specific event listeners to find out if user exited fullscreen mode.
+
+// Default version of the event that is getting standardized across newer browsers.
+document.addEventListener("fullscreenchange", function () {
+    if (!document.fullscreen) {
+        exitFullscreen();
+    }
+}, false);
+
+// Mozilla version of the event, for older Firefox browsers
+document.addEventListener("mozfullscreenchange", function () {
+    if (!document.mozFullScreen) {
+        exitFullscreen();
+    }
+}, false);
+
+// Webkit version of the event, for older webkit-based browsers
+document.addEventListener("webkitfullscreenchange", function () {
+    if (!document.webkitIsFullScreen) {
+        exitFullscreen();
+    }
+}, false);
+
+// Microsoft version of the event, for older IE browsers
+document.addEventListener("msfullscreenchange", function () {
+    if (!document.msFullscreenElement) {
+        exitFullscreen();
+    }
+}, false);
+
+// Find the right method, call on correct element
+function launchIntoFullscreen(element: Element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+    } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+    } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+    } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+    }
+}
+
+/*
+ * This function re-enables the mouse cursor when exiting fullscreen.
+ */
+function exitFullscreen() {
+    $("canvas").removeAttr("style").removeClass("fullscreen");
+};
+
+/*
+ * This code was disabled, planning to enable it when I add an exit fullscreen
+ * button (hopefully in next version).
+// Whack fullscreen
+function exitFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    }
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 // Display a loading progress bar
 function handleProgress(event: ProgressEvent): void {
     var x = stage.canvas.width / 2 - 200;
@@ -198,12 +334,14 @@ function gameLoop(event): void {
             break;
     }
 }
+*/
 
 /*
  * This function runs the primary game play sequences. Checking input states, and reacting accordingly as well
  * as update all game assets, such as move clouds, map, mobs, game objects and run their update() functions
  * to update their states.
  */
+/*
 function playGame(): void {
     // If player moves left, shift all drawn assets to the right
     if (input.keyboard.KEY_LEFT) {
@@ -238,10 +376,12 @@ function playGame(): void {
     stage.update();
     sound.update(player, map);
 }
+*/
 
 /*
  * This function runs each tick while in the start menu state. Updates clouds and image assets.
  */
+/*
 function startMenu(): void {
     cloudManager.update();
     stage.update();
@@ -250,6 +390,7 @@ function startMenu(): void {
 /*
  * This function runs each tick while in the instruction screen state. Updates clouds and image assets.
  */
+/*
 function instructionsScreen(): void {
     cloudManager.update();
     stage.update();
@@ -258,6 +399,7 @@ function instructionsScreen(): void {
 /*
  * This function runs each tick while in the death screen state. Updates clouds and image assets.
  */
+/*
 function deathScreen(): void {
     cloudManager.update();
     stage.update();
@@ -266,6 +408,7 @@ function deathScreen(): void {
 /*
  * This function runs each tick while in the victory screen state. Updates image assets.
  */
+/*
 function victoryScreen(): void {
     stage.update();
 }
@@ -273,6 +416,7 @@ function victoryScreen(): void {
 /*
  * This function initializes game start screen and all game assets.
  */
+/*
 function initGameStart(): void {
     gui.show(constants.GAME_STATE_START);
 
@@ -335,6 +479,7 @@ function initGameStart(): void {
 /*
  * This function initializes the game's instruction screen
  */
+/*
 function initInstructionScreen() {
     gui.show(constants.GAME_STATE_INSTRUCTIONS);
 }
@@ -602,6 +747,7 @@ $(document).keyup(function (e: Event) {
  * This function was supposed to rotate view on mobile devices to ensure that the game was always in
  * landscape mode even if user turns their device to portrait mode direction. However it doesn't seem to work.
  */
+/*
 $(window).bind("orientationchange", function (e: Event) {
     switch (window.orientation) {
         case -90:
@@ -616,76 +762,4 @@ $(window).bind("orientationchange", function (e: Event) {
     }
 });
 
-/*
- * This function determines if the game is in fullscreen mode and returns a boolean indicator.
- * @returns true if game is fullscreen, otherwise false.
- */
-function isFullscreen() {
-    return document.fullscreen || document.mozFullScreen || document.webkitIsFullScreen || document.msFullscreenElement;
-}
-
-// Because fullscreen mode for browsers is still a new feature, the following 4 functions
-// bind vendor-specific event listeners to find out if user exited fullscreen mode.
-
-// Default version of the event that is getting standardized across newer browsers.
-document.addEventListener("fullscreenchange", function () {
-    if (!document.fullscreen) {
-        exitFullscreen();
-    }
-}, false);
-
-// Mozilla version of the event, for older Firefox browsers
-document.addEventListener("mozfullscreenchange", function () {
-    if (!document.mozFullScreen) {
-        exitFullscreen();
-    }
-}, false);
-
-// Webkit version of the event, for older webkit-based browsers
-document.addEventListener("webkitfullscreenchange", function () {
-    if (!document.webkitIsFullScreen) {
-        exitFullscreen();
-    }
-}, false);
-
-// Microsoft version of the event, for older IE browsers
-document.addEventListener("msfullscreenchange", function () {
-    if (!document.msFullscreenElement) {
-        exitFullscreen();
-    }
-}, false);
-
-// Find the right method, call on correct element
-function launchIntoFullscreen(element: Element) {
-    if (element.requestFullscreen) {
-        element.requestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-    } else if (element.mozRequestFullScreen) {
-        element.mozRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-    } else if (element.webkitRequestFullscreen) {
-        element.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-    } else if (element.msRequestFullscreen) {
-        element.msRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-    }
-}
-
-/*
- * This function re-enables the mouse cursor when exiting fullscreen.
- */
-function exitFullscreen() {
-    $("canvas").removeAttr("style").removeClass("fullscreen");
-};
-
-/*
- * This code was disabled, planning to enable it when I add an exit fullscreen
- * button (hopefully in next version).
-// Whack fullscreen
-function exitFullscreen() {
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-    }
-}
 */

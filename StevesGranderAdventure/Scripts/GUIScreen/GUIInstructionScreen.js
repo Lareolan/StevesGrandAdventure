@@ -10,10 +10,12 @@
 * Filename:            GUIInstructionScreen.ts
 * Last Modified By:    Konstantin Koton
 * Date Last Modified:  Nov. 22, 2014
-* Revision History:    Too numerous to mention
+* Revision History:
+*      v1 - Migrated file to Project 1
+*      v2 - Moved class into GUIScreen module
 */
-var GameObjects;
-(function (GameObjects) {
+var GUIScreen;
+(function (GUIScreen) {
     // GUIInstructionScreen Class
     var GUIInstructionScreen = (function (_super) {
         __extends(GUIInstructionScreen, _super);
@@ -94,8 +96,6 @@ var GameObjects;
             btn.setClickHandler(function () {
                 var event = new createjs.Event("backButtonClicked", true, false);
                 theStage.dispatchEvent(event);
-                //                gameState = Constants.GAME_STATE_START;
-                //                initGameStart();
             });
             this.screenObjects.push(btn);
         };
@@ -105,7 +105,7 @@ var GameObjects;
             _super.prototype.show.call(this);
         };
         return GUIInstructionScreen;
-    })(GameObjects.Screen);
-    GameObjects.GUIInstructionScreen = GUIInstructionScreen;
-})(GameObjects || (GameObjects = {}));
+    })(GUIScreen.Screen);
+    GUIScreen.GUIInstructionScreen = GUIInstructionScreen;
+})(GUIScreen || (GUIScreen = {}));
 //# sourceMappingURL=GUIInstructionScreen.js.map

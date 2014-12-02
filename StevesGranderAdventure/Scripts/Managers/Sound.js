@@ -4,7 +4,9 @@
 * Filename:            Sound.ts
 * Last Modified By:    Konstantin Koton
 * Date Last Modified:  Nov. 22, 2014
-* Revision History:    Too numerous to mention
+* Revision History:
+*      v1 - Migrated file to Project 1
+* TODO: v2 - Add panning support for moving sounds
 */
 var Managers;
 (function (Managers) {
@@ -35,6 +37,8 @@ var Managers;
     var Sound = (function () {
         // The constructor
         function Sound() {
+            this.children = [];
+
             this.background = createjs.Sound.play(SoundsList.BACKGROUND, createjs.Sound.INTERRUPT_NONE, 0, 0, -1, 1, 0);
             this.lavaInstance = createjs.Sound.createInstance(SoundsList.LAVA);
             this.lavaPopInstance = createjs.Sound.createInstance(SoundsList.LAVA_POP);
@@ -68,34 +72,29 @@ var Managers;
         */
         Sound.prototype.zombieSpeak = function (zombie, player) {
             var distance, volume, pan;
-            var halfScreenWidth = stage.canvas.width / 2;
 
             distance = zombie.mapX - player.mapX;
-            if (Math.abs(distance) > halfScreenWidth) {
+            if (Math.abs(distance) > Constants.HALF_SCREEN_WIDTH) {
                 return;
             }
 
-            pan = distance / halfScreenWidth;
+            pan = distance / Constants.HALF_SCREEN_WIDTH;
             volume = Math.abs(pan) * 0.8;
 
-            if (!this.zombieSpeakSound) {
-                this.zombieSpeakSound = SoundsList.ZOMBIE_TALK1;
-                this.zombieSpeakInstance = createjs.Sound.play(this.zombieSpeakSound, createjs.Sound.INTERRUPT_NONE, 0, 0, 0, volume, pan);
-            } else {
-                var sound = Math.floor(Math.random() * 3);
-                switch (sound) {
-                    case 0:
-                        this.zombieSpeakSound = SoundsList.ZOMBIE_TALK1;
-                        break;
-                    case 1:
-                        this.zombieSpeakSound = SoundsList.ZOMBIE_TALK2;
-                        break;
-                    case 2:
-                        this.zombieSpeakSound = SoundsList.ZOMBIE_TALK3;
-                        break;
-                }
-                this.zombieSpeakInstance = createjs.Sound.play(this.zombieSpeakSound, createjs.Sound.INTERRUPT_NONE, 0, 0, 0, volume, pan);
+            var sound = Math.floor(Math.random() * 3);
+            switch (sound) {
+                case 0:
+                    this.zombieSpeakSound = SoundsList.ZOMBIE_TALK1;
+                    break;
+                case 1:
+                    this.zombieSpeakSound = SoundsList.ZOMBIE_TALK2;
+                    break;
+                case 2:
+                    this.zombieSpeakSound = SoundsList.ZOMBIE_TALK3;
+                    break;
             }
+            this.zombieSpeakInstance = createjs.Sound.play(this.zombieSpeakSound, createjs.Sound.INTERRUPT_NONE, 0, 0, 0, volume, pan);
+            this.children.push(this.zombieSpeakInstance);
         };
 
         /*
@@ -104,10 +103,9 @@ var Managers;
         */
         Sound.prototype.zombieHurt = function (zombie, player) {
             var distance, volume, pan;
-            var halfScreenWidth = stage.canvas.width / 2;
 
             distance = zombie.mapX - player.mapX;
-            pan = distance / halfScreenWidth;
+            pan = distance / Constants.HALF_SCREEN_WIDTH;
             volume = Math.abs(pan) * 0.8;
             var soundID;
             if (Math.floor(Math.random() * 2) == 0) {
@@ -117,6 +115,7 @@ var Managers;
             }
 
             this.zombieSpeakInstance = createjs.Sound.play(soundID, createjs.Sound.INTERRUPT_NONE, 0, 0, 0, volume, pan);
+            this.children.push(this.zombieSpeakInstance);
         };
 
         /*
@@ -125,12 +124,13 @@ var Managers;
         */
         Sound.prototype.zombieDeath = function (zombie, player) {
             var distance, volume, pan;
-            var halfScreenWidth = stage.canvas.width / 2;
+            var halfScreenWidth = Constants.HALF_SCREEN_WIDTH;
 
             distance = zombie.mapX - player.mapX;
             pan = distance / halfScreenWidth;
             volume = Math.abs(pan) * 0.8;
             this.zombieSpeakInstance = createjs.Sound.play(SoundsList.ZOMBIE_DEATH, createjs.Sound.INTERRUPT_NONE, 0, 0, 0, volume, pan);
+            this.children.push(this.zombieSpeakInstance);
         };
 
         /*
@@ -140,13 +140,12 @@ var Managers;
         */
         Sound.prototype.update = function (player, map) {
             var lavaX, relativeDistance, volume, pan, index, lavaFound, waterFound;
-            var mapData = map.getLayer("Foreground");
-            var halfStage = (stage.canvas.width / 2) * 2;
+            var mapData = map.getLayer(Constants.LAYER_NAME_FOREGROUND);
 
-            var screenTileWidth = Math.floor(stage.canvas.width / 32) * 2;
+            var screenTileWidth = Math.floor(Constants.SCREEN_WIDTH / 32) * 2;
             var screenTileHeight = mapData.height;
             var totalScreenTiles = screenTileWidth * screenTileHeight;
-            var xOffset = Math.floor(player.mapX / 32) - Math.floor(halfStage / 32);
+            var xOffset = Math.floor(player.mapX / 32) - Math.floor(Constants.SCREEN_WIDTH / 32);
             if (xOffset < 0) {
                 xOffset = 0;
             }
@@ -155,12 +154,12 @@ var Managers;
                 index = xOffset + (tileCount % screenTileWidth) + Math.floor(tileCount / screenTileWidth) * mapData.width;
 
                 // If lava is nearby, set lava flag
-                if (mapData.data[index] === constants.LAVA_BLOCK) {
+                if (mapData.data[index] === Constants.LAVA_BLOCK) {
                     lavaX = (index % mapData.width) * 32;
                     relativeDistance = lavaX - player.mapX;
 
-                    if (Math.abs(relativeDistance) <= halfStage) {
-                        pan = (halfStage - Math.abs(relativeDistance)) / halfStage;
+                    if (Math.abs(relativeDistance) <= Constants.SCREEN_WIDTH) {
+                        pan = (Constants.SCREEN_WIDTH - Math.abs(relativeDistance)) / Constants.SCREEN_WIDTH;
                         volume = pan;
 
                         if (relativeDistance < 0) {
@@ -171,12 +170,12 @@ var Managers;
                         break;
                     }
                     // If water is nearby, set water flag
-                } else if (mapData.data[index] === constants.WATER_BLOCK) {
+                } else if (mapData.data[index] === Constants.WATER_BLOCK) {
                     lavaX = (index % mapData.width) * 32;
                     relativeDistance = lavaX - player.mapX;
 
-                    if (Math.abs(relativeDistance) <= halfStage) {
-                        pan = (halfStage - Math.abs(relativeDistance)) / halfStage;
+                    if (Math.abs(relativeDistance) <= Constants.SCREEN_WIDTH) {
+                        pan = (Constants.SCREEN_WIDTH - Math.abs(relativeDistance)) / Constants.SCREEN_WIDTH;
                         volume = pan;
 
                         if (relativeDistance < 0) {
@@ -196,6 +195,7 @@ var Managers;
                 }
                 if (Math.floor(Math.random() * 60) === 0) {
                     this.lavaPopInstance.play(createjs.Sound.INTERRUPT_NONE, 0, 0, 0, volume, pan);
+                    this.children.push(this.lavaPopInstance);
                 }
             }
 

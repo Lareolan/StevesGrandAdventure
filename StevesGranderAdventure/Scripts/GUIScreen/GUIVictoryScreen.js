@@ -10,10 +10,12 @@
 * Filename:            GUIVictoryScreen.ts
 * Last Modified By:    Konstantin Koton
 * Date Last Modified:  Nov. 22, 2014
-* Revision History:    Too numerous to mention
+* Revision History:
+*      v1 - Migrated file to Project 1
+*      v2 - Moved class into GUIScreen module
 */
-var GameObjects;
-(function (GameObjects) {
+var GUIScreen;
+(function (GUIScreen) {
     // GUIVictoryScreen Class
     var GUIVictoryScreen = (function (_super) {
         __extends(GUIVictoryScreen, _super);
@@ -39,7 +41,9 @@ var GameObjects;
         * @param killCount The number of monsters Steve killed
         * @param time The timestamp at the start of the game
         */
-        GUIVictoryScreen.prototype.init = function (killCount, time) {
+        GUIVictoryScreen.prototype.init = function () {
+            var theStage = this.stage;
+
             var textLine, lineData, index, textSize = 32;
 
             for (index = 0; index < this.epilogueList.length; index++) {
@@ -55,26 +59,29 @@ var GameObjects;
             }
             textLine.textAlign = "center";
 
-            var time = Math.floor((new Date().getTime() - worldTimer) / 1000);
-            var timeString = Math.floor(time / 60) + " min " + (time % 60) + " sec";
-            textLine = new createjs.Text("Oh! By the way, you killed " + killCount + " zombies in " + timeString + "!", "32px Minecrafter", "#000000");
+            textLine = new createjs.Text("Oh! By the way, you killed 0 zombies in 0 min 0 sec!", "32px Minecrafter", "#000000");
             textLine.x = 128;
             textLine.y = 512;
             this.screenObjects.push(textLine);
+            this.killLine = textLine;
 
             var btn = new GameObjects.Button("Play Again?", 256, 64, (Constants.HALF_SCREEN_WIDTH - 128), 576, GameObjects.Button.ROUNDED, "black", "#5533DD", "rgba(100, 60, 200, 0.8)");
             btn.setFadeEffect();
             btn.setClickHandler(function () {
-                gameState = constants.GAME_STATE_PLAY;
-                gui.show(constants.GAME_STATE_PLAY);
-                cloudManager.reset();
-                player.reset();
-                map.reset();
-                gameObjects.reset();
-                mobs.reset();
-                gui.gameScreen.reset();
+                var event = new createjs.Event("playAgainButtonClicked", true, false);
+                theStage.dispatchEvent(event);
             });
             this.screenObjects.push(btn);
+        };
+
+        /*
+        * Accepts Steve's kill count and changes the text to show it.
+        * @param killCount The number of monsters Steve killed
+        */
+        GUIVictoryScreen.prototype.setKillCount = function (killCount, worldTimer) {
+            var time = Math.floor((new Date().getTime() - worldTimer) / 1000);
+            var timeString = Math.floor(time / 60) + " min " + (time % 60) + " sec";
+            this.killLine.text = "Oh! By the way, you killed " + killCount + " zombies in " + timeString + "!";
         };
 
         // Shows the victory screen
@@ -82,7 +89,7 @@ var GameObjects;
             _super.prototype.show.call(this);
         };
         return GUIVictoryScreen;
-    })(GameObjects.Screen);
-    GameObjects.GUIVictoryScreen = GUIVictoryScreen;
-})(GameObjects || (GameObjects = {}));
+    })(GUIScreen.Screen);
+    GUIScreen.GUIVictoryScreen = GUIVictoryScreen;
+})(GUIScreen || (GUIScreen = {}));
 //# sourceMappingURL=GUIVictoryScreen.js.map

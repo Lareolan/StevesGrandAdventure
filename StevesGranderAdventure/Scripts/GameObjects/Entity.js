@@ -78,8 +78,8 @@ var GameObjects;
         */
         Entity.prototype.moveRight = function () {
             var result = false;
-            if (this.facing !== constants.FACING_RIGHT) {
-                this.facing = constants.FACING_RIGHT;
+            if (this.facing !== Constants.FACING_RIGHT) {
+                this.facing = Constants.FACING_RIGHT;
                 this.spriteUpdate = true;
                 this.runDistance = 0;
                 this.facingChanged = true;
@@ -119,8 +119,8 @@ var GameObjects;
         */
         Entity.prototype.moveLeft = function () {
             var result = false;
-            if (this.facing !== constants.FACING_LEFT) {
-                this.facing = constants.FACING_LEFT;
+            if (this.facing !== Constants.FACING_LEFT) {
+                this.facing = Constants.FACING_LEFT;
                 this.spriteUpdate = true;
                 this.runDistance = 0;
                 this.facingChanged = true;
@@ -160,7 +160,7 @@ var GameObjects;
         * @returns true if the tile is passable, false if it is solid
         */
         Entity.prototype.isPassable = function (tileID) {
-            if ((tileID === constants.AIR_BLOCK) || (tileID === constants.WATER_BLOCK) || (tileID === constants.LAVA_BLOCK)) {
+            if ((tileID === Constants.AIR_BLOCK) || (tileID === Constants.WATER_BLOCK) || (tileID === Constants.LAVA_BLOCK)) {
                 return true;
             }
             return false;
@@ -173,7 +173,7 @@ var GameObjects;
         * movement would result in collision.
         */
         Entity.prototype.testHorizontal = function (speed) {
-            var xOffset = (this.facing === constants.FACING_LEFT) ? 1 : 0;
+            var xOffset = (this.facing === Constants.FACING_LEFT) ? 1 : 0;
             if (!this.useXOffsetHack) {
                 xOffset = 0;
             }
@@ -207,7 +207,7 @@ var GameObjects;
         * movement would result in collision.
         */
         Entity.prototype.testVerticalCollision = function (direction) {
-            var xOffset = (this.facing === constants.FACING_LEFT) ? 1 : 0;
+            var xOffset = (this.facing === Constants.FACING_LEFT) ? 1 : 0;
             if (!this.useXOffsetHack) {
                 xOffset = 0;
             }
@@ -241,12 +241,12 @@ var GameObjects;
 
         // Shift the entity to the right
         Entity.prototype.shiftRight = function () {
-            this.canvasX += constants.MOVE_SPEED;
+            this.canvasX += Constants.MOVE_SPEED;
         };
 
         // Shift the entity to the left
         Entity.prototype.shiftLeft = function () {
-            this.canvasX -= constants.MOVE_SPEED;
+            this.canvasX -= Constants.MOVE_SPEED;
         };
 
         // Get the entity's current health

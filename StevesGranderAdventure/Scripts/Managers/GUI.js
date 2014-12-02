@@ -15,14 +15,14 @@ var Managers;
         function GUI(stage) {
             this.stage = stage;
 
-            this.preloadScreen = new GameObjects.GUIPreloadScreen(this.stage);
+            this.preloadScreen = new GUIScreen.GUIPreloadScreen(this.stage);
             this.activeScreen = this.preloadScreen;
 
-            this.startScreen = new GameObjects.GUIStartScreen(this.stage);
-            this.instructionScreen = new GameObjects.GUIInstructionScreen(this.stage);
-            this.gameScreen = new GameObjects.GUIGameScreen(this.stage);
-            this.deathScreen = new GameObjects.GUIDeathScreen(this.stage);
-            this.victoryScreen = new GameObjects.GUIVictoryScreen(this.stage);
+            this.startScreen = new GUIScreen.GUIStartScreen(this.stage);
+            this.instructionScreen = new GUIScreen.GUIInstructionScreen(this.stage);
+            this.gameScreen = new GUIScreen.GUIGameScreen(this.stage);
+            this.deathScreen = new GUIScreen.GUIDeathScreen(this.stage);
+            this.victoryScreen = new GUIScreen.GUIVictoryScreen(this.stage);
             //            this.init();
         }
         // Initializes all other game screens
@@ -67,6 +67,11 @@ var Managers;
             this.deathScreen.addChild(this.sky);
             this.deathScreen.addChild(this.clouds);
             this.deathScreen.init();
+
+            // Initialize Victory Screen
+            this.victoryScreen.addChild(this.sky);
+            this.victoryScreen.addChild(this.clouds);
+            this.victoryScreen.init();
         };
 
         // Sets internal reference to the stage object
@@ -122,60 +127,70 @@ var Managers;
         this.gui.display(Constants.GAME_STATE_DEATH);
         }
         */
+        /*
         // Show appropriate screen depending on game state
         // used when switching states, takes a game state as a parameter
-        GUI.prototype.show = function (gameState) {
-            switch (gameState) {
-                case constants.GAME_STATE_INSTRUCTIONS:
-                    this.activeScreen.hide();
-
-                    //                    this.instructionScreen.addChild(sky.getImage());
-                    //                    this.instructionScreen.addChildArray(cloudManager.getImages());
-                    this.instructionScreen.init();
-                    this.activeScreen = this.instructionScreen;
-                    this.activeScreen.show();
-                    break;
-
-                case constants.GAME_STATE_START:
-                    this.activeScreen.hide();
-                    this.activeScreen = this.startScreen;
-                    this.activeScreen.show();
-                    break;
-
-                case constants.GAME_STATE_DEATH:
-                    this.activeScreen.hide();
-
-                    //                    this.deathScreen.addChild(sky.getImage());
-                    //                    this.deathScreen.addChildArray(cloudManager.getImages());
-                    //                    this.deathScreen.init(this.player.getKillcount());
-                    //                    this.activeScreen = this.deathScreen;
-                    this.activeScreen.show();
-                    break;
-
-                case constants.GAME_STATE_VICTORY:
-                    this.activeScreen.hide();
-
-                    //                    this.victoryScreen.addChild(sky.getImage());
-                    //                    this.victoryScreen.addChildArray(cloudManager.getImages());
-                    this.victoryScreen.init(this.player.getKillcount(), worldTimer);
-
-                    //                    this.activeScreen = this.victoryScreen;
-                    this.activeScreen.show();
-                    break;
-
-                case constants.GAME_STATE_PLAY:
-                    worldTimer = new Date().getTime();
-                    this.activeScreen.hide();
-
-                    //                    this.gameScreen.addChild(sky.getImage());
-                    //                    this.gameScreen.addChildArray(cloudManager.getImages());
-                    //                    this.gameScreen.addChild(map.getImage());
-                    this.activeScreen = this.gameScreen;
-                    this.activeScreen.show();
-                    break;
-            }
-        };
-
+        show(gameState: number): void {
+        switch (gameState) {
+        // Hide current screen, and display game instructions screen
+        case constants.GAME_STATE_INSTRUCTIONS:
+        this.activeScreen.hide();
+        
+        //                    this.instructionScreen.addChild(sky.getImage());
+        //                    this.instructionScreen.addChildArray(cloudManager.getImages());
+        
+        this.instructionScreen.init();
+        this.activeScreen = this.instructionScreen;
+        this.activeScreen.show();
+        break;
+        
+        // Hide current screen, and display game start screen
+        case constants.GAME_STATE_START:
+        this.activeScreen.hide();
+        this.activeScreen = this.startScreen;
+        this.activeScreen.show();
+        break;
+        
+        // Hide current screen, and display game over screen
+        case constants.GAME_STATE_DEATH:
+        this.activeScreen.hide();
+        
+        //                    this.deathScreen.addChild(sky.getImage());
+        //                    this.deathScreen.addChildArray(cloudManager.getImages());
+        
+        //                    this.deathScreen.init(this.player.getKillcount());
+        //                    this.activeScreen = this.deathScreen;
+        this.activeScreen.show();
+        break;
+        
+        // Hide current screen, and display game victory screen
+        case constants.GAME_STATE_VICTORY:
+        this.activeScreen.hide();
+        
+        //                    this.victoryScreen.addChild(sky.getImage());
+        //                    this.victoryScreen.addChildArray(cloudManager.getImages());
+        
+        this.victoryScreen.init(this.player.getKillcount(), worldTimer);
+        //                    this.activeScreen = this.victoryScreen;
+        this.activeScreen.show();
+        break;
+        
+        // Hide current screen, and display game play screen
+        case constants.GAME_STATE_PLAY:
+        worldTimer = new Date().getTime();
+        this.activeScreen.hide();
+        
+        //                    this.gameScreen.addChild(sky.getImage());
+        //                    this.gameScreen.addChildArray(cloudManager.getImages());
+        //                    this.gameScreen.addChild(map.getImage());
+        
+        this.activeScreen = this.gameScreen;
+        this.activeScreen.show();
+        break;
+        
+        }
+        }
+        */
         GUI.prototype.display = function (gameState) {
             switch (gameState) {
                 case Constants.GAME_STATE_PRELOAD:
@@ -201,6 +216,11 @@ var Managers;
                 case Constants.GAME_STATE_DEATH:
                     this.activeScreen.hide();
                     this.activeScreen = this.deathScreen;
+                    this.activeScreen.show();
+                    break;
+                case Constants.GAME_STATE_VICTORY:
+                    this.activeScreen.hide();
+                    this.activeScreen = this.victoryScreen;
                     this.activeScreen.show();
                     break;
             }

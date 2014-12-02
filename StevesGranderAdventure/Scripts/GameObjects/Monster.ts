@@ -54,8 +54,8 @@ module GameObjects {
         die(): void {
             if (this instanceof GameObjects.Mobs.Zombie) {
                 this.sound.zombieDeath(<GameObjects.Mobs.Zombie>this, this.player);
-                //                stage.removeChild(this.sprite);
-//                stage.removeChild(this);
+//                this.stage.removeChild(this);
+                this.parent.removeChild(this);
             }
             this.player.addKill();
         }
@@ -67,7 +67,7 @@ module GameObjects {
          */
         hitTest(damage: number): boolean {
             var range;
-            if (this.player.facing == constants.FACING_RIGHT) {
+            if (this.player.facing == Constants.FACING_RIGHT) {
                 range = 64;
             } else {
                 range = 32;
@@ -77,7 +77,7 @@ module GameObjects {
             // player is facing the right direction, and player is eligible to make attack.
             var distanceH = Math.floor(this.player.mapX - this.mapX);
             if (Math.abs(distanceH) <= range) {
-                if (((this.player.facing == constants.FACING_RIGHT) && (distanceH < 0)) || ((this.player.facing == constants.FACING_LEFT) && (distanceH >= 0))) {
+                if (((this.player.facing == Constants.FACING_RIGHT) && (distanceH < 0)) || ((this.player.facing == Constants.FACING_LEFT) && (distanceH >= 0))) {
                     var distanceV = Math.abs(Math.floor(this.mapY - this.player.mapY));
                     if (distanceV <= this.height / 2) {
                         return this.takeDamage(damage);

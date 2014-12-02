@@ -40,7 +40,7 @@ module Managers {
 
         // Create a new cloud instance and bind the cloud off screen event
         getNewCloud(): GameObjects.Cloud {
-            var cloudName = constants.CLOUDS[Math.floor(Math.random() * constants.CLOUDS.length)];
+            var cloudName = Constants.CLOUD_TYPES[Math.floor(Math.random() * Constants.CLOUD_TYPES.length)];
 //            var sky = stage.getChildByName("Sky");
 //            var index = stage.getChildIndex(sky) + 1;
 
@@ -125,7 +125,9 @@ module Managers {
 
         // Reset the clouds
         reset(): void {
-//            this.clouds = [];
+            this.x = 0;
+            this.y = 0;
+            this.removeAllChildren();
             this.initClouds();
         }
     }

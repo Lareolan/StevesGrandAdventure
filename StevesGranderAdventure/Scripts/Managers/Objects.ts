@@ -4,11 +4,13 @@
  * Filename:            Objects.ts
  * Last Modified By:    Konstantin Koton
  * Date Last Modified:  Nov. 22, 2014
- * Revision History:    Too numerous to mention
+ * Revision History:
+ *      v1 - Migrated file to Project 1
+ *      v2 - Modified class to extend createjs.Container
  */
 module Managers {
     // Static Objects manager class
-    export class Objects {
+    export class Objects extends createjs.Container {
         // internal variables
         originalList: Array<Object>;
         objectList: Array<GameObjects.BitmapObject>;
@@ -24,6 +26,7 @@ module Managers {
          * are handled by other classes.
          */
         constructor(objects: Array<Object>, tileset: GameObjects.Tileset) {
+            super();
             this.originalList = objects;
             this.doors = [];
             this.torches = [];
@@ -62,45 +65,50 @@ module Managers {
             }
 
             for (index = 0; index < this.doors.length; index++) {
-                stage.addChild(this.doors[index]);
-                this.objectList.push(this.doors[index]);
+                this.addChild(this.doors[index]);
+//                stage.addChild(this.doors[index]);
+//                this.objectList.push(this.doors[index]);
             }
             for (index = 0; index < this.torches.length; index++) {
-                stage.addChild(this.torches[index]);
-                this.objectList.push(this.torches[index]);
+                this.addChild(this.torches[index]);
+//                stage.addChild(this.torches[index]);
+//                this.objectList.push(this.torches[index]);
             }
             for (index = 0; index < this.miscObjects.length; index++) {
-                stage.addChild(this.miscObjects[index]);
-                this.objectList.push(this.miscObjects[index]);
+                this.addChild(this.miscObjects[index]);
+//                stage.addChild(this.miscObjects[index]);
+//                this.objectList.push(this.miscObjects[index]);
             }
         }
 
         // Move all the static objects to the right to reflect player moving left
-        moveLeft(): void {
-            for (var index = 0; index < this.objectList.length; index++) {
-                this.objectList[index].x += constants.MOVE_SPEED;
-            }
+        shiftRight(): void {
+//            for (var index = 0; index < this.objectList.length; index++) {
+//                this.objectList[index].x += constants.MOVE_SPEED;
+//            }
+            this.x += Constants.MOVE_SPEED;
         }
 
         // Move all the static objects to the left to reflect player moving right
-        moveRight(): void {
-            for (var index = 0; index < this.objectList.length; index++) {
-                this.objectList[index].x -= constants.MOVE_SPEED;
-            }
+        shiftLeft(): void {
+//            for (var index = 0; index < this.objectList.length; index++) {
+//                this.objectList[index].x -= constants.MOVE_SPEED;
+//            }
+            this.x -= Constants.MOVE_SPEED;
         }
 
         // Show all the static objects by adding each one to the stage
         show(): void {
-            for (var index = 0; index < this.objectList.length; index++) {
-                this.objectList[index].show();
-            }
+//            for (var index = 0; index < this.objectList.length; index++) {
+//                this.objectList[index].show();
+//            }
         }
 
         // Hide all the static objects by removing each one from the stage
         hide(): void {
-            for (var index = 0; index < this.objectList.length; index++) {
-                this.objectList[index].hide();
-            }
+//            for (var index = 0; index < this.objectList.length; index++) {
+//                this.objectList[index].hide();
+//            }
         }
 
         // This function checks whether or not the player has reached the exit doorway.
@@ -120,11 +128,8 @@ module Managers {
         // Resets all the static objects back to their initial positions
         // (Used for restarting the level)
         reset(): void {
-            this.show();
-            for (var index = 0; index < this.objectList.length; index++) {
-                this.objectList[index].x = this.objectList[index].posX;
-                this.objectList[index].y = this.objectList[index].posY;
-            }
+            this.x = 0;
+            this.y = 0;
         }
     }
 } 

@@ -5,9 +5,11 @@
  * Filename:            Screen.ts
  * Last Modified By:    Konstantin Koton
  * Date Last Modified:  Nov. 22, 2014
- * Revision History:    Too numerous to mention
+ * Revision History:
+ *      v1 - Migrated file to Project 1
+ *      v2 - Moved class into GUIScreen module
  */
-module GameObjects {
+module GUIScreen {
     // The Screen class
     export class Screen {
         // Instance variables
@@ -23,9 +25,9 @@ module GameObjects {
         // Hides all screen objects by taking them out of the stage and into an internal
         // storage array, then clearing the stage.
         hide() {
-            for (var index = 0; index < this.stage.getNumChildren(); index++) {
-                this.screenObjects.push(this.stage.getChildAt(index));
-            }
+//            for (var index = 0; index < this.stage.getNumChildren(); index++) {
+//                this.screenObjects.push(this.stage.getChildAt(index));
+//            }
             this.stage.removeAllChildren();
         }
 
@@ -39,8 +41,7 @@ module GameObjects {
         }
 
         // Placeholder for init code for the inheriting screens
-        init() {
-        }
+        init() { }
 
         // Add an object to the screen
         addChild(image: createjs.DisplayObject): void {

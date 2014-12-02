@@ -42,7 +42,7 @@ var Managers;
 
         // Create a new cloud instance and bind the cloud off screen event
         CloudManager.prototype.getNewCloud = function () {
-            var cloudName = constants.CLOUDS[Math.floor(Math.random() * constants.CLOUDS.length)];
+            var cloudName = Constants.CLOUD_TYPES[Math.floor(Math.random() * Constants.CLOUD_TYPES.length)];
 
             //            var sky = stage.getChildByName("Sky");
             //            var index = stage.getChildIndex(sky) + 1;
@@ -130,11 +130,13 @@ var Managers;
 
         // Reset the clouds
         CloudManager.prototype.reset = function () {
-            //            this.clouds = [];
+            this.x = 0;
+            this.y = 0;
+            this.removeAllChildren();
             this.initClouds();
         };
         return CloudManager;
     })(createjs.Container);
     Managers.CloudManager = CloudManager;
 })(Managers || (Managers = {}));
-//# sourceMappingURL=CloudManager.js.map
+//# sourceMappingURL=cloudmanager.js.map

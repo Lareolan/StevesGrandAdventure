@@ -20,13 +20,13 @@ module Managers {
         mobs: Managers.Mobs;
         gameObjects: Managers.Objects;
 
-        preloadScreen: GameObjects.GUIPreloadScreen;
-        startScreen: GameObjects.GUIStartScreen;
-        instructionScreen: GameObjects.GUIInstructionScreen;
-        gameScreen: GameObjects.GUIGameScreen;
-        deathScreen: GameObjects.GUIDeathScreen;
-        victoryScreen: GameObjects.GUIVictoryScreen;
-        activeScreen: GameObjects.Screen;
+        preloadScreen: GUIScreen.GUIPreloadScreen;
+        startScreen: GUIScreen.GUIStartScreen;
+        instructionScreen: GUIScreen.GUIInstructionScreen;
+        gameScreen: GUIScreen.GUIGameScreen;
+        deathScreen: GUIScreen.GUIDeathScreen;
+        victoryScreen: GUIScreen.GUIVictoryScreen;
+        activeScreen: GUIScreen.Screen;
 
         // Fix squiggly lines, not actually used
         instance: any;
@@ -37,14 +37,14 @@ module Managers {
         constructor(stage: createjs.Stage) {
             this.stage = stage;
 
-            this.preloadScreen = new GameObjects.GUIPreloadScreen(this.stage);
+            this.preloadScreen = new GUIScreen.GUIPreloadScreen(this.stage);
             this.activeScreen = this.preloadScreen;
 
-            this.startScreen = new GameObjects.GUIStartScreen(this.stage);
-            this.instructionScreen = new GameObjects.GUIInstructionScreen(this.stage);
-            this.gameScreen = new GameObjects.GUIGameScreen(this.stage/*, this.player*/);
-            this.deathScreen = new GameObjects.GUIDeathScreen(this.stage);
-            this.victoryScreen = new GameObjects.GUIVictoryScreen(this.stage);
+            this.startScreen = new GUIScreen.GUIStartScreen(this.stage);
+            this.instructionScreen = new GUIScreen.GUIInstructionScreen(this.stage);
+            this.gameScreen = new GUIScreen.GUIGameScreen(this.stage);
+            this.deathScreen = new GUIScreen.GUIDeathScreen(this.stage);
+            this.victoryScreen = new GUIScreen.GUIVictoryScreen(this.stage);
 //            this.init();
         }
 
@@ -90,6 +90,11 @@ module Managers {
             this.deathScreen.addChild(this.sky);
             this.deathScreen.addChild(this.clouds);
             this.deathScreen.init();
+
+            // Initialize Victory Screen
+            this.victoryScreen.addChild(this.sky);
+            this.victoryScreen.addChild(this.clouds);
+            this.victoryScreen.init();
         }
 
         // Sets internal reference to the stage object
@@ -145,7 +150,7 @@ module Managers {
             this.gui.display(Constants.GAME_STATE_DEATH);
         }
 */
-
+/*
         // Show appropriate screen depending on game state
         // used when switching states, takes a game state as a parameter
         show(gameState: number): void {
@@ -208,6 +213,7 @@ module Managers {
 
             }
         }
+*/
 
         display(gameState: number): void {
             switch (gameState) {
@@ -234,6 +240,11 @@ module Managers {
                 case Constants.GAME_STATE_DEATH:
                     this.activeScreen.hide();
                     this.activeScreen = this.deathScreen;
+                    this.activeScreen.show();
+                    break;
+                case Constants.GAME_STATE_VICTORY:
+                    this.activeScreen.hide();
+                    this.activeScreen = this.victoryScreen;
                     this.activeScreen.show();
                     break;
             }

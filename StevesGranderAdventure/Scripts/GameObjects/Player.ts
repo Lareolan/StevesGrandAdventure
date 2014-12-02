@@ -29,12 +29,13 @@ module GameObjects {
         attackCounter: number;
         baseDamage: number = 5;
         killCount: number = 0;
+        objects: Managers.Objects;
 
         // Added to remove red squiggles
         player: any;
         mobs: any;
 
-        /*
+        /**
          * The constructor takes in an Object describing Steve's attributes, the information
          * about the map's foreground and the sound manager instance to be kept in internal
          * variables. Then initializes the player's object instance and all its variables.
@@ -56,7 +57,7 @@ module GameObjects {
             //            this.sprites.length = this.spriteNames.length;
 
             // Initialize essential variables
-            this.facing = constants.FACING_RIGHT;
+            this.facing = Constants.FACING_RIGHT;
             this.falling = true;
             this.jumping = false;
 
@@ -84,7 +85,15 @@ module GameObjects {
             //            stage.addChild(this);
         }
 
-        /*
+        /**
+         * Set an internal reference to the Object Manager object (for collision with objects, such as doors)
+         * @param objects The Object Manager reference to set
+         */
+        setObjectManager(objects: Managers.Objects): void {
+            this.objects = objects;
+        }
+
+        /**
          * Move Steve right and play step sound.
          * @returns true if player can move right, false if there's an obstacle on the right.
          */
@@ -94,7 +103,7 @@ module GameObjects {
             return super.moveRight();
         }
 
-        /*
+        /**
          * Move Steve left and play step sound.
          * @returns true if player can move left, false if there's an obstacle on the left.
          */
@@ -103,7 +112,7 @@ module GameObjects {
             return super.moveLeft();
         }
 
-        /*
+        /**
          * If Steve is neither jumping, nor falling (i.e. is standing on the ground),
          * then let Steve jump and store what height Steve jumped from.
          */
@@ -114,7 +123,7 @@ module GameObjects {
             }
         }
 
-        /*
+        /**
          * Handle the player's attack event. Set the attack flag, and tell the game that
          * player sprite will need to be updated next update tick. Then check if the player
          * hit anything worth hitting.
@@ -125,7 +134,7 @@ module GameObjects {
             this.mobs.testMobHit(this.player.baseDamage);
         }
 
-        /*
+        /**
          * This function handles the player taking damage and dispatching the appropriate
          * event if player is hit, or if the player dies.
          * @returns Nothing in particular right now. Placeholder for future use.
@@ -152,7 +161,7 @@ module GameObjects {
             this.killCount++;
         }
 
-        /*
+        /**
          * Retrieve the player's current kill count.
          * @returns The current kill count.
          */
@@ -160,7 +169,7 @@ module GameObjects {
             return this.killCount;
         }
 
-        /*
+        /**
          * Calculate the difference between the player's current height and where he jumped from
          * to determine whether player reached maximum jump height.
          * @returns The difference between current height and the height from which the player jumped.
@@ -170,7 +179,7 @@ module GameObjects {
             return (this.jumpedFrom - mapY);
         }
 
-        /*
+        /**
          * This function runs every tick to update all the player's information, such as
          * animating the player's sprite, running vertical collision detection (So player
          * doesn't fall through the floor), drops the player down if he's falling, moves the
@@ -189,7 +198,7 @@ module GameObjects {
 
             // If the player is not moving left or right, reset the run distance counter,
             // and trigger sprite update (to a standing sprite)
-            if (!input.keyboard.KEY_LEFT && !input.keyboard.KEY_RIGHT) {
+            if (!Controls.keyboard.KEY_LEFT && !Controls.keyboard.KEY_RIGHT) {
                 this.runDistance = 0;
                 this.spriteUpdate = true;
             }
@@ -213,7 +222,7 @@ module GameObjects {
                 //                stage.removeChild(this.sprite);
                 //                stage.removeChild(this);
 
-                if (this.facing === constants.FACING_LEFT) {
+                if (this.facing === Constants.FACING_LEFT) {
                     if (Math.floor((this.runDistance % (this.runDistanceIncrements * 4)) / this.runDistanceIncrements * 2)) {
                         // If Steve is facing left and has been running long enough, then
                         // change sprite from standing version to walking version to
@@ -248,7 +257,7 @@ module GameObjects {
                         this.canvasX -= this.width;
                         this.facingChanged = false;
                     }
-                } else if (this.facing === constants.FACING_RIGHT) {
+                } else if (this.facing === Constants.FACING_RIGHT) {
                     if (Math.floor((this.runDistance % (this.runDistanceIncrements * 4)) / (this.runDistanceIncrements * 2))) {
                         // If Steve is facing right and has been running long enough, then
                         // change sprite from standing version to walking version to
@@ -338,7 +347,7 @@ module GameObjects {
 
             // Test if player falls into lava
             // xOffset is a hack due to imperfect Steve sprite.
-            var xOffset = (this.facing === constants.FACING_LEFT) ? 1 : 0;
+            var xOffset = (this.facing === Constants.FACING_LEFT) ? 1 : 0;
             if (this.useXOffsetHack) {
                 xOffset = 0;
             }
@@ -350,22 +359,36 @@ module GameObjects {
             var charBottomTile = this.mapData.data[charBottomIndex];
 
             // If Steve's feet hit lava, then hit Steve for 10 hearts (instant kill)
-            if (charBottomTile === constants.LAVA_BLOCK) {
+            if (charBottomTile === Constants.LAVA_BLOCK) {
                 this.takeDamage(10);
                 result = false;
             }
 
             // Test if Steve reached the exit door, if he did change the game's state to victory.
-//            if (gameObjects.checkExit(mapFrontX, mapY)) {
+            if (this.objects.checkExit(mapFrontX, mapY)) {
+                var event = new createjs.Event("exitReached", true, false);
+                this.stage.dispatchEvent(event);
+
 //                gameState = constants.GAME_STATE_VICTORY;
 //                gui.show(constants.GAME_STATE_VICTORY);
-//            }
+            }
 
             return result;
         }
 
         // Reset all of the player's essential states to initial values.
         reset(): void {
+            this.facing = Constants.FACING_RIGHT;
+            this.gotoAndStop("steveStandRight");
+            this.health = 10;
+            this.killCount = 0;
+            this.dead = false;
+            this.canvasX = parseInt(this.entityObject["x"]);
+            this.canvasY = parseInt(this.entityObject["y"]) - this.height;
+            this.mapX = this.canvasX;
+            this.mapY = this.canvasY;
+            this.x = this.canvasX;
+            this.y = this.canvasY;
             /*
                         this.facing = constants.FACING_RIGHT;
                         this.sprite = this.sprites[this.spriteNames[0]].clone();

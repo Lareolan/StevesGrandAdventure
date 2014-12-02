@@ -53,7 +53,7 @@ var GameObjects;
                 }
                 this.sprites.length = this.spriteNames.length;
                 */
-                this.facing = constants.FACING_RIGHT;
+                this.facing = Constants.FACING_RIGHT;
                 this.falling = true;
                 this.jumping = false;
 
@@ -73,7 +73,7 @@ var GameObjects;
                 this.runDistanceIncrements = 16;
                 this.baseMovementSpeed = 1;
                 this.useXOffsetHack = false;
-                this.currentAIAction = constants.AI_ACTION_IDLE;
+                this.currentAIAction = Constants.AI_ACTION_IDLE;
                 this.currentAITimer = new Date().getTime() + 1000;
             }
             // Carries out an attack against the player and ensures the Zombie can't attack
@@ -109,7 +109,7 @@ var GameObjects;
                 if (this.spriteUpdate) {
                     //                    stage.removeChild(this.sprite);
                     //                    stage.removeChild(this);
-                    if (this.facing === constants.FACING_LEFT) {
+                    if (this.facing === Constants.FACING_LEFT) {
                         if (Math.floor((this.runDistance % (this.runDistanceIncrements * 4)) / this.runDistanceIncrements * 2)) {
                             //                            this.sprite = this.sprites["zombieStepLeft"].clone();
                             this.gotoAndStop("zombieStepLeft");
@@ -117,7 +117,7 @@ var GameObjects;
                             //                            this.sprite = this.sprites["zombieStandLeft"].clone();
                             this.gotoAndStop("zombieStandLeft");
                         }
-                    } else if (this.facing === constants.FACING_RIGHT) {
+                    } else if (this.facing === Constants.FACING_RIGHT) {
                         if (Math.floor((this.runDistance % (this.runDistanceIncrements * 4)) / (this.runDistanceIncrements * 2))) {
                             //                            this.sprite = this.sprites["zombieStepRight"].clone();
                             this.gotoAndStop("zombieStepRight");
@@ -141,22 +141,22 @@ var GameObjects;
                 // a random action or idle action if the zombie was doing a non-idle action.
                 var time = new Date().getTime();
                 if (time >= this.currentAITimer) {
-                    if (this.currentAIAction == constants.AI_ACTION_IDLE) {
+                    if (this.currentAIAction == Constants.AI_ACTION_IDLE) {
                         var action = Math.random();
 
-                        if (action <= this.AIActions[constants.AI_ACTION_MOVE_LEFT]) {
-                            this.currentAIAction = constants.AI_ACTION_MOVE_LEFT;
+                        if (action <= this.AIActions[Constants.AI_ACTION_MOVE_LEFT]) {
+                            this.currentAIAction = Constants.AI_ACTION_MOVE_LEFT;
                         }
-                        if (action <= this.AIActions[constants.AI_ACTION_MOVE_RIGHT]) {
-                            this.currentAIAction = constants.AI_ACTION_MOVE_RIGHT;
+                        if (action <= this.AIActions[Constants.AI_ACTION_MOVE_RIGHT]) {
+                            this.currentAIAction = Constants.AI_ACTION_MOVE_RIGHT;
                         }
-                        if (action <= this.AIActions[constants.AI_ACTION_IDLE]) {
-                            this.currentAIAction = constants.AI_ACTION_IDLE;
+                        if (action <= this.AIActions[Constants.AI_ACTION_IDLE]) {
+                            this.currentAIAction = Constants.AI_ACTION_IDLE;
                             this.runDistance = 0;
                             this.spriteUpdate = true;
                         }
                     } else {
-                        this.currentAIAction = constants.AI_ACTION_IDLE;
+                        this.currentAIAction = Constants.AI_ACTION_IDLE;
                         this.runDistance = 0;
                         this.spriteUpdate = true;
                     }
@@ -164,15 +164,15 @@ var GameObjects;
                 }
 
                 switch (this.currentAIAction) {
-                    case constants.AI_ACTION_MOVE_RIGHT:
+                    case Constants.AI_ACTION_MOVE_RIGHT:
                         if (!this.moveRight()) {
-                            this.currentAIAction = constants.AI_ACTION_IDLE;
+                            this.currentAIAction = Constants.AI_ACTION_IDLE;
                             this.currentAITimer = time + 1000;
                         }
                         break;
-                    case constants.AI_ACTION_MOVE_LEFT:
+                    case Constants.AI_ACTION_MOVE_LEFT:
                         if (!this.moveLeft()) {
-                            this.currentAIAction = constants.AI_ACTION_IDLE;
+                            this.currentAIAction = Constants.AI_ACTION_IDLE;
                             this.currentAITimer = time + 1000;
                         }
                         break;
@@ -183,7 +183,7 @@ var GameObjects;
                 // If zombie is in the air, make it fall to the ground (such as walking off ledges)
                 var passable;
                 passable = this.testVerticalCollision("bottom");
-                var newY = this.mapY + constants.MOVE_SPEED;
+                var newY = this.mapY + Constants.MOVE_SPEED;
 
                 if (passable) {
                     this.falling = true;
@@ -204,10 +204,10 @@ var GameObjects;
                 if (time >= this.attackTimer) {
                     var distanceH = Math.floor(this.mapX - this.player.mapX);
                     if (Math.abs(distanceH) <= 40) {
-                        if (((this.facing == constants.FACING_RIGHT) && (distanceH < 0)) || ((this.facing == constants.FACING_LEFT) && (distanceH >= 0))) {
+                        if (((this.facing == Constants.FACING_RIGHT) && (distanceH < 0)) || ((this.facing == Constants.FACING_LEFT) && (distanceH >= 0))) {
                             var distanceV = Math.abs(Math.floor(this.mapY - this.player.mapY));
                             if (distanceV <= this.height / 2) {
-                                if (Math.random() <= this.AIActions[constants.AI_ACTION_ATTACK]) {
+                                if (Math.random() <= this.AIActions[Constants.AI_ACTION_ATTACK]) {
                                     this.attack();
                                 }
                             }

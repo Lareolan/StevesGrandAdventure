@@ -4,11 +4,13 @@
  * Filename:            GUIInstructionScreen.ts
  * Last Modified By:    Konstantin Koton
  * Date Last Modified:  Nov. 22, 2014
- * Revision History:    Too numerous to mention
+ * Revision History:
+ *      v1 - Migrated file to Project 1
+ *      v2 - Moved class into GUIScreen module
  */
-module GameObjects {
+module GUIScreen {
     // GUIInstructionScreen Class
-    export class GUIInstructionScreen extends GameObjects.Screen {
+    export class GUIInstructionScreen extends GUIScreen.Screen {
         // Instance variables
         images: Array<createjs.Sprite>;
         intro: Array<string> = [
@@ -94,8 +96,6 @@ module GameObjects {
             btn.setClickHandler(function () {
                 var event = new createjs.Event("backButtonClicked", true, false);
                 theStage.dispatchEvent(event);
-//                gameState = Constants.GAME_STATE_START;
-//                initGameStart();
             });
             this.screenObjects.push(btn);
         }

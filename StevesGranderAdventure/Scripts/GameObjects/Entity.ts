@@ -105,8 +105,8 @@ module GameObjects {
          */
         moveRight(): boolean {
             var result = false;
-            if (this.facing !== constants.FACING_RIGHT) {
-                this.facing = constants.FACING_RIGHT;
+            if (this.facing !== Constants.FACING_RIGHT) {
+                this.facing = Constants.FACING_RIGHT;
                 this.spriteUpdate = true;
                 this.runDistance = 0;
                 this.facingChanged = true;
@@ -146,8 +146,8 @@ module GameObjects {
          */
         moveLeft(): boolean {
             var result = false;
-            if (this.facing !== constants.FACING_LEFT) {
-                this.facing = constants.FACING_LEFT;
+            if (this.facing !== Constants.FACING_LEFT) {
+                this.facing = Constants.FACING_LEFT;
                 this.spriteUpdate = true;
                 this.runDistance = 0;
                 this.facingChanged = true;
@@ -188,9 +188,9 @@ module GameObjects {
          */
         isPassable(tileID: number): boolean {
             if (
-                (tileID === constants.AIR_BLOCK) ||
-                (tileID === constants.WATER_BLOCK) ||
-                (tileID === constants.LAVA_BLOCK)
+                (tileID === Constants.AIR_BLOCK) ||
+                (tileID === Constants.WATER_BLOCK) ||
+                (tileID === Constants.LAVA_BLOCK)
                 ) {
                 return true;
             }
@@ -204,7 +204,7 @@ module GameObjects {
          * movement would result in collision.
          */
         testHorizontal(speed: number): boolean {
-            var xOffset = (this.facing === constants.FACING_LEFT) ? 1 : 0;
+            var xOffset = (this.facing === Constants.FACING_LEFT) ? 1 : 0;
             if (!this.useXOffsetHack) {
                 xOffset = 0;
             }
@@ -238,7 +238,7 @@ module GameObjects {
          * movement would result in collision.
          */
         testVerticalCollision(direction: string): boolean {
-            var xOffset = (this.facing === constants.FACING_LEFT) ? 1 : 0;
+            var xOffset = (this.facing === Constants.FACING_LEFT) ? 1 : 0;
             if (!this.useXOffsetHack) {
                 xOffset = 0;
             }
@@ -272,12 +272,12 @@ module GameObjects {
 
         // Shift the entity to the right
         shiftRight(): void {
-            this.canvasX += constants.MOVE_SPEED;
+            this.canvasX += Constants.MOVE_SPEED;
         }
 
         // Shift the entity to the left
         shiftLeft(): void {
-            this.canvasX -= constants.MOVE_SPEED;
+            this.canvasX -= Constants.MOVE_SPEED;
         }
 
         // Get the entity's current health

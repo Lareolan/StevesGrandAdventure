@@ -5,10 +5,12 @@
 * Filename:            Screen.ts
 * Last Modified By:    Konstantin Koton
 * Date Last Modified:  Nov. 22, 2014
-* Revision History:    Too numerous to mention
+* Revision History:
+*      v1 - Migrated file to Project 1
+*      v2 - Moved class into GUIScreen module
 */
-var GameObjects;
-(function (GameObjects) {
+var GUIScreen;
+(function (GUIScreen) {
     // The Screen class
     var Screen = (function () {
         // Constructor simply initializes the screen objects array
@@ -19,9 +21,9 @@ var GameObjects;
         // Hides all screen objects by taking them out of the stage and into an internal
         // storage array, then clearing the stage.
         Screen.prototype.hide = function () {
-            for (var index = 0; index < this.stage.getNumChildren(); index++) {
-                this.screenObjects.push(this.stage.getChildAt(index));
-            }
+            //            for (var index = 0; index < this.stage.getNumChildren(); index++) {
+            //                this.screenObjects.push(this.stage.getChildAt(index));
+            //            }
             this.stage.removeAllChildren();
         };
 
@@ -49,6 +51,6 @@ var GameObjects;
         };
         return Screen;
     })();
-    GameObjects.Screen = Screen;
-})(GameObjects || (GameObjects = {}));
+    GUIScreen.Screen = Screen;
+})(GUIScreen || (GUIScreen = {}));
 //# sourceMappingURL=Screen.js.map

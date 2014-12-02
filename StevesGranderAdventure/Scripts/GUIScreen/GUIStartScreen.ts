@@ -7,10 +7,11 @@
  * Revision History:
  *      v1 - Migrated file to Project 1
  *      v2 - Added code for button initialization
+ *      v3 - Moved class into GUIScreen module
  */
-module GameObjects {
+module GUIScreen {
     // GUIStartScreen class
-    export class GUIStartScreen extends GameObjects.Screen {
+    export class GUIStartScreen extends GUIScreen.Screen {
         // Constructor simply calls the super class constructor
         constructor(stage: createjs.Stage) {
             super(stage);

@@ -49,8 +49,8 @@ var GameObjects;
             this.entities = new GameObjects.MapEntities($entityGroup);
 
             // Separate background and foreground layers
-            var background = this.getLayer("Background");
-            var foreground = this.getLayer("Foreground");
+            var background = this.getLayer(Constants.LAYER_NAME_BACKGROUND);
+            var foreground = this.getLayer(Constants.LAYER_NAME_FOREGROUND);
 
             // Store height and width information
             this.width = foreground.width;
@@ -120,8 +120,8 @@ var GameObjects;
 
         // Move all the map image to the right to reflect player moving left
         GameMap.prototype.shiftRight = function () {
-            if (this.x <= -constants.MOVE_SPEED) {
-                this.x += constants.MOVE_SPEED;
+            if (this.x <= -Constants.MOVE_SPEED) {
+                this.x += Constants.MOVE_SPEED;
             }
             /*
             if (this.map.x <= -constants.MOVE_SPEED) {
@@ -132,8 +132,8 @@ var GameObjects;
 
         // Move all the map image to the left to reflect player moving right
         GameMap.prototype.shiftLeft = function () {
-            if (this.x >= -(this.mapWidth - Constants.SCREEN_WIDTH - constants.MOVE_SPEED)) {
-                this.x -= constants.MOVE_SPEED;
+            if (this.x >= -(this.mapWidth - Constants.SCREEN_WIDTH - Constants.MOVE_SPEED)) {
+                this.x -= Constants.MOVE_SPEED;
             }
             /*
             if (this.map.x >= -(this.mapWidth - Constants.SCREEN_WIDTH - constants.MOVE_SPEED)) {

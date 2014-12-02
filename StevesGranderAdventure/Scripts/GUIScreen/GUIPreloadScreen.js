@@ -1,31 +1,32 @@
-﻿/**
- * This file contains the game's preload screen object
- * Author:              Konstantin Koton
- * Filename:            GUIPreloadScreen.ts
- * Last Modified By:    Konstantin Koton
- * Date Last Modified:  Nov. 22, 2014
- * Revision History:    Too numerous to mention
- */
-module GameObjects {
+﻿var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+/**
+* This file contains the game's preload screen object
+* Author:              Konstantin Koton
+* Filename:            GUIPreloadScreen.ts
+* Last Modified By:    Konstantin Koton
+* Date Last Modified:  Nov. 22, 2014
+* Revision History:
+*      v1 - Migrated file to Project 1
+*      v2 - Moved class into GUIScreen module
+*/
+var GUIScreen;
+(function (GUIScreen) {
     // GUIPreloadScreen Class
-    export class GUIPreloadScreen extends GameObjects.Screen {
-        // Instance variables
-        progressBar: createjs.Shape;
-        text: createjs.Text;
-        progressBarWidth: number = 400;
-        progressBarheight: number = 50;
-
-        // Fix squiggly lines, not actually used
-        instance: any;
-
-
+    var GUIPreloadScreen = (function (_super) {
+        __extends(GUIPreloadScreen, _super);
         // Constructor simply calls the super class constructor
-        constructor(stage: createjs.Stage) {
-            super(stage);
+        function GUIPreloadScreen(stage) {
+            _super.call(this, stage);
+            this.progressBarWidth = 400;
+            this.progressBarheight = 50;
             this.init();
         }
-
-        init() {
+        GUIPreloadScreen.prototype.init = function () {
             this.progressBar = new createjs.Shape();
             this.text = new createjs.Text();
             this.text.font = "bold 36px Arial";
@@ -40,10 +41,10 @@ module GameObjects {
             Managers.Assets.init();
             Managers.Assets.loader.addEventListener("progress", { handleEvent: this.handleProgress, instance: this });
             Managers.Assets.loader.addEventListener("complete", { handleEvent: this.handleComplete, instance: this });
-        }
+        };
 
         // Display a loading progress bar
-        handleProgress(event: ProgressEvent): void {
+        GUIPreloadScreen.prototype.handleProgress = function (event) {
             var instance = this.instance;
             var x = Constants.HALF_SCREEN_WIDTH - instance.progressBarWidth / 2;
             var y = Constants.HALF_SCREEN_HEIGHT - instance.progressBarheight / 2;
@@ -56,13 +57,16 @@ module GameObjects {
 
             // Change the text to reflect progress
             instance.text.text = (progress * 100).toFixed(0) + "% complete";
-        }
+        };
 
         // Once loading is done, initialize the game and load main screen
-        handleComplete(event: Event): void {
+        GUIPreloadScreen.prototype.handleComplete = function (event) {
             var instance = this.instance;
             var complete = new createjs.Event("preloadComplete", true, false);
             instance.stage.dispatchEvent(complete);
-        }
-    }
-}  
+        };
+        return GUIPreloadScreen;
+    })(GUIScreen.Screen);
+    GUIScreen.GUIPreloadScreen = GUIPreloadScreen;
+})(GUIScreen || (GUIScreen = {}));
+//# sourceMappingURL=GUIPreloadScreen.js.map

@@ -22,10 +22,10 @@
     <link href="css/normalize.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
 </head>
-<body onload="preload()">
+<body onload="start()">
     <!--    <canvas id="canvas" width="1280" height="640"></canvas> -->
     <!--    <canvas id="canvas" width="1280" height="768"></canvas> Minecraft -->
-    <canvas id="canvas" width="1280" height="672"></canvas><br />
+    <canvas id="canvas" width="1366" height="768"></canvas><br />
     <button id="fullscreen">Play in Fullscreen mode</button>
 <!--    Kill Count: -->
 
@@ -47,6 +47,7 @@
     <!-- Game Files -->
     <script src="Scripts/MainGame.js"></script>
     <script src="Scripts/Constants/Constants.js"></script>
+    <script src="Scripts/Controls/Controls.js"></script>
 
     <script src="Scripts/Managers/Assets.js"></script>
     <script src="Scripts/GameObjects/BitmapObject.js"></script>
@@ -65,13 +66,13 @@
     <script src="Scripts/Managers/Mobs.js"></script>
     <script src="Scripts/Managers/Objects.js"></script>
     <script src="Scripts/GameObjects/Player.js"></script>
-    <script src="Scripts/GameObjects/Screen.js"></script>
-    <script src="Scripts/GameObjects/GUIPreloadScreen.js"></script>
-    <script src="Scripts/GameObjects/GUIStartScreen.js"></script>
-    <script src="Scripts/GameObjects/GUIInstructionScreen.js"></script>
-    <script src="Scripts/GameObjects/GUIGameScreen.js"></script>
-    <script src="Scripts/GameObjects/GUIDeathScreen.js"></script>
-    <script src="Scripts/GameObjects/GUIVictoryScreen.js"></script>
+    <script src="Scripts/GUIScreen/Screen.js"></script>
+    <script src="Scripts/GUIScreen/GUIPreloadScreen.js"></script>
+    <script src="Scripts/GUIScreen/GUIStartScreen.js"></script>
+    <script src="Scripts/GUIScreen/GUIInstructionScreen.js"></script>
+    <script src="Scripts/GUIScreen/GUIGameScreen.js"></script>
+    <script src="Scripts/GUIScreen/GUIDeathScreen.js"></script>
+    <script src="Scripts/GUIScreen/GUIVictoryScreen.js"></script>
     <script src="Scripts/Managers/GUI.js"></script>
     <script src="Scripts/Managers/Sound.js"></script>
     <script src="Scripts/game.js"></script>

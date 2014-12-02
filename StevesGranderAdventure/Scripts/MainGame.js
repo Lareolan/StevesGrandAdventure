@@ -32,19 +32,19 @@ var MainGame = (function () {
                     break;
                 case 37:
                 case 65:
-                    input.keyboard.KEY_LEFT = true;
+                    Controls.keyboard.KEY_LEFT = true;
                     break;
                 case 39:
                 case 68:
-                    input.keyboard.KEY_RIGHT = true;
+                    Controls.keyboard.KEY_RIGHT = true;
                     break;
                 case 38:
                 case 87:
-                    input.keyboard.KEY_UP = true;
+                    Controls.keyboard.KEY_UP = true;
                     break;
                 case 32:
-                    if (!input.keyboard.KEY_SPACE) {
-                        input.keyboard.KEY_SPACE = true;
+                    if (!Controls.keyboard.KEY_SPACE) {
+                        Controls.keyboard.KEY_SPACE = true;
                         var event = new createjs.Event("playerAttack", true, false);
                         stage.dispatchEvent(event);
                     }
@@ -59,18 +59,18 @@ var MainGame = (function () {
                     break;
                 case 37:
                 case 65:
-                    input.keyboard.KEY_LEFT = false;
+                    Controls.keyboard.KEY_LEFT = false;
                     break;
                 case 39:
                 case 68:
-                    input.keyboard.KEY_RIGHT = false;
+                    Controls.keyboard.KEY_RIGHT = false;
                     break;
                 case 38:
                 case 87:
-                    input.keyboard.KEY_UP = false;
+                    Controls.keyboard.KEY_UP = false;
                     break;
                 case 32:
-                    input.keyboard.KEY_SPACE = false;
+                    Controls.keyboard.KEY_SPACE = false;
                     break;
             }
         });
@@ -106,18 +106,19 @@ var MainGame = (function () {
 
         // Initializes player object
         this.player = new GameObjects.Player();
-        this.player.setMapData(this.map.getLayer(constants.FOREGROUND_LAYER_NAME));
+        this.player.setMapData(this.map.getLayer(Constants.LAYER_NAME_FOREGROUND));
         this.player.setEntity(this.map.entities.getEntityByName("Steve"));
         this.player.setSound(this.sound);
         this.player.setStage(this.stage);
         this.gui.setPlayer(this.player);
 
         // Initializes mob manager object
-        this.mobs = new Managers.Mobs(this.map.entities.getEntitiesByType("Mob"), this.map.getLayer(constants.FOREGROUND_LAYER_NAME), this.sound, this.player);
+        this.mobs = new Managers.Mobs(this.map.entities.getEntitiesByType("Mob"), this.map.getLayer(Constants.LAYER_NAME_FOREGROUND), this.sound, this.player);
         this.gui.setMobManager(this.mobs);
 
         // Initializes the static game object manager
         this.gameObjects = new Managers.Objects(this.map.entities.getAllEntities(), this.map.tileset);
+        this.player.setObjectManager(this.gameObjects);
         this.gui.setGameObjects(this.gameObjects);
 
         // Initializes event listeners listening for player attack, player being hit and player being killed
@@ -126,6 +127,7 @@ var MainGame = (function () {
 
         //        this.stage.addEventListener("playerDeath", { handleEvent: this.gui.playerDeath, player: this.player, gui: this.gui });
         this.stage.addEventListener("playerDeath", { handleEvent: this.playerDeath, instance: this });
+        this.stage.addEventListener("exitReached", { handleEvent: this.playerWins, instance: this });
 
         this.gui.init();
 
@@ -137,7 +139,7 @@ var MainGame = (function () {
         var instance = this.instance;
 
         // If player moves left, shift all drawn assets to the right
-        if (input.keyboard.KEY_LEFT) {
+        if (Controls.keyboard.KEY_LEFT) {
             if (instance.player.moveLeft()) {
                 instance.map.shiftRight();
                 instance.gameObjects.shiftRight();
@@ -147,7 +149,7 @@ var MainGame = (function () {
         }
 
         // If player moves right, shift all drawn assets to the left
-        if (input.keyboard.KEY_RIGHT) {
+        if (Controls.keyboard.KEY_RIGHT) {
             if (instance.player.moveRight()) {
                 instance.map.shiftLeft();
                 instance.gameObjects.shiftLeft();
@@ -157,7 +159,7 @@ var MainGame = (function () {
         }
 
         // If player is jumping, handle the jump
-        if (input.keyboard.KEY_UP) {
+        if (Controls.keyboard.KEY_UP) {
             instance.player.jump();
         }
 
@@ -197,6 +199,7 @@ var MainGame = (function () {
 
         // TODO: Change this
         instance.gameState = Constants.GAME_STATE_PLAY;
+        instance.worldTimer = new Date().getTime();
         instance.gui.display(instance.gameState);
     };
 
@@ -211,9 +214,20 @@ var MainGame = (function () {
     // Handle player being killed, switch game state to dead state
     MainGame.prototype.playerDeath = function (e) {
         var instance = this.instance;
+
+        // TODO: Change this
         instance.gameState = Constants.GAME_STATE_DEATH;
         instance.player.die();
         instance.gui.deathScreen.setKillCount(instance.player.getKillCount());
+        instance.gui.display(instance.gameState);
+    };
+
+    MainGame.prototype.playerWins = function (e) {
+        var instance = this.instance;
+
+        // TODO: Change this
+        instance.gameState = Constants.GAME_STATE_VICTORY;
+        instance.gui.victoryScreen.setKillCount(instance.player.getKillCount(), instance.worldTimer);
         instance.gui.display(instance.gameState);
     };
 
@@ -222,6 +236,14 @@ var MainGame = (function () {
 
         // TODO: Change this
         instance.gameState = Constants.GAME_STATE_PLAY;
+        Controls.resetControls();
+        instance.worldTimer = new Date().getTime();
+        instance.clouds.reset();
+        instance.map.reset();
+        instance.player.reset();
+        instance.gameObjects.reset();
+        instance.mobs.reset();
+        instance.gui.gameScreen.reset();
         instance.gui.display(instance.gameState);
         //                cloudManager.reset();
         //                player.reset();
