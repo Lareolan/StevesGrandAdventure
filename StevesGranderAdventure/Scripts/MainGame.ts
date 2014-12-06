@@ -26,6 +26,7 @@ class MainGame {
     gameState: number;
     changeGameState: number;
     worldTimer: number;
+    currentLevel: number;
 
     // Fix squiggly lines, not actually used
     instance: MainGame;
@@ -33,6 +34,7 @@ class MainGame {
 
     constructor(canvas: Element) {
         this.stage = new createjs.Stage(canvas);
+        this.currentLevel = 1;
         this.init();
     }
 
@@ -126,7 +128,7 @@ class MainGame {
         this.gui.setCloudManager(this.clouds);
 
         // Initialize map manager
-        this.map = new GameObjects.GameMap();
+        this.map = new GameObjects.GameMap(Constants.LEVELS[this.currentLevel]);
         this.gui.setMap(this.map);
 
         // Initializes player object

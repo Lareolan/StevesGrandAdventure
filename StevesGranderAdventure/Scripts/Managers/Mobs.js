@@ -37,19 +37,26 @@ var Managers;
         // Initialize all mobs
         Mobs.prototype.init = function () {
             var zombie;
+            var creeper;
 
             for (var index = 0; index < this.rawMobData.length; index++) {
                 if (this.rawMobData[index]["name"] === "Zombie") {
-                    //                    var zombie = new GameObjects.Mobs.Zombie(mobList[index], foreground, sound, player);
                     zombie = new GameObjects.Mobs.Zombie();
                     zombie.name = "Zombie " + index;
                     zombie.setEntity(this.rawMobData[index]);
                     zombie.setMapData(this.foreground);
                     zombie.setSound(this.sound);
                     zombie.setPlayer(this.player);
+                    //                    this.addChild(zombie);
+                } else if (this.rawMobData[index]["name"] === "Creeper") {
+                    creeper = new GameObjects.Mobs.Creeper();
+                    creeper.name = "Creeper " + index;
+                    creeper.setEntity(this.rawMobData[index]);
+                    creeper.setMapData(this.foreground);
+                    creeper.setSound(this.sound);
+                    creeper.setPlayer(this.player);
 
-                    //                    this.mobs.push(zombie);
-                    this.addChild(zombie);
+                    this.addChild(creeper);
                 }
             }
         };

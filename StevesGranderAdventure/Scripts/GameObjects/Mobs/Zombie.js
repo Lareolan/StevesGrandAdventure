@@ -20,7 +20,7 @@ var GameObjects;
         // Zombie Class
         var Zombie = (function (_super) {
             __extends(Zombie, _super);
-            /*
+            /**
             * The constructor takes in an Object describing the Zombie's attributes, the information
             * about the map's foreground, the sound manager instance and the player instance
             * to be kept in internal variables. Then initializes the Zombie object instance
@@ -68,7 +68,7 @@ var GameObjects;
                 //                this.regY = 0;
                 //                stage.addChild(this.sprite);
                 //                stage.addChild(this);
-                this.health = 10;
+                this.health = 20;
                 this.attackTimer = 0;
                 this.runDistanceIncrements = 16;
                 this.baseMovementSpeed = 1;
@@ -84,7 +84,7 @@ var GameObjects;
                 this.sound.playerHit();
             };
 
-            /*
+            /**
             * This function makes zombies "speak" at random with a rough median of
             * approximately every 4 seconds
             */
@@ -94,7 +94,7 @@ var GameObjects;
                 }
             };
 
-            /*
+            /**
             * This function handles all the updates for the zombie. Animating its movements,
             * determining AI actions and executing those actions as well as falling down
             * if the zombie walks off a ledge. This function also executes the zombie's "speech".

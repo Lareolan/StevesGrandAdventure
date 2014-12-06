@@ -12,7 +12,7 @@
 module GameObjects {
     // The Monster class
     export class Monster extends GameObjects.Entity {
-        // Instance variable holding local reference to the Player object
+        // Instance variable holding local references to the Player object and Sound Manager object.
         player: GameObjects.Player;
         sound: Managers.Sound;
 
@@ -52,9 +52,12 @@ module GameObjects {
 
         // Make the monster die, play the appropriate death sound. Increase Steve's kill count.
         die(): void {
+            this.dead = true;
             if (this instanceof GameObjects.Mobs.Zombie) {
                 this.sound.zombieDeath(<GameObjects.Mobs.Zombie>this, this.player);
 //                this.stage.removeChild(this);
+                this.parent.removeChild(this);
+            } else {
                 this.parent.removeChild(this);
             }
             this.player.addKill();

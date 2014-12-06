@@ -22,14 +22,14 @@ var GameObjects;
     var GameMap = (function (_super) {
         __extends(GameMap, _super);
         // The constructor initializes all of the map data, loads it, parses it, and displays it
-        function GameMap() {
+        function GameMap(mapName) {
             _super.call(this);
             this.layers = [];
             var index, tileID;
             var tile;
 
             // Parses XML sections of the game map file
-            var $mapData = $(Managers.Assets.loader.getResult("Level1Map"));
+            var $mapData = $(Managers.Assets.loader.getResult(mapName));
             var $tilesets = $mapData.find("tileset");
             var $layers = $mapData.find("layer");
             var $entityGroup = $mapData.find("objectgroup");

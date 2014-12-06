@@ -4,7 +4,9 @@
  * Filename:            Assets.ts
  * Last Modified By:    Konstantin Koton
  * Date Last Modified:  Nov. 22, 2014
- * Revision History:    Too numerous to mention
+ * Revision History:
+ *      v1 - Migrated file to Project 1
+ *      v2 - Added assets for levels 2 and 3, added new mob assets for creepers
  */
 module Managers {
     // The Assets class
@@ -13,6 +15,7 @@ module Managers {
         static loader: createjs.LoadQueue;
         static characters: createjs.SpriteSheet;
         static guiComponents: createjs.SpriteSheet;
+        static explosion: createjs.SpriteSheet;
 
         // The list of loose images and sounds
         static assetList = [
@@ -21,8 +24,10 @@ module Managers {
             { id: "cloud2", src: "Assets/images/Cloud_2.png" },
             { id: "MasterTileSet", src: "Assets/images/MasterTileSet.png", type: createjs.LoadQueue.IMAGE, data: 102955 },
             { id: "Character-Tileset", src: "Assets/images/MasterTileSet.png" },
-            { id: "Level1Map", src: "Assets/data/Level1.tmx", type: createjs.LoadQueue.XML },
-            { id: "GuiComponents", src: "Assets/images/GuiComponents.png" },
+            { id: "Level1", src: "Assets/data/Level1.tmx", type: createjs.LoadQueue.XML },
+            { id: "Level2", src: "Assets/data/Level2.tmx", type: createjs.LoadQueue.XML },
+//            { id: "GuiComponents", src: "Assets/images/GuiComponents.png" },
+//            { id: "Explosion", src: "Assets/images/ExplosionSpriteSheet.png" },
             { id: "stone1", src: "Assets/sounds/stone1.ogg" },
             { id: "stone2", src: "Assets/sounds/stone2.ogg" },
             { id: "piano3", src: "Assets/sounds/piano3.ogg" },
@@ -37,8 +42,20 @@ module Managers {
             { id: "zombie_say3", src: "Assets/sounds/zombie/say3.ogg" },
             { id: "zombie_hurt1", src: "Assets/sounds/zombie/hurt1.ogg" },
             { id: "zombie_hurt2", src: "Assets/sounds/zombie/hurt2.ogg" },
-            { id: "zombie_death", src: "Assets/sounds/zombie/death.ogg" }
+            { id: "zombie_death", src: "Assets/sounds/zombie/death.ogg" },
+            { id: "creeper_fuse", src: "Assets/sounds/creeper/fuse.ogg" },
+            { id: "creeper_explode1", src: "Assets/sounds/creeper/explode1.ogg" },
+            { id: "creeper_explode2", src: "Assets/sounds/creeper/explode2.ogg" },
+            { id: "creeper_explode3", src: "Assets/sounds/creeper/explode3.ogg" },
+            { id: "creeper_explode4", src: "Assets/sounds/creeper/explode4.ogg" },
+            { id: "creeper_hurt1", src: "Assets/sounds/creeper/hurt1.ogg" },
+            { id: "creeper_hurt2", src: "Assets/sounds/creeper/hurt2.ogg" },
+            { id: "creeper_hurt3", src: "Assets/sounds/creeper/hurt3.ogg" },
+            { id: "creeper_hurt4", src: "Assets/sounds/creeper/hurt4.ogg" },
+            { id: "creeper_death", src: "Assets/sounds/creeper/death.ogg" }
         ];
+
+
 
         // Character and monster sprite sheet
         static characterSpriteSheet = {
@@ -92,6 +109,14 @@ module Managers {
             }
         };
 
+        static explosionSpriteSheet = {
+            images: ["Assets/images/ExplosionSpriteSheet.png"],
+            frames: { width: 160, height: 160, count: 25, regX: 80, regY: 80 },
+            animations: {
+                explode: [0, 24, false, 1]
+            }
+        }
+
         // Loads all the game assets
         static init() {
             this.loader = new createjs.LoadQueue();
@@ -99,6 +124,7 @@ module Managers {
             this.loader.loadManifest(this.assetList);
             this.characters = new createjs.SpriteSheet(this.characterSpriteSheet);
             this.guiComponents = new createjs.SpriteSheet(this.guiSpriteSheet);
+            this.explosion = new createjs.SpriteSheet(this.explosionSpriteSheet);
         }
     }
 }

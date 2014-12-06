@@ -51,10 +51,13 @@ var GameObjects;
 
         // Make the monster die, play the appropriate death sound. Increase Steve's kill count.
         Monster.prototype.die = function () {
+            this.dead = true;
             if (this instanceof GameObjects.Mobs.Zombie) {
                 this.sound.zombieDeath(this, this.player);
 
                 //                this.stage.removeChild(this);
+                this.parent.removeChild(this);
+            } else {
                 this.parent.removeChild(this);
             }
             this.player.addKill();

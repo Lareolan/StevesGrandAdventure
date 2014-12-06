@@ -10,6 +10,7 @@
 var MainGame = (function () {
     function MainGame(canvas) {
         this.stage = new createjs.Stage(canvas);
+        this.currentLevel = 1;
         this.init();
     }
     MainGame.prototype.init = function () {
@@ -101,7 +102,7 @@ var MainGame = (function () {
         this.gui.setCloudManager(this.clouds);
 
         // Initialize map manager
-        this.map = new GameObjects.GameMap();
+        this.map = new GameObjects.GameMap(Constants.LEVELS[this.currentLevel]);
         this.gui.setMap(this.map);
 
         // Initializes player object

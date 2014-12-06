@@ -29,6 +29,9 @@ var Constants;
     Constants.WATER_BLOCK = 206;
     Constants.LAVA_BLOCK = 238;
 
+    // Game level constants
+    Constants.LEVELS = ["Level1", "Level2", "Level3"];
+
     // Layer names
     Constants.LAYER_NAME_FOREGROUND = "Foreground";
     Constants.LAYER_NAME_BACKGROUND = "Background";

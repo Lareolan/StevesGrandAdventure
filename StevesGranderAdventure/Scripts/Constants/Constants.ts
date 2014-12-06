@@ -28,6 +28,9 @@ module Constants {
     export var WATER_BLOCK: number = 206;
     export var LAVA_BLOCK: number = 238;
 
+    // Game level constants
+    export var LEVELS: Array<string> = ["Level1", "Level2", "Level3"];
+
     // Layer names
     export var LAYER_NAME_FOREGROUND: string = "Foreground";
     export var LAYER_NAME_BACKGROUND: string = "Background";

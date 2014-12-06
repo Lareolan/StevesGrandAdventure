@@ -26,7 +26,7 @@ module GameObjects {
             AIActions: Array<number> = [0.4, 0.7, 1.0, 0.5];
             damage: number = 2;
 
-            /*
+            /**
              * The constructor takes in an Object describing the Zombie's attributes, the information
              * about the map's foreground, the sound manager instance and the player instance 
              * to be kept in internal variables. Then initializes the Zombie object instance
@@ -70,7 +70,7 @@ module GameObjects {
                 //                stage.addChild(this.sprite);
 //                stage.addChild(this);
 
-                this.health = 10;
+                this.health = 20;
                 this.attackTimer = 0;
                 this.runDistanceIncrements = 16;
                 this.baseMovementSpeed = 1;
@@ -87,7 +87,7 @@ module GameObjects {
                 this.sound.playerHit();
             }
 
-            /*
+            /**
              * This function makes zombies "speak" at random with a rough median of
              * approximately every 4 seconds
              */
@@ -97,7 +97,7 @@ module GameObjects {
                 }
             }
 
-            /*
+            /**
              * This function handles all the updates for the zombie. Animating its movements,
              * determining AI actions and executing those actions as well as falling down
              * if the zombie walks off a ledge. This function also executes the zombie's "speech".

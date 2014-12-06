@@ -53,7 +53,7 @@ module GameObjects {
             }
         }
 
-        /*
+        /**
          * Sets an internal values based on entity properties retrieved from the level data file.
          * @param entity The entity Object to get the information from.
          */
@@ -74,7 +74,7 @@ module GameObjects {
             this.entityObject = entity;
         }
 
-        /*
+        /**
          * Sets an internal reference to the map's foreground Layer object (for collision detection purposes).
          * @param foreground The foreground Layer object to store the reference to.
          */
@@ -82,7 +82,7 @@ module GameObjects {
             this.mapData = foreground;
         }
 
-        /*
+        /**
          * Sets an internal reference to the Sound object (so the entity can vocalize/make noise).
          * @param sound The Sound object to store the reference to.
          */
@@ -90,7 +90,7 @@ module GameObjects {
             this.sound = sound;
         }
 
-        /*
+        /**
          * Sets an internal reference to the Stage object (Primarily for dispatching events onto the stage).
          * @param stage The Stage object to store the reference to.
          */
@@ -98,7 +98,15 @@ module GameObjects {
             this.stage = stage;
         }
 
-        /*
+        /**
+         * This function simply returns the death status of this entity.
+         * @returns true is the entity is dead, otherwise false
+         */
+        isDead(): boolean {
+            return this.dead;
+        }
+
+        /**
          * Move the entity to the right, check for collisions. Return a boolean value
          * indicating whether the movement was successful.
          * @returns true if movement was successful, false if entity hit an obstacle.
@@ -139,7 +147,7 @@ module GameObjects {
             return result;
         }
 
-        /*
+        /**
          * Move the entity to the left, check for collisions. Return a boolean value
          * indicating whether the movement was successful.
          * @returns true if movement was successful, false if entity hit an obstacle.
@@ -180,7 +188,7 @@ module GameObjects {
             return result;
         }
 
-        /*
+        /**
          * Determines if a particular tile is passable (that is non-solid).
          * Currently checks for Air, Water and Lava blocks as non-solid blocks.
          * @param tileID The tilemap tile ID to test
@@ -197,7 +205,7 @@ module GameObjects {
             return false;
         }
 
-        /*
+        /**
          * Tests whether or not the next movement is possible.
          * @param speed The number of pixels to move (the sign indicates direction of movement)
          * @returns true if the entity can move in the desired direction, false if
@@ -231,7 +239,7 @@ module GameObjects {
             return false;
         }
 
-        /*
+        /**
          * Tests whether or not there a vertical movement would result in a collision.
          * @param direction A string denoting direction of test.
          * @returns true if the entity can move in the desired direction, false if

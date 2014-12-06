@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="500" height="20" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="MasterTileSet" tilewidth="32" tileheight="32">
+  <image source="MasterTileSet.png" trans="ffffff" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="257" name="Character-Tileset" tilewidth="64" tileheight="64">
+  <image source="Character-Tileset.png" trans="ffffff" width="512" height="512"/>
+ </tileset>
+ <layer name="Foreground" width="500" height="20">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer name="Background" width="500" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztm0ty2zAMhplkkq677ybKuqt028NmlyPkJDmGz9Boak5RDEjixYdkfDOYxJZEAiDI36LslIIgODr3VwuCIPDmHlkQnBVc65SN8mEFOPmYlacgmMnb1Tx4+LJHYFZmz9dYA/SsvLb+QubBHs8LMq8cWPTLK+ezx6zEynU2Cs9YbyVnFqx11mOu7udnLedcvx9/YFhLz1t+r7R2cdvy9HmGeTK7/xJYw6FZfcDxSPTcI1+9x59z7uzxzT7cEpx8U6/hebPHzJNea83s9bnXnNbq+ezYavHO9oNr+N6vl16MYnRf0rgl82Jm3XL9oj7DcMa9dt4KtQXbnlnPWjT50taNZqy+L2Ae8a9qG2GW9jS5quk5xeycjRqXnu2P0PJSTfRgRD+amO+uxsnHjDqD/W6p7F/pekrPR8WXc4uhcn60euZi9Z1zTekzm6bf2Vo+Us85a+wbMmufW/LRcW2taOZNr/z3NMlYeY3HSiZhBR+sPu3cpbq29IhZ0h48d19vcM150Ws8YX4zrZxj02rVLFp+bcl/7ajtw0jzBXX188ueCPtM8/UcaqzmfodznwQ1fMR9lbR2Wjni3hO2mBmzxDSfvXBOcU5mx2Txh4OHb9b6wrwqfLhLPG2xxs2hdi3MWan2VjWcY27ONfpUyssIPq5/OT5yx89jf06yrmWgru7a/Y2wp9RXz7Gml2IbtX9pMUzpmKTOuXXEzU0Lz7ruabAerHsppdhH15p0LCRjC8/L35mw5NxSY5nX1F/PpWOO/efGWXov52sTxqjdI3xB/WrqsKXlnvvtGyM3Pbikv1r+IfCTm3+PdeMN/G3VQuYoer6K9cTij6fvrXnHreve5rFuteKf9Rzcuz7hOY/IpDn3+H2XNVdWbWn5I/Wx1d6WZPNGsu+E27bWLEfLR+u5tQ7hGOXXl8JYQb+ksXiuE5IayKyi59C86oQ7rpJrtHi0MYranNPMvRnmGb9kf9nDV++44XGs5dr79JFzD5uHvtTy5OGj1aTPjzbi2FH0XGJYxy36eankqpRTjn8z8kLp6Fn1vAQ8h9rz4+LtlxfafihfN8I8xsb6vc5eebX0ZfXXM3Z4rKTlMzRde62HvpTw8nGkbUk2HznPN1rfg8P5fq3kcSXDmn0pvJ/zOttfiVE6un/vjdLzkd+H4/rvCVXjEqi6Kfnt8dsEiWkotbUl32dItVxQ19Z89caaX8kzL26/tbUY3rdkcA4ler6luXsxpT1jjpZvhHHrBJ83Om5tn9xxwtpLQf1OrZTzUnvWHHi1VbNL4X1cMxp77uh3K18rcWRfs7W0TKLpte9wU+3kNd8zLljfklqv7Y21tPwl/a9fRyOPHXz9nP7N89I1NWvdW0E9p2rwaHpO5SdryTuwrC04j1QMNai1Z2TMJT+827cC9bxFL/888lHSc4s9p//nuTb2keNJMau2ZjFinuXjNS2n9NyT3O6W6us7dQ00zXMu71hG463nOSfaOhux3176zCGJ1QPYXq5ZyTX3hfc4c9myBnDPk/YzmxV8xP1p9ZzTNjVW3HNr7Qb+WMf/iOPiUd9ec+eoWNYDzvkta+m5h6ZjPefQc7y57XJq8B1ZD7y05AhzaKZv+2/U4O/VEvgfWq9crjwutwJn3px1nDTrBeeaI65DWlrrMdyH4bYnyT9HzyWa/uPLfl7//iaOr4JEz6n90hmcfU6cMaZgbc48n4I1gDoOn6lIrh9B1P5Yzrb2cD8jHj3OIAhuE3xfLrk3D87LGXUu9DwIgiAIgiAI5PwB5HeVBg==
+  </data>
+ </layer>
+ <objectgroup name="Objects">
+  <object gid="85" x="3872" y="448"/>
+  <object gid="85" x="3968" y="448"/>
+  <object gid="86" x="11936" y="352"/>
+  <object gid="86" x="11936" y="320"/>
+  <object gid="86" x="12000" y="320"/>
+  <object gid="86" x="12000" y="352"/>
+  <object name="Exit" type="Door" gid="82" x="15904" y="96"/>
+  <object name="Exit" type="Door" gid="98" x="15904" y="128"/>
+  <object gid="96" x="12352" y="384"/>
+  <object gid="96" x="12384" y="384"/>
+  <object gid="96" x="12416" y="384"/>
+  <object gid="96" x="12448" y="384"/>
+  <object gid="96" x="12480" y="384"/>
+  <object gid="96" x="12512" y="384"/>
+  <object gid="96" x="12544" y="384"/>
+  <object gid="96" x="12576" y="384"/>
+  <object gid="96" x="12608" y="384"/>
+  <object gid="96" x="12640" y="384"/>
+  <object gid="96" x="12672" y="384"/>
+  <object gid="96" x="12704" y="384"/>
+  <object gid="96" x="4192" y="544"/>
+  <object gid="96" x="4224" y="544"/>
+  <object gid="96" x="4256" y="544"/>
+  <object gid="96" x="4320" y="544"/>
+  <object gid="96" x="4352" y="544"/>
+  <object gid="96" x="4384" y="544"/>
+  <object gid="85" x="3968" y="416"/>
+  <object gid="85" x="3872" y="416"/>
+  <object gid="85" x="3904" y="416"/>
+  <object gid="85" x="3904" y="448"/>
+  <object gid="85" x="4000" y="416"/>
+  <object gid="85" x="4000" y="448"/>
+  <object name="Steve" type="Steve" gid="257" x="64" y="448" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="608" y="544" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="1472" y="384" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="1728" y="320" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="2112" y="416" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="2368" y="416" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="2816" y="448" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="2976" y="608" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="3392" y="512" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="3712" y="544" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="4096" y="544" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="4576" y="544" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="4416" y="544" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="4992" y="480" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="5728" y="384" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="6144" y="256" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="6528" y="192" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="6720" y="160" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="7136" y="192" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="7296" y="192" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="6752" y="480" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="7584" y="480" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="8032" y="384" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="8128" y="384" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="8480" y="352" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="9408" y="384" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="10240" y="480" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="10688" y="448" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="11040" y="416" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="11392" y="448" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="13024" y="352" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="13600" y="288" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="13920" y="352" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="14592" y="224" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="15136" y="288" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="3904" y="544" width="32" height="64"/>
+ </objectgroup>
+</map>
