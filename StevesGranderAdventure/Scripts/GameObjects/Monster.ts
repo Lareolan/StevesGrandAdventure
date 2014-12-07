@@ -70,7 +70,9 @@ module GameObjects {
          * Monster has a random chance to drop some health when it dies. This function makes it drop.
          */
         dropLoot(): void {
-            this.player.objects.spawnLoot(this.x, this.y + 32);
+            if (Math.floor(Math.random() * 4) === 0) {
+                this.player.objects.spawnLoot(this.x, this.y + 32);
+            }
         }
 
         /*

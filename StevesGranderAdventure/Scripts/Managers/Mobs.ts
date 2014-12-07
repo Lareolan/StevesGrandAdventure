@@ -72,16 +72,10 @@ module Managers {
             var deadMobIdx = -1;
             for (var index = 0; index < this.children.length; index++) {
                 if (!(<GameObjects.Monster>this.children[index]).hitTest(damage)) {
-//                    deadMobIdx = index;
                     (<GameObjects.Monster>this.children[index]).die();
                     break;
                 }
             }
-
-//            if (deadMobIdx != -1) {
-//                this.children.splice(deadMobIdx, 1);
-
-//            }
         }
 
 

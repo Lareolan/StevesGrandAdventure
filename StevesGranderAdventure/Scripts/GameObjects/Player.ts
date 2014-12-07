@@ -377,9 +377,6 @@ module GameObjects {
             if (this.objects.checkExit(mapX, mapY)) {
                 var event = new createjs.Event("exitReached", true, false);
                 this.stage.dispatchEvent(event);
-
-//                gameState = constants.GAME_STATE_VICTORY;
-//                gui.show(constants.GAME_STATE_VICTORY);
             }
 
             // Test if Steve can pick something up

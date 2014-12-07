@@ -255,9 +255,9 @@ module GameObjects {
             var mapFrontX = Math.ceil((this.mapX) / 32) + xOffset;
             var mapY = Math.floor((this.mapY) / 32);
 
-            var topBackIndex = this.mapData.width * (mapY - 1) + mapBackX;
+            var topBackIndex = this.mapData.width * (mapY - 0) + mapBackX;
             var bottomBackIndex = this.mapData.width * (mapY + 2) + mapBackX;
-            var topFrontIndex = this.mapData.width * (mapY - 1) + mapFrontX;
+            var topFrontIndex = this.mapData.width * (mapY - 0) + mapFrontX;
             var bottomFrontIndex = this.mapData.width * (mapY + 2) + mapFrontX;
 
             var topBackTile = this.mapData.data[topBackIndex];
