@@ -139,4 +139,4 @@ var Managers;
     })(createjs.Container);
     Managers.CloudManager = CloudManager;
 })(Managers || (Managers = {}));
-//# sourceMappingURL=cloudmanager.js.map
+//# sourceMappingURL=CloudManager.js.map

@@ -45,6 +45,8 @@ module GameObjects {
             } else {
                 if (this instanceof GameObjects.Mobs.Zombie) {
                     this.sound.zombieHurt(<GameObjects.Mobs.Zombie>this, this.player);
+                } else if (this instanceof GameObjects.Mobs.Creeper) {
+                    this.sound.creeperHurt(<GameObjects.Mobs.Creeper>this, this.player);
                 }
             }
             return true;
@@ -54,13 +56,21 @@ module GameObjects {
         die(): void {
             this.dead = true;
             if (this instanceof GameObjects.Mobs.Zombie) {
+                this.dropLoot();
                 this.sound.zombieDeath(<GameObjects.Mobs.Zombie>this, this.player);
-//                this.stage.removeChild(this);
                 this.parent.removeChild(this);
-            } else {
+            } else if (this instanceof GameObjects.Mobs.Creeper) {
+                this.dropLoot();
                 this.parent.removeChild(this);
             }
             this.player.addKill();
+        }
+
+        /**
+         * Monster has a random chance to drop some health when it dies. This function makes it drop.
+         */
+        dropLoot(): void {
+            this.player.objects.spawnLoot(this.x, this.y + 32);
         }
 
         /*

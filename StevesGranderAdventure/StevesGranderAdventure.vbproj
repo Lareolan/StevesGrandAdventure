@@ -100,6 +100,7 @@
     <Content Include="Assets\sounds\creeper\hurt2.ogg" />
     <Content Include="Assets\sounds\creeper\hurt3.ogg" />
     <Content Include="Assets\sounds\creeper\hurt4.ogg" />
+    <Content Include="Assets\sounds\eat.ogg" />
     <Content Include="Assets\sounds\hit1.ogg" />
     <Content Include="Assets\sounds\lava.ogg" />
     <Content Include="Assets\sounds\lavapop.ogg" />

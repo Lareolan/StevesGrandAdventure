@@ -22,12 +22,10 @@ module GameObjects {
             super(Managers.Assets.characters, imageAsset);
             this.width = this.getBounds().width;
             this.height = this.getBounds().height;
-
-            if (positionIndex !== null) {
-                stage.addChildAt(this, positionIndex);
-            } else {
-                stage.addChild(this);
-            }
+            this.regX = this.width * 0.5;
+            this.regY = this.height * 0.5;
+            this.x = this.regX;
+            this.y = this.regY;
         }
     }
 } 

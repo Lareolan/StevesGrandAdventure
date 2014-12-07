@@ -164,30 +164,6 @@ class MainGame {
     gameLoop(event: Event): void {
         var instance = this.instance;
 
-        // If player moves left, shift all drawn assets to the right
-        if (Controls.keyboard.KEY_LEFT) {
-            if (instance.player.moveLeft()) {
-                instance.map.shiftRight();
-                instance.gameObjects.shiftRight()
-                instance.clouds.shiftRight();
-                instance.mobs.shiftRight();
-            }
-        }
-
-        // If player moves right, shift all drawn assets to the left
-        if (Controls.keyboard.KEY_RIGHT) {
-            if (instance.player.moveRight()) {
-                instance.map.shiftLeft();
-                instance.gameObjects.shiftLeft()
-                instance.clouds.shiftLeft();
-                instance.mobs.shiftLeft();
-            }
-        }
-
-        // If player is jumping, handle the jump
-        if (Controls.keyboard.KEY_UP) {
-            instance.player.jump();
-        }
 
         switch (instance.gameState) {
             case Constants.GAME_STATE_PRELOAD:
@@ -200,6 +176,7 @@ class MainGame {
                 break;
             case Constants.GAME_STATE_PLAY:
                 instance.clouds.update();
+                instance.inputUpdate();
                 instance.player.update();
                 instance.mobs.update();
                 instance.sound.update(instance.player, instance.map);
@@ -271,14 +248,36 @@ class MainGame {
         instance.mobs.reset();
         instance.gui.gameScreen.reset();
         instance.gui.display(instance.gameState);
-
-//                cloudManager.reset();
-//                player.reset();
-//                map.reset();
-//                gameObjects.reset();
-//                mobs.reset();
-//                gui.gameScreen.reset();
     }
 
+    /**
+     * 
+     */
+    inputUpdate(): void {
+        // If player moves left, shift all drawn assets to the right
+        if (Controls.keyboard.KEY_LEFT) {
+            if (this.player.moveLeft()) {
+                this.map.shiftRight();
+                this.gameObjects.shiftRight();
+                this.clouds.shiftRight();
+                this.mobs.shiftRight();
+            }
+        }
+
+        // If player moves right, shift all drawn assets to the left
+        if (Controls.keyboard.KEY_RIGHT) {
+            if (this.player.moveRight()) {
+                this.map.shiftLeft();
+                this.gameObjects.shiftLeft();
+                this.clouds.shiftLeft();
+                this.mobs.shiftLeft();
+            }
+        }
+
+        // If player is jumping, handle the jump
+        if (Controls.keyboard.KEY_UP) {
+            this.player.jump();
+        }
+    }
 }
 

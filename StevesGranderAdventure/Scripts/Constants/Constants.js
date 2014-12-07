@@ -42,6 +42,7 @@ var Constants;
 
     // Player constants
     Constants.MOVE_SPEED = 8;
+    Constants.PLAYER_MAX_HEALTH = 10;
 
     // Entity constants
     Constants.FACING_LEFT = 0;

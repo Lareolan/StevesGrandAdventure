@@ -21,6 +21,7 @@ var Managers;
         SoundsList.LAVA_POP = "lavapop";
         SoundsList.WATER = "water";
         SoundsList.HIT = "hit";
+        SoundsList.EAT = "eat";
         SoundsList.ZOMBIE_WALK1 = "zombie_step1";
         SoundsList.ZOMBIE_WALK2 = "zombie_step2";
         SoundsList.ZOMBIE_TALK1 = "zombie_say1";
@@ -29,7 +30,6 @@ var Managers;
         SoundsList.ZOMBIE_HURT1 = "zombie_hurt1";
         SoundsList.ZOMBIE_HURT2 = "zombie_hurt2";
         SoundsList.ZOMBIE_DEATH = "zombie_death";
-
         SoundsList.CREEPER_FUSE = "creeper_fuse";
         SoundsList.CREEPER_EXPLODE1 = "creeper_explode1";
         SoundsList.CREEPER_EXPLODE2 = "creeper_explode2";
@@ -76,7 +76,14 @@ var Managers;
             this.playerHitInstance.play(createjs.Sound.INTERRUPT_NONE, 0, 0, 0, 1, 0);
         };
 
-        /*
+        /**
+        * The sound of a player eating to restore health
+        */
+        Sound.prototype.playerEat = function () {
+            createjs.Sound.play(SoundsList.EAT, createjs.Sound.INTERRUPT_NONE, 0, 0, 0, 1, 0);
+        };
+
+        /**
         * Play a random "speak" sound for zombies at random intervals. This function also calculates
         * the relative distance from the player, and calculates volume and pan accordingly.
         */

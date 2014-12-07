@@ -32,12 +32,6 @@ module GameObjects {
             this.regY = this.height * 0.5;
             this.x = this.regX;
             this.y = this.regY;
-
-            if (positionIndex !== null) {
-//                stage.addChildAt(this, positionIndex);
-            } else {
-//                stage.addChild(this);
-            }
         }
 
         // Retrieve the Bitmap object

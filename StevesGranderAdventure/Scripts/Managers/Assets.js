@@ -40,6 +40,7 @@ var Managers;
             { id: "lavapop", src: "Assets/sounds/lavapop.ogg" },
             { id: "water", src: "Assets/sounds/water.ogg" },
             { id: "hit", src: "Assets/sounds/hit1.ogg" },
+            { id: "eat", src: "Assets/sounds/eat.ogg" },
             { id: "zombie_step1", src: "Assets/sounds/zombie/step1.ogg" },
             { id: "zombie_step2", src: "Assets/sounds/zombie/step2.ogg" },
             { id: "zombie_say1", src: "Assets/sounds/zombie/say1.ogg" },
@@ -96,17 +97,17 @@ var Managers;
                 [790, 2, 32, 32]
             ],
             animations: {
-                "AKey": [0],
-                "DKey": [1],
-                "FullFood": [2],
-                "FullHeart": [3],
-                "HalfHeart": [4],
-                "LeftArrowKey": [5],
-                "MeterBackground": [6],
-                "RightArrowKey": [7],
-                "SpaceBar": [8],
-                "UpArrowKey": [9],
-                "WKey": [10]
+                AKey: [0],
+                DKey: [1],
+                FullFood: [2],
+                FullHeart: [3],
+                HalfHeart: [4],
+                LeftArrowKey: [5],
+                MeterBackground: [6],
+                RightArrowKey: [7],
+                SpaceBar: [8],
+                UpArrowKey: [9],
+                WKey: [10]
             }
         };
 

@@ -41,6 +41,7 @@ module Constants {
 
     // Player constants
     export var MOVE_SPEED: number = 8;
+    export var PLAYER_MAX_HEALTH: number = 10;
 
     // Entity constants
     export var FACING_LEFT: number = 0;

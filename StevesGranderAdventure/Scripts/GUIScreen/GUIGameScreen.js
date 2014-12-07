@@ -21,18 +21,16 @@ var GUIScreen;
         __extends(GUIGameScreen, _super);
         // Initializes the game play screen's GUI components such as player's health
         // and kill count display objects.
-        function GUIGameScreen(stage /*, player: GameObjects.Player*/ ) {
+        function GUIGameScreen(stage) {
             _super.call(this, stage);
             this.healthSprites = [];
-            //            this.player = player;
+            this.playerHealth = Constants.PLAYER_MAX_HEALTH;
         }
         GUIGameScreen.prototype.init = function () {
             this.healthBar = new createjs.Sprite(Managers.Assets.guiComponents, "MeterBackground");
             this.healthBar.x = Constants.HALF_SCREEN_WIDTH - 160;
             this.healthBar.y = 640;
             this.healthBar.name = "Health Bar";
-
-            //            stage.addChild(this.healthBar);
             this.screenObjects.push(this.healthBar);
 
             for (var i = 0; i < 10; i++) {
@@ -40,8 +38,6 @@ var GUIScreen;
                 this.healthSprites[i].x = Constants.HALF_SCREEN_WIDTH - 160 + (32 * i);
                 this.healthSprites[i].y = 640;
                 this.healthSprites[i].name = "Full Heart";
-
-                //                stage.addChild(this.healthSprites[i]);
                 this.screenObjects.push(this.healthSprites[i]);
             }
 
@@ -54,8 +50,6 @@ var GUIScreen;
             this.killDisplay.y = 640 + 16;
             this.killDisplay.textBaseline = "middle";
             this.killDisplay.name = "Kill Display";
-
-            //            stage.addChild(this.killDisplay);
             this.screenObjects.push(this.killDisplay);
         };
 
@@ -64,10 +58,6 @@ var GUIScreen;
             this.player = player;
         };
 
-        // Shows the victory screen
-        //        show() {
-        //            super.show();
-        //        }
         // Resets the game play screen back to initial state
         GUIGameScreen.prototype.reset = function () {
             this.killDisplay.text = "Kill Count: 0";
@@ -75,49 +65,27 @@ var GUIScreen;
             for (var i = 0; i < 10; i++) {
                 this.stage.addChild(this.healthSprites[i]);
             }
-            //            this.init();
-            /*
-            this.healthBar.x = Constants.HALF_SCREEN_WIDTH - 160;
-            this.healthBar.y = 640;
-            this.healthBar.name = "Health Bar";
-            stage.addChild(this.healthBar);
-            
-            for (var i = 0; i < 10; i++) {
-            this.healthSprites[i] = new createjs.Sprite(Managers.Assets.guiComponents, "FullHeart");
-            this.healthSprites[i].x = (stage.canvas.width / 2) - 160 + (32 * i);
-            this.healthSprites[i].y = 640;
-            this.healthSprites[i].name = "Full Heart";
-            stage.addChild(this.healthSprites[i]);
-            }
-            
-            this.hitShape = new createjs.Shape();
-            this.hitShape.graphics.beginFill("rgba(255,0,0,0.5)").drawRect(0, 0, stage.canvas.width, stage.canvas.height - 32);
-            
-            this.killDisplay.font = "32px Minecrafter";
-            this.killDisplay.text = "Kill Count: 0";
-            this.killDisplay.y = 640 + 16;
-            this.killDisplay.textBaseline = "middle";
-            this.killDisplay.name = "Kill Display";
-            stage.addChild(this.killDisplay);
-            //*/
         };
 
         // Updates the player's health display and kill count
         GUIGameScreen.prototype.update = function () {
             var health = this.player.getHealth();
 
-            if ((health < this.healthSprites.length) && (health >= 0)) {
-                for (var i = this.healthSprites.length - 1; i >= health; i--) {
-                    //                    stage.removeChild(this.healthSprites[i]);
+            if ((health < this.playerHealth) && (health >= 0)) {
+                for (var i = (this.playerHealth - 1); i >= health; i--) {
                     this.stage.removeChild(this.healthSprites[i]);
-                    //                    this.healthSprites.length = i;
                 }
+                this.playerHealth = health;
+            } else if (health > this.playerHealth) {
+                for (var i = (this.playerHealth - 1); i < health; i++) {
+                    this.stage.addChild(this.healthSprites[i]);
+                }
+                this.playerHealth = health;
             }
 
             if (this.lastKillCount != this.player.getKillCount()) {
                 this.lastKillCount = this.player.getKillCount();
                 this.killDisplay.text = "Kill Count: " + this.lastKillCount;
-                //                stage.update();
             }
         };
 
@@ -126,7 +94,6 @@ var GUIScreen;
             stage.addChild(instance.hitShape);
             setTimeout(function () {
                 stage.removeChild(instance.hitShape);
-                //                stage.update();
             }, 100);
         };
         return GUIGameScreen;

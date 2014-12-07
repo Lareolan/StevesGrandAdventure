@@ -224,7 +224,7 @@ module GameObjects {
                 mapX = Math.floor((this.mapX + speed) / 32) + xOffset;
             }
 
-            var mapY = Math.floor((this.mapY) / 32);
+            var mapY = Math.ceil((this.mapY) / 32);
 
             var topIndex = this.mapData.width * mapY + mapX;
             var bottomIndex = this.mapData.width * (mapY + 1) + mapX;

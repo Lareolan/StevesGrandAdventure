@@ -18,6 +18,7 @@ module Managers {
         static LAVA_POP: string = "lavapop";
         static WATER: string = "water";
         static HIT: string = "hit";
+        static EAT: string = "eat";
         static ZOMBIE_WALK1: string = "zombie_step1";
         static ZOMBIE_WALK2: string = "zombie_step2";
         static ZOMBIE_TALK1: string = "zombie_say1";
@@ -26,7 +27,6 @@ module Managers {
         static ZOMBIE_HURT1: string = "zombie_hurt1";
         static ZOMBIE_HURT2: string = "zombie_hurt2";
         static ZOMBIE_DEATH: string = "zombie_death";
-
         static CREEPER_FUSE: string = "creeper_fuse";
         static CREEPER_EXPLODE1: string = "creeper_explode1";
         static CREEPER_EXPLODE2: string = "creeper_explode2";
@@ -89,7 +89,14 @@ module Managers {
             this.playerHitInstance.play(createjs.Sound.INTERRUPT_NONE, 0, 0, 0, 1, 0);
         }
 
-        /*
+        /**
+         * The sound of a player eating to restore health
+         */
+        playerEat(): void {
+            createjs.Sound.play(SoundsList.EAT, createjs.Sound.INTERRUPT_NONE, 0, 0, 0, 1, 0);
+        }
+
+        /**
          * Play a random "speak" sound for zombies at random intervals. This function also calculates
          * the relative distance from the player, and calculates volume and pan accordingly.
          */

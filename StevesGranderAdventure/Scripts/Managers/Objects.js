@@ -80,6 +80,23 @@ var Managers;
                 //                this.objectList.push(this.miscObjects[index]);
             }
         }
+        // Spawns loot in the world
+        Objects.prototype.spawnLoot = function (x, y) {
+            var image = createjs.SpriteSheetUtils.extractFrame(Managers.Assets.guiComponents, "FullFood");
+            var bitmap = new createjs.Bitmap(image);
+            var obj = new GameObjects.BitmapObject(null, bitmap);
+            this.miscObjects.push(obj);
+
+            obj.x = x;
+            obj.y = y;
+            obj.posX = obj.x;
+            obj.posY = obj.y;
+            obj.regX = 0;
+            obj.regY = 0;
+            obj.name = "Loot";
+            this.addChild(obj);
+        };
+
         // Move all the static objects to the right to reflect player moving left
         Objects.prototype.shiftRight = function () {
             //            for (var index = 0; index < this.objectList.length; index++) {
@@ -122,6 +139,35 @@ var Managers;
                 }
             }
             return false;
+        };
+
+        // This function checks whether or not the player has run across some loot.
+        Objects.prototype.checkLoot = function (x, y) {
+            for (var index = 0; index < this.miscObjects.length; index++) {
+                if (this.miscObjects[index].name === "Loot") {
+                    var distanceH = Math.abs(Math.floor(this.miscObjects[index].posX / 32) - x);
+                    var distanceV = Math.abs(Math.floor(this.miscObjects[index].posY / 32) - y);
+                    if ((distanceH === 0) && (distanceV <= 1)) {
+                        return this.miscObjects[index];
+                    }
+                }
+            }
+            return null;
+        };
+
+        /**
+        * Remove a specific child from the objects collection
+        * @param obj The BitmapObject to be removed
+        */
+        Objects.prototype.removeChild = function (obj) {
+            for (var index = 0; index < this.miscObjects.length; index++) {
+                if (obj === this.miscObjects[index]) {
+                    //                    this.miscObjects = this.miscObjects.splice(index, 1);
+                    this.miscObjects.splice(index, 1);
+                    _super.prototype.removeChild.call(this, obj);
+                    return;
+                }
+            }
         };
 
         // Resets all the static objects back to their initial positions

@@ -68,7 +68,7 @@ var GameObjects;
             //            this.y = this.canvasY;
             //            this.regX = 0;
             //            this.regY = 0;
-            this.health = 10;
+            this.health = Constants.PLAYER_MAX_HEALTH;
             this.attackCounter = 0;
             this.runDistanceIncrements = 4;
             this.useXOffsetHack = true;
@@ -288,6 +288,8 @@ var GameObjects;
                 //                this.sprite.x = this.canvasX;
                 //                this.sprite.y = this.canvasY;
                 //                stage.addChild(this.sprite);
+                //                this.canvasX = this.mapX;
+                //                this.canvasY = this.mapY;
                 this.x = this.canvasX;
                 this.y = this.canvasY;
 
@@ -344,9 +346,16 @@ var GameObjects;
             }
 
             // Calculate player's current position and see if Steve's feet hit lava
-            var mapFrontX = Math.ceil((this.mapX) / 32) + xOffset;
+            var mapX;
+            if (this.facing == Constants.FACING_RIGHT) {
+                mapX = Math.floor((this.mapX) / 32) + xOffset;
+            } else {
+                mapX = Math.ceil((this.mapX) / 32) + xOffset;
+            }
+
+            //            var mapFrontX = Math.ceil((this.mapX) / 32) + xOffset;
             var mapY = Math.floor((this.canvasY) / 32);
-            var charBottomIndex = this.mapData.width * (mapY + 1) + mapFrontX;
+            var charBottomIndex = this.mapData.width * (mapY + 1) + mapX;
             var charBottomTile = this.mapData.data[charBottomIndex];
 
             // If Steve's feet hit lava, then hit Steve for 10 hearts (instant kill)
@@ -356,11 +365,21 @@ var GameObjects;
             }
 
             // Test if Steve reached the exit door, if he did change the game's state to victory.
-            if (this.objects.checkExit(mapFrontX, mapY)) {
+            if (this.objects.checkExit(mapX, mapY)) {
                 var event = new createjs.Event("exitReached", true, false);
                 this.stage.dispatchEvent(event);
                 //                gameState = constants.GAME_STATE_VICTORY;
                 //                gui.show(constants.GAME_STATE_VICTORY);
+            }
+
+            // Test if Steve can pick something up
+            var loot = this.objects.checkLoot(mapX, mapY);
+            if (loot) {
+                if (this.getHealth() < Constants.PLAYER_MAX_HEALTH) {
+                    this.sound.playerEat();
+                    this.objects.removeChild(loot);
+                    this.health++;
+                }
             }
 
             return result;

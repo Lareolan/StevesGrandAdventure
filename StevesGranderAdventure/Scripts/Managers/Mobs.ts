@@ -48,7 +48,7 @@ module Managers {
                     zombie.setSound(this.sound);
                     zombie.setPlayer(this.player);
 
-//                    this.addChild(zombie);
+                    this.addChild(zombie);
                 } else if (this.rawMobData[index]["name"] === "Creeper") {
                     creeper = new GameObjects.Mobs.Creeper();
                     creeper.name = "Creeper " + index;
