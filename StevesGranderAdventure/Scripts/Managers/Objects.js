@@ -32,6 +32,7 @@ var Managers;
             this.torches = [];
             this.miscObjects = [];
             this.objectList = [];
+            this.spawnedObjects = [];
 
             var bitmap;
             var gid;
@@ -66,18 +67,12 @@ var Managers;
 
             for (index = 0; index < this.doors.length; index++) {
                 this.addChild(this.doors[index]);
-                //                stage.addChild(this.doors[index]);
-                //                this.objectList.push(this.doors[index]);
             }
             for (index = 0; index < this.torches.length; index++) {
                 this.addChild(this.torches[index]);
-                //                stage.addChild(this.torches[index]);
-                //                this.objectList.push(this.torches[index]);
             }
             for (index = 0; index < this.miscObjects.length; index++) {
                 this.addChild(this.miscObjects[index]);
-                //                stage.addChild(this.miscObjects[index]);
-                //                this.objectList.push(this.miscObjects[index]);
             }
         }
         // Spawns loot in the world
@@ -85,7 +80,7 @@ var Managers;
             var image = createjs.SpriteSheetUtils.extractFrame(Managers.Assets.guiComponents, "FullFood");
             var bitmap = new createjs.Bitmap(image);
             var obj = new GameObjects.BitmapObject(null, bitmap);
-            this.miscObjects.push(obj);
+            this.spawnedObjects.push(obj);
 
             obj.x = x;
             obj.y = y;
@@ -99,17 +94,11 @@ var Managers;
 
         // Move all the static objects to the right to reflect player moving left
         Objects.prototype.shiftRight = function () {
-            //            for (var index = 0; index < this.objectList.length; index++) {
-            //                this.objectList[index].x += constants.MOVE_SPEED;
-            //            }
             this.x += Constants.MOVE_SPEED;
         };
 
         // Move all the static objects to the left to reflect player moving right
         Objects.prototype.shiftLeft = function () {
-            //            for (var index = 0; index < this.objectList.length; index++) {
-            //                this.objectList[index].x -= constants.MOVE_SPEED;
-            //            }
             this.x -= Constants.MOVE_SPEED;
         };
 
@@ -143,12 +132,12 @@ var Managers;
 
         // This function checks whether or not the player has run across some loot.
         Objects.prototype.checkLoot = function (x, y) {
-            for (var index = 0; index < this.miscObjects.length; index++) {
-                if (this.miscObjects[index].name === "Loot") {
-                    var distanceH = Math.abs(Math.floor(this.miscObjects[index].posX / 32) - x);
-                    var distanceV = Math.abs(Math.floor(this.miscObjects[index].posY / 32) - y);
+            for (var index = 0; index < this.spawnedObjects.length; index++) {
+                if (this.spawnedObjects[index].name === "Loot") {
+                    var distanceH = Math.abs(Math.floor(this.spawnedObjects[index].posX / 32) - x);
+                    var distanceV = Math.abs(Math.floor(this.spawnedObjects[index].posY / 32) - y);
                     if ((distanceH === 0) && (distanceV <= 1)) {
-                        return this.miscObjects[index];
+                        return this.spawnedObjects[index];
                     }
                 }
             }
@@ -160,10 +149,9 @@ var Managers;
         * @param obj The BitmapObject to be removed
         */
         Objects.prototype.removeChild = function (obj) {
-            for (var index = 0; index < this.miscObjects.length; index++) {
-                if (obj === this.miscObjects[index]) {
-                    //                    this.miscObjects = this.miscObjects.splice(index, 1);
-                    this.miscObjects.splice(index, 1);
+            for (var index = 0; index < this.spawnedObjects.length; index++) {
+                if (obj === this.spawnedObjects[index]) {
+                    this.spawnedObjects.splice(index, 1);
                     _super.prototype.removeChild.call(this, obj);
                     return;
                 }
@@ -175,6 +163,12 @@ var Managers;
         Objects.prototype.reset = function () {
             this.x = 0;
             this.y = 0;
+
+            for (var index = 0; index < this.spawnedObjects.length; index++) {
+                _super.prototype.removeChild.call(this, this.spawnedObjects[index]);
+            }
+
+            this.spawnedObjects = [];
         };
         return Objects;
     })(createjs.Container);

@@ -18,6 +18,7 @@ module Managers {
         torches: Array<GameObjects.BitmapObject>;
         ladders: Array<GameObjects.BitmapObject>;
         miscObjects: Array<GameObjects.BitmapObject>;
+        spawnedObjects: Array<GameObjects.BitmapObject>;
 
         /*
          * Constructor. Takes in an array of objects and the game's loaded tileset from the map,
@@ -32,6 +33,7 @@ module Managers {
             this.torches = [];
             this.miscObjects = [];
             this.objectList = [];
+            this.spawnedObjects = [];
 
             var bitmap: createjs.Bitmap;
             var gid: number;
@@ -66,18 +68,12 @@ module Managers {
 
             for (index = 0; index < this.doors.length; index++) {
                 this.addChild(this.doors[index]);
-//                stage.addChild(this.doors[index]);
-//                this.objectList.push(this.doors[index]);
             }
             for (index = 0; index < this.torches.length; index++) {
                 this.addChild(this.torches[index]);
-//                stage.addChild(this.torches[index]);
-//                this.objectList.push(this.torches[index]);
             }
             for (index = 0; index < this.miscObjects.length; index++) {
                 this.addChild(this.miscObjects[index]);
-//                stage.addChild(this.miscObjects[index]);
-//                this.objectList.push(this.miscObjects[index]);
             }
         }
 
@@ -86,7 +82,7 @@ module Managers {
             var image = createjs.SpriteSheetUtils.extractFrame(Managers.Assets.guiComponents, "FullFood");
             var bitmap = new createjs.Bitmap(image);
             var obj = new GameObjects.BitmapObject(null, bitmap);
-            this.miscObjects.push(obj);
+            this.spawnedObjects.push(obj);
 
             obj.x = x;
             obj.y = y;
@@ -100,32 +96,26 @@ module Managers {
 
         // Move all the static objects to the right to reflect player moving left
         shiftRight(): void {
-//            for (var index = 0; index < this.objectList.length; index++) {
-//                this.objectList[index].x += constants.MOVE_SPEED;
-//            }
             this.x += Constants.MOVE_SPEED;
         }
 
         // Move all the static objects to the left to reflect player moving right
         shiftLeft(): void {
-//            for (var index = 0; index < this.objectList.length; index++) {
-//                this.objectList[index].x -= constants.MOVE_SPEED;
-//            }
             this.x -= Constants.MOVE_SPEED;
         }
 
         // Show all the static objects by adding each one to the stage
         show(): void {
-//            for (var index = 0; index < this.objectList.length; index++) {
-//                this.objectList[index].show();
-//            }
+            //            for (var index = 0; index < this.objectList.length; index++) {
+            //                this.objectList[index].show();
+            //            }
         }
 
         // Hide all the static objects by removing each one from the stage
         hide(): void {
-//            for (var index = 0; index < this.objectList.length; index++) {
-//                this.objectList[index].hide();
-//            }
+            //            for (var index = 0; index < this.objectList.length; index++) {
+            //                this.objectList[index].hide();
+            //            }
         }
 
         // This function checks whether or not the player has reached the exit doorway.
@@ -144,12 +134,12 @@ module Managers {
 
         // This function checks whether or not the player has run across some loot.
         checkLoot(x: number, y: number): GameObjects.BitmapObject {
-            for (var index = 0; index < this.miscObjects.length; index++) {
-                if (this.miscObjects[index].name === "Loot") {
-                    var distanceH = Math.abs(Math.floor(this.miscObjects[index].posX / 32) - x);
-                    var distanceV = Math.abs(Math.floor(this.miscObjects[index].posY / 32) - y);
+            for (var index = 0; index < this.spawnedObjects.length; index++) {
+                if (this.spawnedObjects[index].name === "Loot") {
+                    var distanceH = Math.abs(Math.floor(this.spawnedObjects[index].posX / 32) - x);
+                    var distanceV = Math.abs(Math.floor(this.spawnedObjects[index].posY / 32) - y);
                     if ((distanceH === 0) && (distanceV <= 1)) {
-                        return this.miscObjects[index];
+                        return this.spawnedObjects[index];
                     }
                 }
             }
@@ -161,10 +151,9 @@ module Managers {
          * @param obj The BitmapObject to be removed
          */
         removeChild(obj: GameObjects.BitmapObject): void {
-            for (var index = 0; index < this.miscObjects.length; index++) {
-                if (obj === this.miscObjects[index]) {
-//                    this.miscObjects = this.miscObjects.splice(index, 1);
-                    this.miscObjects.splice(index, 1);
+            for (var index = 0; index < this.spawnedObjects.length; index++) {
+                if (obj === this.spawnedObjects[index]) {
+                    this.spawnedObjects.splice(index, 1);
                     super.removeChild(obj);
                     return;
                 }
@@ -176,6 +165,12 @@ module Managers {
         reset(): void {
             this.x = 0;
             this.y = 0;
+
+            for (var index = 0; index < this.spawnedObjects.length; index++) {
+                super.removeChild(this.spawnedObjects[index]);
+            }
+
+            this.spawnedObjects = [];
         }
     }
 } 
