@@ -20,14 +20,22 @@ module Managers {
         miscObjects: Array<GameObjects.BitmapObject>;
         spawnedObjects: Array<GameObjects.BitmapObject>;
 
+        /**
+         * The constructor simply initializes the Object manager/container instance
+         */
+        constructor() {
+            super();
+        }
+
         /*
-         * Constructor. Takes in an array of objects and the game's loaded tileset from the map,
+         * This function takes in an array of objects and the game's loaded tileset from the map,
          * and creates game objects out of them, then adds them to the appropriate array
          * depending on their type. Ignores objects with type "Steve" and "Mob" since those
-         * are handled by other classes.
+         * are handled by other classes (Player and Mobs respectively).
+         * @param objects A raw array of objects loaded from the map data
+         * @param tileset A reference to the game map's tileset to use to load bitmaps for the various objects
          */
-        constructor(objects: Array<Object>, tileset: GameObjects.Tileset) {
-            super();
+        loadObjects(objects: Array<Object>, tileset: GameObjects.Tileset): void {
             this.originalList = objects;
             this.doors = [];
             this.torches = [];

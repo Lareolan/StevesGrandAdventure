@@ -21,12 +21,18 @@ var GameObjects;
     // GameMap class
     var GameMap = (function (_super) {
         __extends(GameMap, _super);
-        // The constructor initializes all of the map data, loads it, parses it, and displays it
-        function GameMap(mapName) {
+        // The constructor initializes the object, not much else
+        function GameMap() {
             _super.call(this);
-            this.layers = [];
+        }
+        /**
+        * This function initializes all of the map data, loads it, and parses it
+        */
+        GameMap.prototype.loadMap = function (mapName) {
             var index, tileID;
             var tile;
+
+            this.layers = [];
 
             // Parses XML sections of the game map file
             var $mapData = $(Managers.Assets.loader.getResult(mapName));
@@ -103,7 +109,8 @@ var GameObjects;
             //            this.map = new createjs.Bitmap(canvas);
             //            this.map.name = "Map";
             //            stage.addChild(this.map);
-        }
+        };
+
         /*
         * Returns layer information for a specific map layer
         * @param name A string name of the layer to retrieve

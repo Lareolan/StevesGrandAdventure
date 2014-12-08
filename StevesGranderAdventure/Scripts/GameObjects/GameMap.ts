@@ -24,12 +24,19 @@ module GameObjects {
         mapWidth: number;
         mapHeight: number;
 
-        // The constructor initializes all of the map data, loads it, parses it, and displays it
-        constructor(mapName: string) {
+        // The constructor initializes the object, not much else
+        constructor() {
             super();
-            this.layers = [];
+        }
+
+        /**
+         * This function initializes all of the map data, loads it, and parses it
+         */
+        loadMap(mapName: string): void {
             var index, tileID;
             var tile: createjs.Bitmap;
+
+            this.layers = [];
 
             // Parses XML sections of the game map file
             var $mapData = $(Managers.Assets.loader.getResult(mapName));

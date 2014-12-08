@@ -62,5 +62,7 @@
   <object name="Ladder" type="Ladder" gid="84" x="7360" y="320"/>
   <object name="Bed" type="Bed" gid="151" x="5056" y="544"/>
   <object name="Bed" type="Bed" gid="152" x="5088" y="544"/>
+  <object name="Exit" type="Door" gid="98" x="544" y="480"/>
+  <object name="Exit" type="Door" gid="82" x="544" y="448"/>
  </objectgroup>
 </map>

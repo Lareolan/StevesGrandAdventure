@@ -12,30 +12,43 @@ module Managers {
     // The Mob manager class
     export class Mobs extends createjs.Container {
         // instance variables
-//        mobs: Array<GameObjects.Monster>;
         rawMobData: Array<Object>;
         foreground: GameObjects.Layer;
         sound: Managers.Sound;
         player: GameObjects.Player;
-//        children: GameObjects.Monster;
 
         /*
-         * This constructor takes in a list of Mob objects, and creates appropriate Monster
-         * objects out of them. For now only Zombie objects are created.
+         * This constructor takes initializes the Mob object and sets internal references to sound and player objects
+         * @param sound The object reference to the Sound Manager instance
+         * @param player The object reference to the Player instance
          */
-        constructor(mobList: Array<Object>, foreground: GameObjects.Layer, sound: Managers.Sound, player: GameObjects.Player) {
+        constructor(sound: Managers.Sound, player: GameObjects.Player) {
             super();
-            this.rawMobData = mobList;
-            this.foreground = foreground;
             this.sound = sound;
             this.player = player;
+        }
 
-//            this.mobs = [];
+        /**
+         * This function loads all the mobs from an array of Objects loaded from the raw map data
+         * @param mobList The raw list of mob objects to process and use to create mobs
+         */
+        loadMobs(mobList: Array<Object>): void {
+            this.rawMobData = mobList;
             this.init();
         }
 
-        // Initialize all mobs
-        init() {
+        /**
+         * Sets the collision map for the Mobs container object
+         * @param foreground The Layer object that contains the collision map
+         */
+        setMapData(foreground: GameObjects.Layer): void {
+            this.foreground = foreground;
+        }
+
+        /**
+         * Initialize all mobs based on data provided
+         */
+        init(): void {
             var zombie: GameObjects.Mobs.Zombie;
             var creeper: GameObjects.Mobs.Creeper;
 
@@ -119,37 +132,12 @@ module Managers {
 //            }
         }
 
-        // Display all mobs by adding each one to the stage
-        show(): void {
-//            for (var index = 0; index < this.mobs.length; index++) {
-//                this.mobs[index].show();
-//            }
-        }
-
-        // Hide all mobs by removing each one from the stage
-        hide(): void {
-//            for (var index = 0; index < this.mobs.length; index++) {
-//                this.mobs[index].hide();
-//            }
-        }
-
         // Reset all the mobs back to default position (for use in restarting game)
         reset(): void {
             this.removeAllChildren();
             this.x = 0;
             this.y = 0;
             this.init();
-
-//            this.hide();
-//            this.mobs = [];
-/*
-            for (var index = 0; index < this.rawMobData.length; index++) {
-                if (this.rawMobData[index]["name"] === "Zombie") {
-                    this.mobs.push(new GameObjects.Mobs.Zombie(this.rawMobData[index], this.foreground, this.sound, this.player));
-                    this.mobs[index].name = "Zombie " + index;
-                }
-            }
-*/
         }
     }
 } 

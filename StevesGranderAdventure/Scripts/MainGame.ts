@@ -34,7 +34,7 @@ class MainGame {
 
     constructor(canvas: Element) {
         this.stage = new createjs.Stage(canvas);
-        this.currentLevel = 1;
+        this.currentLevel = 0;
         this.init();
     }
 
@@ -128,7 +128,8 @@ class MainGame {
         this.gui.setCloudManager(this.clouds);
 
         // Initialize map manager
-        this.map = new GameObjects.GameMap(Constants.LEVELS[this.currentLevel]);
+        this.map = new GameObjects.GameMap();
+        this.map.loadMap(Constants.LEVELS[this.currentLevel]);
         this.gui.setMap(this.map);
 
         // Initializes player object
@@ -140,11 +141,14 @@ class MainGame {
         this.gui.setPlayer(this.player);
 
         // Initializes mob manager object
-        this.mobs = new Managers.Mobs(this.map.entities.getEntitiesByType("Mob"), this.map.getLayer(Constants.LAYER_NAME_FOREGROUND), this.sound, this.player);
+        this.mobs = new Managers.Mobs(this.sound, this.player);
+        this.mobs.setMapData(this.map.getLayer(Constants.LAYER_NAME_FOREGROUND));
+        this.mobs.loadMobs(this.map.entities.getEntitiesByType("Mob"));
         this.gui.setMobManager(this.mobs);
 
         // Initializes the static game object manager
-        this.gameObjects = new Managers.Objects(this.map.entities.getAllEntities(), this.map.tileset);
+        this.gameObjects = new Managers.Objects();
+        this.gameObjects.loadObjects(this.map.entities.getAllEntities(), this.map.tileset);
         this.player.setObjectManager(this.gameObjects);
         this.gui.setGameObjects(this.gameObjects);
 
@@ -153,7 +157,7 @@ class MainGame {
         this.stage.addEventListener("playerHit", { handleEvent: this.gui.playerHit, player: this.player, gui: this.gui });
 //        this.stage.addEventListener("playerDeath", { handleEvent: this.gui.playerDeath, player: this.player, gui: this.gui });
         this.stage.addEventListener("playerDeath", { handleEvent: this.playerDeath, instance: this });
-        this.stage.addEventListener("exitReached", { handleEvent: this.playerWins, instance: this });
+        this.stage.addEventListener("exitReached", { handleEvent: this.nextLevel, instance: this });
 
         this.gui.init();
 
@@ -234,6 +238,43 @@ class MainGame {
         instance.gui.display(instance.gameState);
     }
 
+    nextLevel(e: Event): void {
+        var instance = this.instance;
+
+        // TODO: Change this
+        instance.gameState = Constants.GAME_STATE_PLAY;
+
+        if (++instance.currentLevel <= Constants.LEVELS.length) {
+            var map = instance.map;
+            var player = instance.player;
+            var mobs = instance.mobs;
+            var gameObjects = instance.gameObjects;
+
+            // Re-initialize map manager with new map
+            map.loadMap(Constants.LEVELS[instance.currentLevel]);
+
+            // Change the player's collision map and starting position based on that map
+            player.setMapData(map.getLayer(Constants.LAYER_NAME_FOREGROUND));
+            player.setEntity(map.entities.getEntityByName("Steve"));
+
+            // Clear all mob data from previous map, switch out the collision map, and re-initialize
+            // mob manager object with new mobs from the new map
+            mobs.removeAllChildren();
+            mobs.setMapData(map.getLayer(Constants.LAYER_NAME_FOREGROUND));
+            mobs.loadMobs(map.entities.getEntitiesByType("Mob"));
+
+            // Clear all object data from previous map, and re-initialize the static game
+            // object manager with all the objects from the new map
+            gameObjects.removeAllChildren();
+            gameObjects.loadObjects(map.entities.getAllEntities(), map.tileset);
+        } else {
+            instance.playerWins(e);
+        }
+
+
+        instance.gui.display(instance.gameState);
+    }
+
     restartGame(event: Event): void {
         var instance = this.instance;
 
@@ -251,7 +292,8 @@ class MainGame {
     }
 
     /**
-     * 
+     * This function checks if user is providing input this cycle, and if they are it reacts to the input.
+     * (Used in game play).
      */
     inputUpdate(): void {
         // If player moves left, shift all drawn assets to the right

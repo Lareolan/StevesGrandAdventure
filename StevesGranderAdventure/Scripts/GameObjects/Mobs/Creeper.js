@@ -76,13 +76,16 @@ var GameObjects;
                     var explosion = new createjs.Sprite(Managers.Assets.explosion, "explode");
                     explosion.x = instance.x + instance.parent.x;
                     explosion.y = instance.y;
-                    var container = instance.getStage();
-                    container.addChild(explosion);
 
-                    // Clean up the explosion after a 1 second delay
-                    setTimeout(function () {
-                        container.removeChild(explosion);
-                    }, 1000);
+                    var container = instance.getStage();
+                    if (container) {
+                        container.addChild(explosion);
+
+                        // Clean up the explosion after a 1 second delay
+                        setTimeout(function () {
+                            container.removeChild(explosion);
+                        }, 1000);
+                    }
 
                     // Play explosion sound and make the creeper die in the explosion
                     instance.sound.creeperExplode(instance, instance.player);

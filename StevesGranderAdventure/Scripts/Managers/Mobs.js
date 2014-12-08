@@ -19,22 +19,36 @@ var Managers;
     // The Mob manager class
     var Mobs = (function (_super) {
         __extends(Mobs, _super);
-        //        children: GameObjects.Monster;
         /*
-        * This constructor takes in a list of Mob objects, and creates appropriate Monster
-        * objects out of them. For now only Zombie objects are created.
+        * This constructor takes initializes the Mob object and sets internal references to sound and player objects
+        * @param sound The object reference to the Sound Manager instance
+        * @param player The object reference to the Player instance
         */
-        function Mobs(mobList, foreground, sound, player) {
+        function Mobs(sound, player) {
             _super.call(this);
-            this.rawMobData = mobList;
-            this.foreground = foreground;
             this.sound = sound;
             this.player = player;
-
-            //            this.mobs = [];
-            this.init();
         }
-        // Initialize all mobs
+        /**
+        * This function loads all the mobs from an array of Objects loaded from the raw map data
+        * @param mobList The raw list of mob objects to process and use to create mobs
+        */
+        Mobs.prototype.loadMobs = function (mobList) {
+            this.rawMobData = mobList;
+            this.init();
+        };
+
+        /**
+        * Sets the collision map for the Mobs container object
+        * @param foreground The Layer object that contains the collision map
+        */
+        Mobs.prototype.setMapData = function (foreground) {
+            this.foreground = foreground;
+        };
+
+        /**
+        * Initialize all mobs based on data provided
+        */
         Mobs.prototype.init = function () {
             var zombie;
             var creeper;
@@ -72,14 +86,10 @@ var Managers;
             var deadMobIdx = -1;
             for (var index = 0; index < this.children.length; index++) {
                 if (!this.children[index].hitTest(damage)) {
-                    //                    deadMobIdx = index;
                     this.children[index].die();
                     break;
                 }
             }
-            //            if (deadMobIdx != -1) {
-            //                this.children.splice(deadMobIdx, 1);
-            //            }
         };
 
         // Move all the mobs to the right
@@ -122,36 +132,12 @@ var Managers;
             //            }
         };
 
-        // Display all mobs by adding each one to the stage
-        Mobs.prototype.show = function () {
-            //            for (var index = 0; index < this.mobs.length; index++) {
-            //                this.mobs[index].show();
-            //            }
-        };
-
-        // Hide all mobs by removing each one from the stage
-        Mobs.prototype.hide = function () {
-            //            for (var index = 0; index < this.mobs.length; index++) {
-            //                this.mobs[index].hide();
-            //            }
-        };
-
         // Reset all the mobs back to default position (for use in restarting game)
         Mobs.prototype.reset = function () {
             this.removeAllChildren();
             this.x = 0;
             this.y = 0;
             this.init();
-            //            this.hide();
-            //            this.mobs = [];
-            /*
-            for (var index = 0; index < this.rawMobData.length; index++) {
-            if (this.rawMobData[index]["name"] === "Zombie") {
-            this.mobs.push(new GameObjects.Mobs.Zombie(this.rawMobData[index], this.foreground, this.sound, this.player));
-            this.mobs[index].name = "Zombie " + index;
-            }
-            }
-            */
         };
         return Mobs;
     })(createjs.Container);

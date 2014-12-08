@@ -19,14 +19,21 @@ var Managers;
     // Static Objects manager class
     var Objects = (function (_super) {
         __extends(Objects, _super);
+        /**
+        * The constructor simply initializes the Object manager/container instance
+        */
+        function Objects() {
+            _super.call(this);
+        }
         /*
-        * Constructor. Takes in an array of objects and the game's loaded tileset from the map,
+        * This function takes in an array of objects and the game's loaded tileset from the map,
         * and creates game objects out of them, then adds them to the appropriate array
         * depending on their type. Ignores objects with type "Steve" and "Mob" since those
-        * are handled by other classes.
+        * are handled by other classes (Player and Mobs respectively).
+        * @param objects A raw array of objects loaded from the map data
+        * @param tileset A reference to the game map's tileset to use to load bitmaps for the various objects
         */
-        function Objects(objects, tileset) {
-            _super.call(this);
+        Objects.prototype.loadObjects = function (objects, tileset) {
             this.originalList = objects;
             this.doors = [];
             this.torches = [];
@@ -74,7 +81,8 @@ var Managers;
             for (index = 0; index < this.miscObjects.length; index++) {
                 this.addChild(this.miscObjects[index]);
             }
-        }
+        };
+
         // Spawns loot in the world
         Objects.prototype.spawnLoot = function (x, y) {
             var image = createjs.SpriteSheetUtils.extractFrame(Managers.Assets.guiComponents, "FullFood");

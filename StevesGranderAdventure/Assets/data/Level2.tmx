@@ -8,12 +8,12 @@
  </tileset>
  <layer name="Foreground" width="500" height="20">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer name="Background" width="500" height="20">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup name="Objects">
@@ -49,13 +49,13 @@
   <object gid="85" x="3904" y="448"/>
   <object gid="85" x="4000" y="416"/>
   <object gid="85" x="4000" y="448"/>
-  <object name="Steve" type="Steve" gid="257" x="64" y="448" width="32" height="64"/>
+  <object name="Steve" type="Steve" gid="257" x="96" y="448" width="32" height="64"/>
   <object name="Zombie" type="Mob" gid="265" x="608" y="544" width="32" height="64"/>
   <object name="Zombie" type="Mob" gid="265" x="1472" y="384" width="32" height="64"/>
   <object name="Zombie" type="Mob" gid="265" x="1728" y="320" width="32" height="64"/>
   <object name="Zombie" type="Mob" gid="265" x="2112" y="416" width="32" height="64"/>
   <object name="Zombie" type="Mob" gid="265" x="2368" y="416" width="32" height="64"/>
-  <object name="Zombie" type="Mob" gid="265" x="2816" y="448" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="2752" y="480" width="32" height="64"/>
   <object name="Zombie" type="Mob" gid="265" x="2976" y="608" width="32" height="64"/>
   <object name="Zombie" type="Mob" gid="265" x="3392" y="512" width="32" height="64"/>
   <object name="Zombie" type="Mob" gid="265" x="3712" y="544" width="32" height="64"/>
@@ -63,27 +63,112 @@
   <object name="Zombie" type="Mob" gid="265" x="4576" y="544" width="32" height="64"/>
   <object name="Zombie" type="Mob" gid="265" x="4416" y="544" width="32" height="64"/>
   <object name="Zombie" type="Mob" gid="265" x="4992" y="480" width="32" height="64"/>
-  <object name="Zombie" type="Mob" gid="265" x="5728" y="384" width="32" height="64"/>
-  <object name="Zombie" type="Mob" gid="265" x="6144" y="256" width="32" height="64"/>
-  <object name="Zombie" type="Mob" gid="265" x="6528" y="192" width="32" height="64"/>
-  <object name="Zombie" type="Mob" gid="265" x="6720" y="160" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="5728" y="480" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="6208" y="256" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="6528" y="224" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="6720" y="256" width="32" height="64"/>
   <object name="Zombie" type="Mob" gid="265" x="7136" y="192" width="32" height="64"/>
   <object name="Zombie" type="Mob" gid="265" x="7296" y="192" width="32" height="64"/>
   <object name="Zombie" type="Mob" gid="265" x="6752" y="480" width="32" height="64"/>
-  <object name="Zombie" type="Mob" gid="265" x="7584" y="480" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="7520" y="480" width="32" height="64"/>
   <object name="Zombie" type="Mob" gid="265" x="8032" y="384" width="32" height="64"/>
   <object name="Zombie" type="Mob" gid="265" x="8128" y="384" width="32" height="64"/>
-  <object name="Zombie" type="Mob" gid="265" x="8480" y="352" width="32" height="64"/>
-  <object name="Zombie" type="Mob" gid="265" x="9408" y="384" width="32" height="64"/>
-  <object name="Zombie" type="Mob" gid="265" x="10240" y="480" width="32" height="64"/>
-  <object name="Zombie" type="Mob" gid="265" x="10688" y="448" width="32" height="64"/>
-  <object name="Zombie" type="Mob" gid="265" x="11040" y="416" width="32" height="64"/>
-  <object name="Zombie" type="Mob" gid="265" x="11392" y="448" width="32" height="64"/>
-  <object name="Zombie" type="Mob" gid="265" x="13024" y="352" width="32" height="64"/>
-  <object name="Zombie" type="Mob" gid="265" x="13600" y="288" width="32" height="64"/>
-  <object name="Zombie" type="Mob" gid="265" x="13920" y="352" width="32" height="64"/>
-  <object name="Zombie" type="Mob" gid="265" x="14592" y="224" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="8416" y="416" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="9408" y="416" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="10368" y="512" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="10688" y="480" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="11040" y="480" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="11392" y="480" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="13088" y="384" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="13600" y="320" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="13920" y="384" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="14592" y="256" width="32" height="64"/>
   <object name="Zombie" type="Mob" gid="265" x="15136" y="288" width="32" height="64"/>
   <object name="Creeper" type="Mob" gid="269" x="3904" y="544" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="4960" y="480" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="6592" y="256" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="7232" y="192" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="6976" y="480" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="10912" y="448" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="14336" y="256" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="15552" y="288" width="32" height="64"/>
+  <object name="Torch" type="Torch" gid="81" x="15776" y="160"/>
+  <object name="Torch" type="Torch" gid="81" x="15392" y="256"/>
+  <object name="Torch" type="Torch" gid="81" x="15200" y="160"/>
+  <object name="Torch" type="Torch" gid="81" x="14912" y="256"/>
+  <object name="Torch" type="Torch" gid="81" x="14688" y="224"/>
+  <object name="Torch" type="Torch" gid="81" x="14464" y="224"/>
+  <object name="Torch" type="Torch" gid="81" x="14080" y="320"/>
+  <object name="Torch" type="Torch" gid="81" x="13760" y="288"/>
+  <object name="Torch" type="Torch" gid="81" x="13248" y="352"/>
+  <object name="Torch" type="Torch" gid="81" x="12928" y="320"/>
+  <object name="Torch" type="Torch" gid="81" x="12736" y="320"/>
+  <object name="Torch" type="Torch" gid="81" x="12640" y="320"/>
+  <object name="Torch" type="Torch" gid="81" x="12544" y="320"/>
+  <object name="Torch" type="Torch" gid="81" x="12448" y="320"/>
+  <object name="Torch" type="Torch" gid="81" x="12832" y="320"/>
+  <object name="Torch" type="Torch" gid="81" x="12352" y="320"/>
+  <object name="Torch" type="Torch" gid="81" x="12256" y="320"/>
+  <object name="Torch" type="Torch" gid="81" x="12160" y="320"/>
+  <object name="Torch" type="Torch" gid="81" x="12064" y="320"/>
+  <object name="Torch" type="Torch" gid="81" x="11872" y="320"/>
+  <object name="Torch" type="Torch" gid="81" x="11904" y="192"/>
+  <object name="Torch" type="Torch" gid="81" x="12032" y="192"/>
+  <object name="Torch" type="Torch" gid="81" x="12160" y="192"/>
+  <object name="Torch" type="Torch" gid="81" x="12256" y="192"/>
+  <object name="Torch" type="Torch" gid="81" x="12352" y="192"/>
+  <object name="Torch" type="Torch" gid="81" x="12448" y="192"/>
+  <object name="Torch" type="Torch" gid="81" x="12544" y="192"/>
+  <object name="Torch" type="Torch" gid="81" x="12640" y="192"/>
+  <object name="Torch" type="Torch" gid="81" x="12736" y="192"/>
+  <object name="Torch" type="Torch" gid="81" x="11712" y="352"/>
+  <object name="Torch" type="Torch" gid="81" x="11296" y="416"/>
+  <object name="Torch" type="Torch" gid="81" x="10976" y="448"/>
+  <object name="Torch" type="Torch" gid="81" x="10560" y="448"/>
+  <object name="Torch" type="Torch" gid="81" x="9920" y="416"/>
+  <object name="Torch" type="Torch" gid="81" x="9504" y="416"/>
+  <object name="Torch" type="Torch" gid="81" x="9248" y="384"/>
+  <object name="Torch" type="Torch" gid="81" x="8864" y="448"/>
+  <object name="Torch" type="Torch" gid="81" x="8640" y="352"/>
+  <object name="Torch" type="Torch" gid="81" x="8320" y="352"/>
+  <object name="Torch" type="Torch" gid="81" x="7968" y="384"/>
+  <object name="Torch" type="Torch" gid="81" x="7552" y="480"/>
+  <object name="Torch" type="Torch" gid="81" x="7168" y="384"/>
+  <object name="Torch" type="Torch" gid="81" x="7200" y="192"/>
+  <object name="Torch" type="Torch" gid="81" x="6816" y="96"/>
+  <object name="Torch" type="Torch" gid="81" x="6656" y="448"/>
+  <object name="Torch" type="Torch" gid="81" x="6400" y="192"/>
+  <object name="Torch" type="Torch" gid="81" x="6240" y="384"/>
+  <object name="Torch" type="Torch" gid="81" x="6208" y="544"/>
+  <object name="Torch" type="Torch" gid="81" x="6112" y="448"/>
+  <object name="Torch" type="Torch" gid="81" x="6016" y="256"/>
+  <object name="Torch" type="Torch" gid="81" x="5600" y="416"/>
+  <object name="Torch" type="Torch" gid="81" x="5216" y="416"/>
+  <object name="Torch" type="Torch" gid="81" x="4864" y="448"/>
+  <object name="Torch" type="Torch" gid="81" x="4672" y="480"/>
+  <object name="Torch" type="Torch" gid="81" x="4544" y="480"/>
+  <object name="Torch" type="Torch" gid="81" x="4416" y="480"/>
+  <object name="Torch" type="Torch" gid="81" x="4288" y="480"/>
+  <object name="Torch" type="Torch" gid="81" x="4160" y="480"/>
+  <object name="Torch" type="Torch" gid="81" x="4032" y="480"/>
+  <object name="Torch" type="Torch" gid="81" x="3840" y="480"/>
+  <object name="Torch" type="Torch" gid="81" x="3936" y="480"/>
+  <object name="Torch" type="Torch" gid="81" x="3936" y="352"/>
+  <object name="Torch" type="Torch" gid="81" x="3936" y="224"/>
+  <object name="Torch" type="Torch" gid="81" x="4064" y="352"/>
+  <object name="Torch" type="Torch" gid="81" x="3808" y="352"/>
+  <object name="Torch" type="Torch" gid="81" x="3616" y="480"/>
+  <object name="Torch" type="Torch" gid="81" x="3168" y="224"/>
+  <object name="Torch" type="Torch" gid="81" x="2720" y="416"/>
+  <object name="Torch" type="Torch" gid="81" x="2464" y="320"/>
+  <object name="Torch" type="Torch" gid="81" x="2016" y="224"/>
+  <object name="Torch" type="Torch" gid="81" x="1600" y="320"/>
+  <object name="Torch" type="Torch" gid="81" x="1248" y="384"/>
+  <object name="Torch" type="Torch" gid="81" x="864" y="512"/>
+  <object name="Torch" type="Torch" gid="81" x="480" y="448"/>
+  <object name="Entrance" type="Door" gid="98" x="96" y="448"/>
+  <object name="Entrance" type="Door" gid="82" x="96" y="416"/>
+  <object name="Torch" type="Torch" gid="81" x="160" y="384"/>
+  <object name="Torch" type="Torch" gid="81" x="32" y="384"/>
  </objectgroup>
 </map>
