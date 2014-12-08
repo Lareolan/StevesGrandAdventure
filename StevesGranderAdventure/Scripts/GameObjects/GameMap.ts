@@ -10,6 +10,7 @@
  * Revision History:
  *      v1 - Migrated file to Project 1
  *      v2 - Modified class to extend GameObjects.BitmapObject
+ *      v3 - Moved map loading code from constructor to separate loadMap() function
  */
 module GameObjects {
     // GameMap class

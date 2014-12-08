@@ -8,6 +8,7 @@
 * Revision History:
 *      v1 - Migrated file to Project 1
 *      v2 - Moved class into GUIScreen module
+*      v3 - Added moveTo() function to allow shifting all screen objects around the canvas
 */
 var GUIScreen;
 (function (GUIScreen) {
@@ -33,6 +34,18 @@ var GUIScreen;
             this.stage.removeAllChildren();
             for (var index = 0; index < this.screenObjects.length; index++) {
                 this.stage.addChild(this.screenObjects[index]);
+            }
+        };
+
+        /**
+        * Move screen object(s) to specified location in canvas
+        * @param x The x coordinate to move to
+        * @param y The y coordinate to move to
+        */
+        Screen.prototype.moveTo = function (x, y) {
+            for (var index = 0; index < this.screenObjects.length; index++) {
+                this.screenObjects[index].x += x;
+                this.screenObjects[index].y += y;
             }
         };
 

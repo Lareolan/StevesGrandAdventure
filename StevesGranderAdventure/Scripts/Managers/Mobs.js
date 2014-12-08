@@ -13,6 +13,7 @@
 * Revision History:
 *      v1 - Migrated file to Project 1
 *      v2 - Modified class to extend createjs.Container
+*      v3 - Moved mob loading code from constructor to separate loadMobs() function
 */
 var Managers;
 (function (Managers) {

@@ -7,6 +7,7 @@
  * Revision History:
  *      v1 - Migrated file to Project 1
  *      v2 - Modified class to extend createjs.Container
+ *      v3 - Moved object loading code from constructor to separate loadObjects() function
  */
 module Managers {
     // Static Objects manager class

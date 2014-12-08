@@ -37,18 +37,7 @@ var GUIScreen;
             startBtn.setClickHandler(function () {
                 var event = new createjs.Event("startGameClicked", true, false);
                 theStage.dispatchEvent(event);
-                // TODO: Fix this later
-                /*
-                stage.removeChild(startBtn);
-                stage.removeChild(instructBtn);
-                
-                gameState = constants.GAME_STATE_PLAY;
-                gui.show(constants.GAME_STATE_PLAY);
-                initGamePlay();
-                */
             });
-
-            //            stage.addChild(startBtn);
             this.screenObjects.push(startBtn);
 
             // Create "Instructions" button, and bind a click handler function to change state when clicked
@@ -58,16 +47,7 @@ var GUIScreen;
             instructBtn.setClickHandler(function () {
                 var event = new createjs.Event("instructionsClicked", true, false);
                 theStage.dispatchEvent(event);
-                /*
-                stage.removeChild(startBtn);
-                stage.removeChild(instructBtn);
-                
-                gameState = constants.GAME_STATE_INSTRUCTIONS;
-                initInstructionScreen();
-                */
             });
-
-            //            stage.addChild(instructBtn);
             this.screenObjects.push(instructBtn);
         };
         return GUIStartScreen;

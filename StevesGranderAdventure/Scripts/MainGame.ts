@@ -6,6 +6,8 @@
  * Date Last Modified:  Nov. 22, 2014
  * Revision History:    
  *      v1 - Created initial framework for the new class.
+ *      v2 - Moved all game functionality code into this class and made the game work fully again.
+ *      v3 - Implemented the ability to go to the next level.
  */
 
 class MainGame {
@@ -152,10 +154,10 @@ class MainGame {
         this.player.setObjectManager(this.gameObjects);
         this.gui.setGameObjects(this.gameObjects);
 
-        // Initializes event listeners listening for player attack, player being hit and player being killed
+        // Initializes event listeners listening for player attack, player being hit,
+        // player being killed or player reaching the exit door
         this.stage.addEventListener("playerAttack", { handleEvent: this.player.attack, player: this.player, mobs: this.mobs });
         this.stage.addEventListener("playerHit", { handleEvent: this.gui.playerHit, player: this.player, gui: this.gui });
-//        this.stage.addEventListener("playerDeath", { handleEvent: this.gui.playerDeath, player: this.player, gui: this.gui });
         this.stage.addEventListener("playerDeath", { handleEvent: this.playerDeath, instance: this });
         this.stage.addEventListener("exitReached", { handleEvent: this.nextLevel, instance: this });
 
@@ -241,9 +243,6 @@ class MainGame {
     nextLevel(e: Event): void {
         var instance = this.instance;
 
-        // TODO: Change this
-        instance.gameState = Constants.GAME_STATE_PLAY;
-
         if (++instance.currentLevel <= Constants.LEVELS.length) {
             var map = instance.map;
             var player = instance.player;
@@ -267,11 +266,17 @@ class MainGame {
             // object manager with all the objects from the new map
             gameObjects.removeAllChildren();
             gameObjects.loadObjects(map.entities.getAllEntities(), map.tileset);
+
+            // Reset all game container managers back to initial positions
+            map.reset();
+            mobs.reset();
+            gameObjects.reset();
         } else {
             instance.playerWins(e);
         }
 
-
+        // TODO: Change this
+        instance.gameState = Constants.GAME_STATE_PLAY;
         instance.gui.display(instance.gameState);
     }
 
