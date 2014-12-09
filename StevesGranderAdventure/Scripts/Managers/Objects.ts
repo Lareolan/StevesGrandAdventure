@@ -100,6 +100,7 @@ module Managers {
             obj.regX = 0;
             obj.regY = 0;
             obj.name = "Loot";
+            obj["item"] = Constants.ITEM.FOOD;
             this.addChild(obj);
         }
 

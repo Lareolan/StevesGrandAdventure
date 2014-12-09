@@ -98,6 +98,7 @@ var Managers;
             obj.regX = 0;
             obj.regY = 0;
             obj.name = "Loot";
+            obj["item"] = 1 /* FOOD */;
             this.addChild(obj);
         };
 
