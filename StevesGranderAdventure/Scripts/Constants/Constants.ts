@@ -6,6 +6,10 @@
  * Date Last Modified:  Nov. 22, 2014
  * Revision History:    
  *      v1 - Created module and added all game constants to it.
+ *      v2 - Added item constants.
+ *      v3 - Added inventory constants, changed item to enum.
+ *      v4 - Added score constants.
+ *      v5 - Added transition screen to screen constants
  */
 module Constants {
     // Canvas constants
@@ -22,6 +26,7 @@ module Constants {
     export var GAME_STATE_PLAY: number = 4;
     export var GAME_STATE_DEATH: number = 5;
     export var GAME_STATE_VICTORY: number = 6;
+    export var GAME_STATE_TRANSITION: number = 7;
 
     // Block type constants
     export var AIR_BLOCK: number = 0;
@@ -30,6 +35,7 @@ module Constants {
 
     // Game level constants
     export var LEVELS: Array<string> = ["Level1", "Level2", "Level3"];
+    export var LEVEL_OPTIMUM_TIME: Array<number> = [60, 90, 90];
 
     // Layer names
     export var LAYER_NAME_FOREGROUND: string = "Foreground";
@@ -52,4 +58,22 @@ module Constants {
     export var AI_ACTION_MOVE_RIGHT: number = 1;
     export var AI_ACTION_MOVE_LEFT: number = 2;
     export var AI_ACTION_ATTACK: number = 3;
+
+    // Item constants
+    export enum ITEM {
+        EMPTY = 0,
+        FOOD = 1
+    }
+
+    // Inventory constants
+    export var INVENTORY_SLOTS: number = 9;
+
+    // Score constants
+    export var SCORE_MONSTER_KILL: number = 100;
+    export var SCORE_HEALTH_LEFT: number = 25;
+    export var SCORE_TIMER: number = 100;
+    export enum SCORE_INVENTORY {
+        EMPTY = 0,
+        FOOD = 10
+    };
 }

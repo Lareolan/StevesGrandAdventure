@@ -84,30 +84,28 @@ var Managers;
         Assets.guiSpriteSheet = {
             images: ["Assets/images/GuiComponents.png"],
             frames: [
-                [518, 2, 32, 32],
-                [552, 2, 32, 32],
-                [586, 2, 32, 32],
-                [620, 2, 32, 32],
-                [654, 2, 32, 32],
-                [688, 2, 32, 32],
-                [2, 2, 320, 32],
-                [722, 2, 32, 32],
-                [324, 2, 192, 32],
-                [756, 2, 32, 32],
-                [790, 2, 32, 32]
+                [0, 78, 32, 32],
+                [33, 78, 32, 32],
+                [165, 78, 27, 27],
+                [193, 78, 18, 18],
+                [66, 78, 32, 32],
+                [0, 0, 364, 44],
+                [99, 78, 32, 32],
+                [0, 45, 192, 32],
+                [132, 78, 32, 32],
+                [193, 45, 32, 32]
             ],
             animations: {
                 AKey: [0],
                 DKey: [1],
                 FullFood: [2],
                 FullHeart: [3],
-                HalfHeart: [4],
-                LeftArrowKey: [5],
-                MeterBackground: [6],
-                RightArrowKey: [7],
-                SpaceBar: [8],
-                UpArrowKey: [9],
-                WKey: [10]
+                LeftArrowKey: [4],
+                QuickBar: [5],
+                RightArrowKey: [6],
+                SpaceBar: [7],
+                UpArrowKey: [8],
+                WKey: [9]
             }
         };
 

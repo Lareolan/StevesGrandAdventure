@@ -233,7 +233,8 @@ var MainGame = (function () {
         this.stage.addEventListener("usePlayerInventory", { handleEvent: this.player.useInventory, player: this.player, gui: this.gui });
         this.stage.addEventListener("playerHit", { handleEvent: this.gui.playerHit, player: this.player, gui: this.gui });
         this.stage.addEventListener("playerDeath", { handleEvent: this.playerDeath, instance: this });
-        this.stage.addEventListener("exitReached", { handleEvent: this.nextLevel, instance: this });
+        this.stage.addEventListener("exitReached", { handleEvent: this.loadNextLevel, instance: this });
+        this.stage.addEventListener("continueButtonClicked", { handleEvent: this.startNextLevel, instance: this });
 
         this.gui.init();
 
@@ -264,6 +265,9 @@ var MainGame = (function () {
             case Constants.GAME_STATE_DEATH:
                 instance.clouds.update();
                 break;
+            case Constants.GAME_STATE_TRANSITION:
+                instance.clouds.update();
+                break;
         }
         instance.stage.update();
     };
@@ -281,6 +285,7 @@ var MainGame = (function () {
 
         // TODO: Change this
         instance.gameState = Constants.GAME_STATE_PLAY;
+
         instance.worldTimer = new Date().getTime();
         instance.gui.display(instance.gameState);
     };
@@ -313,8 +318,27 @@ var MainGame = (function () {
         instance.gui.display(instance.gameState);
     };
 
-    MainGame.prototype.nextLevel = function (e) {
+    MainGame.prototype.loadNextLevel = function (e) {
         var instance = this.instance;
+
+        instance.gameState = Constants.GAME_STATE_TRANSITION;
+
+        // Collect all the score data
+        var scoreData = {};
+        scoreData["baseScore"] = instance.player.getScore();
+        scoreData["health"] = instance.player.getHealth();
+        scoreData["healthScore"] = scoreData["health"] * Constants.SCORE_HEALTH_LEFT;
+        scoreData["inventory"] = instance.player.getFoodCount();
+        scoreData["inventoryScore"] = scoreData["inventory"] * 10 /* FOOD */;
+        var levelTime = Math.floor((new Date().getTime() - instance.worldTimer) / 1000);
+        var time = Constants.LEVEL_OPTIMUM_TIME[instance.currentLevel] - levelTime;
+        scoreData["optimumTime"] = Constants.LEVEL_OPTIMUM_TIME[instance.currentLevel];
+        scoreData["playerTime"] = levelTime;
+        scoreData["time"] = (time > 0) ? time : 0;
+        scoreData["timeScore"] = (time > 0) ? time * Constants.SCORE_TIMER : 0;
+        scoreData["finalScore"] = scoreData["baseScore"] + scoreData["healthScore"] + scoreData["inventoryScore"] + scoreData["timeScore"];
+        instance.gui.transitionScreen.setScoreData(scoreData);
+        instance.player.setScore(scoreData["finalScore"]);
 
         if (++instance.currentLevel <= Constants.LEVELS.length) {
             var map = instance.map;
@@ -347,6 +371,15 @@ var MainGame = (function () {
         } else {
             instance.playerWins(e);
         }
+
+        // TODO: Change this
+        //        instance.changeGameState = Constants.GAME_STATE_PLAY;
+        //        instance.gameState = Constants.GAME_STATE_PLAY;
+        instance.gui.display(instance.gameState);
+    };
+
+    MainGame.prototype.startNextLevel = function (e) {
+        var instance = this.instance;
 
         // TODO: Change this
         instance.gameState = Constants.GAME_STATE_PLAY;

@@ -6,6 +6,8 @@
  * Date Last Modified:  Nov. 22, 2014
  * Revision History:    
  *      v1 - Created module and added all game controls to it.
+ *      v2 - Added resetControls() function.
+ *      v3 - Added keys 0 - 9 to the controls list.
  */
 module Controls {
     export var keyboard = {
@@ -13,7 +15,17 @@ module Controls {
         KEY_RIGHT: false,
         KEY_UP: false,
         KEY_DOWN: false,
-        KEY_SPACE: false
+        KEY_SPACE: false,
+        KEY_1: false,
+        KEY_2: false,
+        KEY_3: false,
+        KEY_4: false,
+        KEY_5: false,
+        KEY_6: false,
+        KEY_7: false,
+        KEY_8: false,
+        KEY_9: false,
+        KEY_0: false
     };
     export var mouse = {
         LEFT_BUTTON: false,
@@ -32,6 +44,16 @@ module Controls {
         Controls.keyboard.KEY_UP = false;
         Controls.keyboard.KEY_DOWN = false;
         Controls.keyboard.KEY_SPACE = false;
+        Controls.keyboard.KEY_1 = false;
+        Controls.keyboard.KEY_2 = false;
+        Controls.keyboard.KEY_3 = false;
+        Controls.keyboard.KEY_4 = false;
+        Controls.keyboard.KEY_5 = false;
+        Controls.keyboard.KEY_6 = false;
+        Controls.keyboard.KEY_7 = false;
+        Controls.keyboard.KEY_8 = false;
+        Controls.keyboard.KEY_9 = false;
+        Controls.keyboard.KEY_0 = false;
 
         Controls.mouse.LEFT_BUTTON = false;
         Controls.mouse.RIGHT_BUTTON = false;

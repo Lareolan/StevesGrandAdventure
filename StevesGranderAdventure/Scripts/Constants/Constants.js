@@ -6,6 +6,10 @@
 * Date Last Modified:  Nov. 22, 2014
 * Revision History:
 *      v1 - Created module and added all game constants to it.
+*      v2 - Added item constants.
+*      v3 - Added inventory constants, changed item to enum.
+*      v4 - Added score constants.
+*      v5 - Added transition screen to screen constants
 */
 var Constants;
 (function (Constants) {
@@ -23,6 +27,7 @@ var Constants;
     Constants.GAME_STATE_PLAY = 4;
     Constants.GAME_STATE_DEATH = 5;
     Constants.GAME_STATE_VICTORY = 6;
+    Constants.GAME_STATE_TRANSITION = 7;
 
     // Block type constants
     Constants.AIR_BLOCK = 0;
@@ -31,6 +36,7 @@ var Constants;
 
     // Game level constants
     Constants.LEVELS = ["Level1", "Level2", "Level3"];
+    Constants.LEVEL_OPTIMUM_TIME = [60, 90, 90];
 
     // Layer names
     Constants.LAYER_NAME_FOREGROUND = "Foreground";
@@ -53,5 +59,26 @@ var Constants;
     Constants.AI_ACTION_MOVE_RIGHT = 1;
     Constants.AI_ACTION_MOVE_LEFT = 2;
     Constants.AI_ACTION_ATTACK = 3;
+
+    // Item constants
+    (function (ITEM) {
+        ITEM[ITEM["EMPTY"] = 0] = "EMPTY";
+        ITEM[ITEM["FOOD"] = 1] = "FOOD";
+    })(Constants.ITEM || (Constants.ITEM = {}));
+    var ITEM = Constants.ITEM;
+
+    // Inventory constants
+    Constants.INVENTORY_SLOTS = 9;
+
+    // Score constants
+    Constants.SCORE_MONSTER_KILL = 100;
+    Constants.SCORE_HEALTH_LEFT = 25;
+    Constants.SCORE_TIMER = 100;
+    (function (SCORE_INVENTORY) {
+        SCORE_INVENTORY[SCORE_INVENTORY["EMPTY"] = 0] = "EMPTY";
+        SCORE_INVENTORY[SCORE_INVENTORY["FOOD"] = 10] = "FOOD";
+    })(Constants.SCORE_INVENTORY || (Constants.SCORE_INVENTORY = {}));
+    var SCORE_INVENTORY = Constants.SCORE_INVENTORY;
+    ;
 })(Constants || (Constants = {}));
 //# sourceMappingURL=Constants.js.map

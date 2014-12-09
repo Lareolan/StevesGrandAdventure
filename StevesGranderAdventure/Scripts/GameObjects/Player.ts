@@ -10,6 +10,8 @@
  * Revision History:
  *      v1 - Migrated file to Project 1
  *      v2 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class)
+ *      v3 - Added inventory management
+ *      v4 - Added Score code
  */
 module GameObjects {
     // Player Class
@@ -30,10 +32,13 @@ module GameObjects {
         baseDamage: number = 5;
         killCount: number = 0;
         objects: Managers.Objects;
+        inventory: Array<number>;
+        score: number;
 
         // Added to remove red squiggles
-        player: any;
-        mobs: any;
+        player: GameObjects.Player;
+        mobs: Managers.Mobs;
+        gui: Managers.GUI;
 
         /**
          * The constructor takes in an Object describing Steve's attributes, the information
@@ -42,47 +47,24 @@ module GameObjects {
          */
         constructor() {
             super(Managers.Assets.characters, "steveStandRight");
-            
-
-            //            this.steveObject = Steve;
             this.name = "Steve";
-            //            this.sound = sound;
-
-            // Load all the different animation sprites
-            //            var spriteName: string;
-            //            for (var frameID = 0; frameID < this.spriteNames.length; frameID++) {
-            //                spriteName = this.spriteNames[frameID];
-            //                this.sprites[spriteName] = new createjs.Sprite(Managers.Assets.characters, spriteName);
-            //            }
-            //            this.sprites.length = this.spriteNames.length;
 
             // Initialize essential variables
             this.facing = Constants.FACING_RIGHT;
             this.falling = true;
             this.jumping = false;
 
-            //            this.sprite = this.sprites[this.spriteNames[0]].clone();
-            //            this.sprite.x = this.canvasX;
-            //            this.sprite.y = this.canvasY;
-            //            this.sprite.regX = 0;
-            //            this.sprite.regY = 0;
-
-            //            this = this.sprites[this.spriteNames[0]].clone();
-//            this.x = this.canvasX;
-//            this.y = this.canvasY;
-//            this.regX = 0;
-//            this.regY = 0;
-
-
             this.health = Constants.PLAYER_MAX_HEALTH;
             this.attackCounter = 0;
             this.runDistanceIncrements = 4;
             this.useXOffsetHack = true;
             this.baseMovementSpeed = Constants.MOVE_SPEED;
+            this.score = 0;
 
-            // And add default (right facing standing Steve) sprite to the stage
-            //            stage.addChild(this.sprite);
-            //            stage.addChild(this);
+            this.inventory = [];
+            for (var i = 0; i < Constants.INVENTORY_SLOTS; i++) {
+                this.inventory.push(Constants.ITEM.EMPTY);
+            }
         }
 
         /**
@@ -127,11 +109,34 @@ module GameObjects {
          * Handle the player's attack event. Set the attack flag, and tell the game that
          * player sprite will need to be updated next update tick. Then check if the player
          * hit anything worth hitting.
+         * @param event The event that was triggered
          */
         attack(event: Event): void {
             this.player.attackFlag = true;
             this.player.spriteUpdate = true;
             this.mobs.testMobHit(this.player.baseDamage);
+        }
+
+        /**
+         * 
+         */
+        useInventory(event: Event): void {
+            var player = this.player;
+            var gui = this.gui;
+            var slot = event["slot"];
+
+            if (slot <= player.inventory.length) {
+                switch (player.inventory[slot]) {
+                    case Constants.ITEM.FOOD:
+                        if (player.getHealth() < Constants.PLAYER_MAX_HEALTH) {
+                            gui.changeInventory(slot, Constants.ITEM.EMPTY);
+                            player.inventory[slot] = Constants.ITEM.EMPTY;
+                            player.sound.playerEat();
+                            player.health++;
+                        }
+                        break;
+                }
+            }
         }
 
         /**
@@ -159,6 +164,7 @@ module GameObjects {
         // Increase kill counter
         addKill(): void {
             this.killCount++;
+            this.score += Constants.SCORE_MONSTER_KILL;
         }
 
         /**
@@ -167,6 +173,36 @@ module GameObjects {
          */
         getKillCount(): number {
             return this.killCount;
+        }
+
+        /**
+         * Retrieve the player's current score.
+         * @returns The current score.
+         */
+        getScore(): number {
+            return this.score;
+        }
+
+        /**
+         * Set the player's score.
+         * @param score The score to set.
+         */
+        setScore(score: number): void {
+            this.score = score;
+        }
+
+        /**
+         * Retrieve the player's inventory food count.
+         * @returns The current inventory food count.
+         */
+        getFoodCount(): number {
+            var count = 0;
+            for (var i = 0; i < this.inventory.length; i++) {
+                if (this.inventory[i] === Constants.ITEM.FOOD) {
+                    count++;
+                }
+            }
+            return count;
         }
 
         /**
@@ -382,10 +418,13 @@ module GameObjects {
             // Test if Steve can pick something up
             var loot = this.objects.checkLoot(mapX, mapY);
             if (loot) {
-                if (this.getHealth() < Constants.PLAYER_MAX_HEALTH) {
-                    this.sound.playerEat();
-                    this.objects.removeChild(loot);
-                    this.health++;
+                var item = loot["item"];
+                for (var i = 0; i < this.inventory.length; i++) {
+                    if (this.inventory[i] === Constants.ITEM.EMPTY) {
+                        this.inventory[i] = item;
+                        this.objects.removeChild(loot);
+                        break;
+                    }
                 }
             }
 
@@ -396,8 +435,9 @@ module GameObjects {
         reset(): void {
             this.facing = Constants.FACING_RIGHT;
             this.gotoAndStop("steveStandRight");
-            this.health = 10;
+            this.health = Constants.PLAYER_MAX_HEALTH;
             this.killCount = 0;
+            this.score = 0;
             this.dead = false;
             this.canvasX = parseInt(this.entityObject["x"]);
             this.canvasY = parseInt(this.entityObject["y"]) - this.height;
@@ -405,19 +445,11 @@ module GameObjects {
             this.mapY = this.canvasY;
             this.x = this.canvasX;
             this.y = this.canvasY;
-            /*
-                        this.facing = constants.FACING_RIGHT;
-                        this.sprite = this.sprites[this.spriteNames[0]].clone();
-                        this.sprite.x = this.canvasX;
-                        this.sprite.y = this.canvasY;
-                        this.health = 10;
-                        this.killCount = 0;
-                        this.dead = false;
-                        this.canvasX = parseInt(this.steveObject["x"]);
-                        this.canvasY = parseInt(this.steveObject["y"]) - this.height;
-                        this.mapX = this.canvasX;
-                        this.mapY = this.canvasY;
-            */
+
+            // empty the inventory
+            for (var i = 0; i < this.inventory.length; i++) {
+                this.inventory[i] = Constants.ITEM.EMPTY;
+            }
         }
     }
 }
