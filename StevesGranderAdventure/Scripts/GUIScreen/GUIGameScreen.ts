@@ -37,18 +37,14 @@ module GUIScreen {
         }
 
         init(): void {
-//            this.healthBar = new createjs.Sprite(Managers.Assets.guiComponents, "MeterBackground");
             this.quickBar = new createjs.Sprite(Managers.Assets.guiComponents, "QuickBar");
             this.quickBar.x = Constants.HALF_SCREEN_WIDTH - this.quickBar.getBounds().width / 2;
-//            this.healthBar.y = 640;
             this.quickBar.y = Constants.SCREEN_HEIGHT - this.quickBar.getBounds().height;
             this.quickBar.name = "Health Bar";
             this.screenObjects.push(this.quickBar);
 
             for (var i = 0; i < 10; i++) {
                 this.healthSprites[i] = new createjs.Sprite(Managers.Assets.guiComponents, "FullHeart");
-//                this.healthSprites[i].x = Constants.HALF_SCREEN_WIDTH - 160 + (32 * i);
-//                this.healthSprites[i].y = 640;
                 this.healthSprites[i].x = this.quickBar.x + (this.healthSprites[i].getBounds().width * i);
                 this.healthSprites[i].y = this.quickBar.y - this.healthSprites[i].getBounds().height - 1;
                 this.healthSprites[i].name = "Full Heart";
@@ -63,7 +59,7 @@ module GUIScreen {
             this.killDisplay = new createjs.Text();
             this.killDisplay.font = "32px Minecrafter";
             this.killDisplay.text = "Kill Count: 0";
-            this.killDisplay.y = 640 + 16 + 64 + 16;
+            this.killDisplay.y = Constants.SCREEN_HEIGHT - 32; //640 + 16 + 64 + 16;
             this.killDisplay.textBaseline = "middle";
             this.killDisplay.name = "Kill Display";
             this.screenObjects.push(this.killDisplay);
@@ -82,7 +78,7 @@ module GUIScreen {
             this.scoreDisplay.font = "32px Minecrafter";
             this.scoreDisplay.text = "Score: 0";
             this.scoreDisplay.x = Constants.SCREEN_WIDTH;
-            this.scoreDisplay.y = 640 + 16 + 64 + 16;
+            this.scoreDisplay.y = Constants.SCREEN_HEIGHT - 32; //640 + 16 + 64 + 16;
             this.scoreDisplay.textBaseline = "middle";
             this.scoreDisplay.textAlign = "right";
             this.scoreDisplay.name = "Score Display";
