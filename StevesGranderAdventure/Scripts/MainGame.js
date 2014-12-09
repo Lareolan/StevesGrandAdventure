@@ -52,6 +52,78 @@ var MainGame = (function () {
                         stage.dispatchEvent(event);
                     }
                     break;
+                case 49:
+                    if (!Controls.keyboard.KEY_1) {
+                        Controls.keyboard.KEY_1 = true;
+                        var event = new createjs.Event("usePlayerInventory", true, false);
+                        event["slot"] = 0;
+                        stage.dispatchEvent(event);
+                    }
+                    break;
+                case 50:
+                    if (!Controls.keyboard.KEY_2) {
+                        Controls.keyboard.KEY_2 = true;
+                        var event = new createjs.Event("usePlayerInventory", true, false);
+                        event["slot"] = 1;
+                        stage.dispatchEvent(event);
+                    }
+                    break;
+                case 51:
+                    if (!Controls.keyboard.KEY_3) {
+                        Controls.keyboard.KEY_3 = true;
+                        var event = new createjs.Event("usePlayerInventory", true, false);
+                        event["slot"] = 2;
+                        stage.dispatchEvent(event);
+                    }
+                    break;
+                case 52:
+                    if (!Controls.keyboard.KEY_4) {
+                        Controls.keyboard.KEY_4 = true;
+                        var event = new createjs.Event("usePlayerInventory", true, false);
+                        event["slot"] = 3;
+                        stage.dispatchEvent(event);
+                    }
+                    break;
+                case 53:
+                    if (!Controls.keyboard.KEY_5) {
+                        Controls.keyboard.KEY_5 = true;
+                        var event = new createjs.Event("usePlayerInventory", true, false);
+                        event["slot"] = 4;
+                        stage.dispatchEvent(event);
+                    }
+                    break;
+                case 54:
+                    if (!Controls.keyboard.KEY_6) {
+                        Controls.keyboard.KEY_6 = true;
+                        var event = new createjs.Event("usePlayerInventory", true, false);
+                        event["slot"] = 5;
+                        stage.dispatchEvent(event);
+                    }
+                    break;
+                case 55:
+                    if (!Controls.keyboard.KEY_7) {
+                        Controls.keyboard.KEY_7 = true;
+                        var event = new createjs.Event("usePlayerInventory", true, false);
+                        event["slot"] = 6;
+                        stage.dispatchEvent(event);
+                    }
+                    break;
+                case 56:
+                    if (!Controls.keyboard.KEY_8) {
+                        Controls.keyboard.KEY_8 = true;
+                        var event = new createjs.Event("usePlayerInventory", true, false);
+                        event["slot"] = 7;
+                        stage.dispatchEvent(event);
+                    }
+                    break;
+                case 57:
+                    if (!Controls.keyboard.KEY_9) {
+                        Controls.keyboard.KEY_9 = true;
+                        var event = new createjs.Event("usePlayerInventory", true, false);
+                        event["slot"] = 8;
+                        stage.dispatchEvent(event);
+                    }
+                    break;
             }
         });
 
@@ -74,6 +146,33 @@ var MainGame = (function () {
                     break;
                 case 32:
                     Controls.keyboard.KEY_SPACE = false;
+                    break;
+                case 49:
+                    Controls.keyboard.KEY_1 = false;
+                    break;
+                case 50:
+                    Controls.keyboard.KEY_2 = false;
+                    break;
+                case 51:
+                    Controls.keyboard.KEY_3 = false;
+                    break;
+                case 52:
+                    Controls.keyboard.KEY_4 = false;
+                    break;
+                case 53:
+                    Controls.keyboard.KEY_5 = false;
+                    break;
+                case 54:
+                    Controls.keyboard.KEY_6 = false;
+                    break;
+                case 55:
+                    Controls.keyboard.KEY_7 = false;
+                    break;
+                case 56:
+                    Controls.keyboard.KEY_8 = false;
+                    break;
+                case 57:
+                    Controls.keyboard.KEY_9 = false;
                     break;
             }
         });
@@ -128,9 +227,10 @@ var MainGame = (function () {
         this.player.setObjectManager(this.gameObjects);
         this.gui.setGameObjects(this.gameObjects);
 
-        // Initializes event listeners listening for player attack, player being hit,
+        // Initializes event listeners listening for player attack, player uses inventory, player being hit,
         // player being killed or player reaching the exit door
         this.stage.addEventListener("playerAttack", { handleEvent: this.player.attack, player: this.player, mobs: this.mobs });
+        this.stage.addEventListener("usePlayerInventory", { handleEvent: this.player.useInventory, player: this.player, gui: this.gui });
         this.stage.addEventListener("playerHit", { handleEvent: this.gui.playerHit, player: this.player, gui: this.gui });
         this.stage.addEventListener("playerDeath", { handleEvent: this.playerDeath, instance: this });
         this.stage.addEventListener("exitReached", { handleEvent: this.nextLevel, instance: this });

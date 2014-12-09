@@ -131,6 +131,13 @@ module Managers {
             this.gui.gameScreen.playerHit(/*this.gui.stage, this.gui.gameScreen*/);
         }
 
+        /**
+         * 
+         */
+        changeInventory(slot: number, item: number): void {
+            this.gameScreen.changeInventory(slot, item);
+        }
+
         //
         display(gameState: number): void {
             switch (gameState) {

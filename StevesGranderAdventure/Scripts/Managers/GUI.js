@@ -109,6 +109,13 @@ var Managers;
             this.gui.gameScreen.playerHit();
         };
 
+        /**
+        *
+        */
+        GUI.prototype.changeInventory = function (slot, item) {
+            this.gameScreen.changeInventory(slot, item);
+        };
+
         //
         GUI.prototype.display = function (gameState) {
             switch (gameState) {
