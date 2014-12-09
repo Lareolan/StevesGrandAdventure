@@ -7,29 +7,43 @@
  * Revision History:
  *      v1 - Migrated file to Project 1
  *      v2 - Moved class into GUIScreen module
+ *      v3 - Changed class to add representation of final score
  */
 module GUIScreen {
     // GUIVictoryScreen Class 
     export class GUIVictoryScreen extends GUIScreen.Screen {
         // Instance variables
-        killLine: createjs.Text;
+        textLines: Object;
+        healthSprite: createjs.Sprite;
+        foodSprite: createjs.Sprite;
 
         // An object containing data descriptions and text
-        epilogue: Object = {
-            line1: { text: "Due to your heroic efforts, Steve made it through...", textSize: 32, color: "#000000", x: 128, y: 64 },
-            line2: { text: "...alive!", textSize: 32, color: "#000000", x: 128, y: 128 },
-            line3: { text: "Great job Steve!", textSize: 32, color: "#ff0000", x: 128, y: 192 },
-            line4: { text: "FIN?", textSize: 128, color: "#ff0000", x: Constants.HALF_SCREEN_WIDTH, y: 256 }
+        scoreInfo: Object = {
+            complete: { text: "You Win!", textSize: 48, color: "#000000", x: Constants.HALF_SCREEN_WIDTH, y: 64, align: "center" },
+            scoreText: { text: "Score:", textSize: 32, color: "#000000", x: Constants.HALF_SCREEN_WIDTH, y: 128, align: "center" },
+            baseScore: { text: "", textSize: 32, color: "#000000", x: Constants.HALF_SCREEN_WIDTH, y: 192, align: "center" },
+            optimumTime: { text: "", textSize: 32, color: "#000000", x: Constants.HALF_SCREEN_WIDTH, y: 256, align: "center" },
+            playerTime: { text: "", textSize: 32, color: "#000000", x: Constants.HALF_SCREEN_WIDTH, y: 320, align: "center" },
+            time: { text: "", textSize: 32, color: "#000000", x: Constants.HALF_SCREEN_WIDTH - 192, y: 384, align: "left" },
+            health: { text: "", textSize: 32, color: "#000000", x: Constants.HALF_SCREEN_WIDTH - 144, y: 448, align: "left" },
+            inventory: { text: "", textSize: 32, color: "#000000", x: Constants.HALF_SCREEN_WIDTH - 144, y: 512, align: "left" },
+            finalScore: { text: "", textSize: 48, color: "#000000", x: Constants.HALF_SCREEN_WIDTH, y: 576, align: "center" }
         };
-        epilogueList: Array<string> = [
-            "line1",
-            "line2",
-            "line3",
-            "line4"
+        scoreList: Array<string> = [
+            "complete",
+            "scoreText",
+            "baseScore",
+            "optimumTime",
+            "playerTime",
+            "time",
+            "health",
+            "inventory",
+            "finalScore"
         ];
 
         constructor(stage: createjs.Stage) {
             super(stage);
+            this.textLines = {};
         }
 
         /*
@@ -41,13 +55,13 @@ module GUIScreen {
         init(): void {
             var theStage = this.stage;
 
-            var textLine,
+            var textLine: createjs.Text,
                 lineData,
                 index,
                 textSize = 32;
 
-            for (index = 0; index < this.epilogueList.length; index++) {
-                lineData = this.epilogue[this.epilogueList[index]];
+            for (index = 0; index < this.scoreList.length; index++) {
+                lineData = this.scoreInfo[this.scoreList[index]];
 
                 textLine = new createjs.Text();
                 textLine.font = lineData.textSize + "px Minecrafter";
@@ -55,35 +69,49 @@ module GUIScreen {
                 textLine.color = lineData.color;
                 textLine.x = lineData.x;
                 textLine.y = lineData.y;
+                textLine.textAlign = lineData.align;
                 this.screenObjects.push(textLine);
+                this.textLines[this.scoreList[index]] = textLine;
             }
             textLine.textAlign = "center";
 
-
-            textLine = new createjs.Text("Oh! By the way, you killed 0 zombies in 0 min 0 sec!", "32px Minecrafter", "#000000");
-            textLine.x = 128;
-            textLine.y = 512;
-            this.screenObjects.push(textLine);
-            this.killLine = textLine;
+            this.healthSprite = new createjs.Sprite(Managers.Assets.guiComponents, "FullHeart");
+            this.foodSprite = new createjs.Sprite(Managers.Assets.guiComponents, "FullFood");
+            this.screenObjects.push(this.healthSprite);
+            this.screenObjects.push(this.foodSprite);
 
 
-            var btn = new GameObjects.Button("Play Again?", 256, 64, (Constants.HALF_SCREEN_WIDTH - 128), 576, GameObjects.Button.ROUNDED, "black", "#5533DD", "rgba(100, 60, 200, 0.8)");
+            var btn = new GameObjects.Button("Play Again?", 256, 64, (Constants.HALF_SCREEN_WIDTH - 128), (Constants.SCREEN_HEIGHT - 96), GameObjects.Button.ROUNDED, "black", "#5533DD", "rgba(100, 60, 200, 0.8)");
             btn.setFadeEffect();
             btn.setClickHandler(function () {
                 var event = new createjs.Event("playAgainButtonClicked", true, false);
                 theStage.dispatchEvent(event);
             });
             this.screenObjects.push(btn);
+
         }
 
         /*
-         * Accepts Steve's kill count and changes the text to show it.
-         * @param killCount The number of monsters Steve killed
+         * Accepts Steve's score data and changes the text to show it.
+         * @param scoreData And Object containing all the score information
          */
-        setKillCount(killCount: number, worldTimer: number): void {
-            var time = Math.floor((new Date().getTime() - worldTimer) / 1000);
-            var timeString = Math.floor(time / 60) + " min " + (time % 60) + " sec";
-            this.killLine.text = "Oh! By the way, you killed " + killCount + " zombies in " + timeString + "!";
+        setScoreData(scoreData: Object): void {
+            this.textLines["baseScore"].text = "Base Score: " + scoreData["baseScore"];
+            this.textLines["optimumTime"].text = "Optimum Time for Level: " + scoreData["optimumTime"] + " seconds";
+            this.textLines["playerTime"].text = "Your Time for Level: " + scoreData["playerTime"] + " seconds";
+            if (scoreData["timeScore"] > 0) {
+                this.textLines["playerTime"].color = "#33cc33";
+            } else {
+                this.textLines["playerTime"].color = "#cc3333";
+            }
+            this.textLines["time"].text = "x " + scoreData["time"] + " seconds = " + scoreData["timeScore"];
+            this.textLines["health"].text = "x " + scoreData["health"] + " = " + scoreData["healthScore"];
+            this.textLines["inventory"].text = "x " + scoreData["inventory"] + " = " + scoreData["inventoryScore"];
+            this.textLines["finalScore"].text = "Game Final Score: " + scoreData["finalScore"];
+            this.healthSprite.x = this.textLines["health"].x - 43;
+            this.healthSprite.y = this.textLines["health"].y + 5;
+            this.foodSprite.x = this.textLines["inventory"].x - 48;
+            this.foodSprite.y = this.textLines["inventory"].y;
         }
 
 

@@ -6,6 +6,8 @@
 * Date Last Modified:  Nov. 22, 2014
 * Revision History:
 *      v1 - Migrated file to Project 1
+*      v2 - Completely reworked how screens are displayed
+*      v3 - Added Transition screen for level transitions
 */
 var Managers;
 (function (Managers) {
@@ -23,6 +25,7 @@ var Managers;
             this.gameScreen = new GUIScreen.GUIGameScreen(this.stage);
             this.deathScreen = new GUIScreen.GUIDeathScreen(this.stage);
             this.victoryScreen = new GUIScreen.GUIVictoryScreen(this.stage);
+            this.transitionScreen = new GUIScreen.GUITransitionScreen(this.stage);
         }
         // Initializes all other game screens
         GUI.prototype.init = function () {
@@ -58,6 +61,11 @@ var Managers;
             this.victoryScreen.addChild(this.sky);
             this.victoryScreen.addChild(this.clouds);
             this.victoryScreen.init();
+
+            // Initialize transition screen
+            this.transitionScreen.addChild(this.sky);
+            this.transitionScreen.addChild(this.clouds);
+            this.transitionScreen.init();
         };
 
         // Sets internal reference to the stage object
@@ -147,6 +155,11 @@ var Managers;
                 case Constants.GAME_STATE_VICTORY:
                     this.activeScreen.hide();
                     this.activeScreen = this.victoryScreen;
+                    this.activeScreen.show();
+                    break;
+                case Constants.GAME_STATE_TRANSITION:
+                    this.activeScreen.hide();
+                    this.activeScreen = this.transitionScreen;
                     this.activeScreen.show();
                     break;
             }

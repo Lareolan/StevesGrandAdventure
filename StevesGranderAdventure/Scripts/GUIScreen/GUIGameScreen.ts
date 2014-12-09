@@ -63,7 +63,7 @@ module GUIScreen {
             this.killDisplay = new createjs.Text();
             this.killDisplay.font = "32px Minecrafter";
             this.killDisplay.text = "Kill Count: 0";
-            this.killDisplay.y = 640 + 16;
+            this.killDisplay.y = 640 + 16 + 64 + 16;
             this.killDisplay.textBaseline = "middle";
             this.killDisplay.name = "Kill Display";
             this.screenObjects.push(this.killDisplay);
@@ -82,7 +82,7 @@ module GUIScreen {
             this.scoreDisplay.font = "32px Minecrafter";
             this.scoreDisplay.text = "Score: 0";
             this.scoreDisplay.x = Constants.SCREEN_WIDTH;
-            this.scoreDisplay.y = 640 + 16;
+            this.scoreDisplay.y = 640 + 16 + 64 + 16;
             this.scoreDisplay.textBaseline = "middle";
             this.scoreDisplay.textAlign = "right";
             this.scoreDisplay.name = "Score Display";

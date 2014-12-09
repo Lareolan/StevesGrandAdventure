@@ -198,6 +198,7 @@
     <TypeScriptCompile Include="Scripts\GUIScreen\GUIInstructionScreen.ts" />
     <TypeScriptCompile Include="Scripts\GUIScreen\GUIPreloadScreen.ts" />
     <TypeScriptCompile Include="Scripts\GUIScreen\GUIStartScreen.ts" />
+    <TypeScriptCompile Include="Scripts\GUIScreen\GUITransitionScreen.ts" />
     <TypeScriptCompile Include="Scripts\GUIScreen\GUIVictoryScreen.ts" />
     <TypeScriptCompile Include="Scripts\GameObjects\Layer.ts" />
     <TypeScriptCompile Include="Scripts\GameObjects\MapEntities.ts" />

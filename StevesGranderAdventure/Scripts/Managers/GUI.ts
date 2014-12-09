@@ -6,6 +6,8 @@
  * Date Last Modified:  Nov. 22, 2014
  * Revision History:
  *      v1 - Migrated file to Project 1
+ *      v2 - Completely reworked how screens are displayed
+ *      v3 - Added Transition screen for level transitions
  */
 module Managers {
     // The GUI manager class
@@ -26,6 +28,7 @@ module Managers {
         gameScreen: GUIScreen.GUIGameScreen;
         deathScreen: GUIScreen.GUIDeathScreen;
         victoryScreen: GUIScreen.GUIVictoryScreen;
+        transitionScreen: GUIScreen.GUITransitionScreen;
         activeScreen: GUIScreen.Screen;
 
         // Fix squiggly lines, not actually used
@@ -45,6 +48,7 @@ module Managers {
             this.gameScreen = new GUIScreen.GUIGameScreen(this.stage);
             this.deathScreen = new GUIScreen.GUIDeathScreen(this.stage);
             this.victoryScreen = new GUIScreen.GUIVictoryScreen(this.stage);
+            this.transitionScreen = new GUIScreen.GUITransitionScreen(this.stage);
         }
 
         // Initializes all other game screens
@@ -80,6 +84,11 @@ module Managers {
             this.victoryScreen.addChild(this.sky);
             this.victoryScreen.addChild(this.clouds);
             this.victoryScreen.init();
+
+            // Initialize transition screen
+            this.transitionScreen.addChild(this.sky);
+            this.transitionScreen.addChild(this.clouds);
+            this.transitionScreen.init();
         }
 
         // Sets internal reference to the stage object
@@ -128,7 +137,7 @@ module Managers {
          * @param e The event that fired
          */
         playerHit(e: Event) {
-            this.gui.gameScreen.playerHit(/*this.gui.stage, this.gui.gameScreen*/);
+            this.gui.gameScreen.playerHit();
         }
 
         /**
@@ -169,6 +178,11 @@ module Managers {
                 case Constants.GAME_STATE_VICTORY:
                     this.activeScreen.hide();
                     this.activeScreen = this.victoryScreen;
+                    this.activeScreen.show();
+                    break;
+                case Constants.GAME_STATE_TRANSITION:
+                    this.activeScreen.hide();
+                    this.activeScreen = this.transitionScreen;
                     this.activeScreen.show();
                     break;
             }

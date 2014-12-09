@@ -11,7 +11,6 @@ module GUIScreen {
     // GUITransitionScreen Class 
     export class GUITransitionScreen extends GUIScreen.Screen {
         // Instance variables
-//        killLine: createjs.Text;
         textLines: Object;
         healthSprite: createjs.Sprite;
         foodSprite: createjs.Sprite;
@@ -71,13 +70,6 @@ module GUIScreen {
                 textLine.textAlign = lineData.align;
                 this.screenObjects.push(textLine);
                 this.textLines[this.scoreList[index]] = textLine;
-/*
-                if (lineData.icon) {
-                    var sprite = new createjs.Sprite(Managers.Assets.guiComponents, lineData.icon);
-                    sprite.x = textLine.x - (textLine.getBounds().width / 2);
-                    this.screenObjects.push(sprite);
-                }
-*/
             }
             textLine.textAlign = "center";
 

@@ -181,6 +181,7 @@ var MainGame = (function () {
         this.stage.addEventListener("instructionsClicked", { handleEvent: this.showInstructions, instance: this });
         this.stage.addEventListener("backButtonClicked", { handleEvent: this.showStartScreen, instance: this });
         this.stage.addEventListener("playAgainButtonClicked", { handleEvent: this.restartGame, instance: this });
+        this.stage.addEventListener("continueButtonClicked", { handleEvent: this.startNextLevel, instance: this });
     };
 
     MainGame.prototype.preloadComplete = function (event) {
@@ -234,7 +235,6 @@ var MainGame = (function () {
         this.stage.addEventListener("playerHit", { handleEvent: this.gui.playerHit, player: this.player, gui: this.gui });
         this.stage.addEventListener("playerDeath", { handleEvent: this.playerDeath, instance: this });
         this.stage.addEventListener("exitReached", { handleEvent: this.loadNextLevel, instance: this });
-        this.stage.addEventListener("continueButtonClicked", { handleEvent: this.startNextLevel, instance: this });
 
         this.gui.init();
 
@@ -266,6 +266,9 @@ var MainGame = (function () {
                 instance.clouds.update();
                 break;
             case Constants.GAME_STATE_TRANSITION:
+                instance.clouds.update();
+                break;
+            case Constants.GAME_STATE_VICTORY:
                 instance.clouds.update();
                 break;
         }
@@ -309,13 +312,29 @@ var MainGame = (function () {
         instance.gui.display(instance.gameState);
     };
 
-    MainGame.prototype.playerWins = function (e) {
-        var instance = this.instance;
-
+    MainGame.prototype.playerWins = function () {
+        //        var instance = this.instance;
         // TODO: Change this
-        instance.gameState = Constants.GAME_STATE_VICTORY;
-        instance.gui.victoryScreen.setKillCount(instance.player.getKillCount(), instance.worldTimer);
-        instance.gui.display(instance.gameState);
+        this.gameState = Constants.GAME_STATE_VICTORY;
+
+        // Collect all the score data
+        var scoreData = {};
+        scoreData["baseScore"] = this.player.getScore();
+        scoreData["health"] = this.player.getHealth();
+        scoreData["healthScore"] = scoreData["health"] * Constants.SCORE_HEALTH_LEFT;
+        scoreData["inventory"] = this.player.getFoodCount();
+        scoreData["inventoryScore"] = scoreData["inventory"] * 10 /* FOOD */;
+        var levelTime = Math.floor((new Date().getTime() - this.worldTimer) / 1000);
+        var time = Constants.LEVEL_OPTIMUM_TIME[this.currentLevel] - levelTime;
+        scoreData["optimumTime"] = Constants.LEVEL_OPTIMUM_TIME[this.currentLevel];
+        scoreData["playerTime"] = levelTime;
+        scoreData["time"] = (time > 0) ? time : 0;
+        scoreData["timeScore"] = (time > 0) ? time * Constants.SCORE_TIMER : 0;
+        scoreData["finalScore"] = scoreData["baseScore"] + scoreData["healthScore"] + scoreData["inventoryScore"] + scoreData["timeScore"];
+        this.gui.victoryScreen.setScoreData(scoreData);
+        this.player.setScore(scoreData["finalScore"]);
+
+        this.gui.display(this.gameState);
     };
 
     MainGame.prototype.loadNextLevel = function (e) {
@@ -323,24 +342,24 @@ var MainGame = (function () {
 
         instance.gameState = Constants.GAME_STATE_TRANSITION;
 
-        // Collect all the score data
-        var scoreData = {};
-        scoreData["baseScore"] = instance.player.getScore();
-        scoreData["health"] = instance.player.getHealth();
-        scoreData["healthScore"] = scoreData["health"] * Constants.SCORE_HEALTH_LEFT;
-        scoreData["inventory"] = instance.player.getFoodCount();
-        scoreData["inventoryScore"] = scoreData["inventory"] * 10 /* FOOD */;
-        var levelTime = Math.floor((new Date().getTime() - instance.worldTimer) / 1000);
-        var time = Constants.LEVEL_OPTIMUM_TIME[instance.currentLevel] - levelTime;
-        scoreData["optimumTime"] = Constants.LEVEL_OPTIMUM_TIME[instance.currentLevel];
-        scoreData["playerTime"] = levelTime;
-        scoreData["time"] = (time > 0) ? time : 0;
-        scoreData["timeScore"] = (time > 0) ? time * Constants.SCORE_TIMER : 0;
-        scoreData["finalScore"] = scoreData["baseScore"] + scoreData["healthScore"] + scoreData["inventoryScore"] + scoreData["timeScore"];
-        instance.gui.transitionScreen.setScoreData(scoreData);
-        instance.player.setScore(scoreData["finalScore"]);
+        if (++instance.currentLevel < Constants.LEVELS.length) {
+            // Collect all the score data
+            var scoreData = {};
+            scoreData["baseScore"] = instance.player.getScore();
+            scoreData["health"] = instance.player.getHealth();
+            scoreData["healthScore"] = scoreData["health"] * Constants.SCORE_HEALTH_LEFT;
+            scoreData["inventory"] = instance.player.getFoodCount();
+            scoreData["inventoryScore"] = scoreData["inventory"] * 10 /* FOOD */;
+            var levelTime = Math.floor((new Date().getTime() - instance.worldTimer) / 1000);
+            var time = Constants.LEVEL_OPTIMUM_TIME[instance.currentLevel] - levelTime;
+            scoreData["optimumTime"] = Constants.LEVEL_OPTIMUM_TIME[instance.currentLevel];
+            scoreData["playerTime"] = levelTime;
+            scoreData["time"] = (time > 0) ? time : 0;
+            scoreData["timeScore"] = (time > 0) ? time * Constants.SCORE_TIMER : 0;
+            scoreData["finalScore"] = scoreData["baseScore"] + scoreData["healthScore"] + scoreData["inventoryScore"] + scoreData["timeScore"];
+            instance.gui.transitionScreen.setScoreData(scoreData);
+            instance.player.setScore(scoreData["finalScore"]);
 
-        if (++instance.currentLevel <= Constants.LEVELS.length) {
             var map = instance.map;
             var player = instance.player;
             var mobs = instance.mobs;
@@ -369,7 +388,7 @@ var MainGame = (function () {
             mobs.reset();
             gameObjects.reset();
         } else {
-            instance.playerWins(e);
+            instance.playerWins();
         }
 
         // TODO: Change this
@@ -383,6 +402,10 @@ var MainGame = (function () {
 
         // TODO: Change this
         instance.gameState = Constants.GAME_STATE_PLAY;
+
+        // Start up the level timer
+        instance.worldTimer = new Date().getTime();
+
         instance.gui.display(instance.gameState);
     };
 
@@ -392,13 +415,52 @@ var MainGame = (function () {
         // TODO: Change this
         instance.gameState = Constants.GAME_STATE_PLAY;
         Controls.resetControls();
+
+        var map = instance.map;
+        var player = instance.player;
+        var mobs = instance.mobs;
+        var gameObjects = instance.gameObjects;
+
+        // Reset to first level
+        instance.currentLevel = 0;
+
+        // Re-initialize map manager with new map
+        map.loadMap(Constants.LEVELS[instance.currentLevel]);
+
+        // Change the player's collision map and starting position based on that map
+        player.setMapData(map.getLayer(Constants.LAYER_NAME_FOREGROUND));
+        player.setEntity(map.entities.getEntityByName("Steve"));
+
+        // Clear all mob data from previous map, switch out the collision map, and re-initialize
+        // mob manager object with new mobs from the new map
+        mobs.removeAllChildren();
+        mobs.setMapData(map.getLayer(Constants.LAYER_NAME_FOREGROUND));
+        mobs.loadMobs(map.entities.getEntitiesByType("Mob"));
+
+        // Clear all object data from previous map, and re-initialize the static game
+        // object manager with all the objects from the new map
+        gameObjects.removeAllChildren();
+        gameObjects.loadObjects(map.entities.getAllEntities(), map.tileset);
+
+        // Reset all game container managers back to initial positions
+        map.reset();
+        mobs.reset();
+        gameObjects.reset();
+
+        // Start up the level timer
+        instance.worldTimer = new Date().getTime();
+
+        /*
         instance.worldTimer = new Date().getTime();
         instance.clouds.reset();
         instance.map.reset();
         instance.player.reset();
         instance.gameObjects.reset();
         instance.mobs.reset();
+        */
+        // Reset the GUI display
         instance.gui.gameScreen.reset();
+
         instance.gui.display(instance.gameState);
     };
 
