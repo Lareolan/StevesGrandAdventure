@@ -3,7 +3,7 @@
  * Author:              Konstantin Koton
  * Filename:            Cloud.ts
  * Last Modified By:    Konstantin Koton
- * Date Last Modified:  Nov. 22, 2014
+ * Date Last Modified:  Nov. 23, 2014
  * Revision History:
  *      v1 - Migrated file to Project 1
  */
@@ -48,12 +48,12 @@ module GameObjects {
 
         // Move the cloud image to the right to reflect player moving left
         moveLeft(): void {
-            this.x += constants.MOVE_SPEED;
+            this.x += Constants.MOVE_SPEED;
         }
 
         // Move the cloud image to the left to reflect player moving right
         moveRight(): void {
-            this.x -= constants.MOVE_SPEED;
+            this.x -= Constants.MOVE_SPEED;
         }
     }
 }

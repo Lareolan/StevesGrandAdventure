@@ -3,7 +3,7 @@
  * Author:              Konstantin Koton
  * Filename:            Entity.ts
  * Last Modified By:    Konstantin Koton
- * Date Last Modified:  Nov. 22, 2014
+ * Date Last Modified:  Dec. 9, 2014
  * Revision History:
  *      v1 - Migrated file to Project 1
  *      v2 - Modified the class to extend createjs.Sprite.
@@ -14,8 +14,6 @@ module GameObjects {
         // Instance variables
         name: string;
         entityObject: Object;
-//        sprites: Array<createjs.Sprite>;
-//        sprite: createjs.Sprite;
         spriteID: string;
         stage: createjs.Stage;
 
@@ -42,7 +40,12 @@ module GameObjects {
         useXOffsetHack: boolean;
         dead: boolean;
 
-        // The constructor initializes all of the Entity's core data
+        /**
+         * The constructor accepts a SpriteSheet and frame parameters and passes them to it's super class.
+         * If no frame is provided, just use the first frame in the SpriteSheet.
+         * @param spriteSheet The sprite sheet to use
+         * @param frameNameOrNumber The frame to use
+         */
         constructor(spriteSheet: createjs.SpriteSheet, frameNameOrNumber?: string);
         constructor(spriteSheet: createjs.SpriteSheet, frameNameOrNumber?: number);
         constructor(spriteSheet: createjs.SpriteSheet, frameNameOrNumber?: any) {
@@ -295,27 +298,9 @@ module GameObjects {
 
         // Update the entity's current position
         update(): boolean {
-//            this.sprite.x = this.canvasX;
-//            this.sprite.y = this.canvasY;
             this.x = this.canvasX;
             this.y = this.canvasY;
             return false;
-        }
-
-        // Show the entity by adding it to the stage
-        show(): void {
-//            if (this.sprite) {
-//                stage.addChild(this.sprite);
-//            }
-//            stage.addChild(this);
-        }
-
-        // Hide the entity by removing it from the stage
-        hide(): void {
-//            if (this.sprite) {
-//                stage.removeChild(this.sprite);
-//            }
-//            stage.removeChild(this);
         }
     }
 } 

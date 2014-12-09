@@ -3,7 +3,7 @@
  * Author:              Konstantin Koton
  * Filename:            Mobs.ts
  * Last Modified By:    Konstantin Koton
- * Date Last Modified:  Nov. 22, 2014
+ * Date Last Modified:  Dec. 9, 2014
  * Revision History:
  *      v1 - Migrated file to Project 1
  *      v2 - Modified class to extend createjs.Container
@@ -107,19 +107,13 @@ module Managers {
             }
         }
 
-        // Move all the Mobs to the right
+        // Shift all the Mobs to the right
         shiftRight(): void {
-//            for (var index = 0; index < this.mobs.length; index++) {
-//                this.mobs[index].shiftRight();
-//            }
             this.x += Constants.MOVE_SPEED;
         }
 
-        // Move all the Mobs to the left
+        // Shift all the Mobs to the left
         shiftLeft(): void {
-//            for (var index = 0; index < this.mobs.length; index++) {
-//                this.mobs[index].shiftLeft();
-//            }
             this.x -= Constants.MOVE_SPEED;
         }
 
@@ -128,9 +122,6 @@ module Managers {
             for (var index = 0; index < this.children.length; index++) {
                 (<GameObjects.Monster>this.children[index]).update();
             }
-//            for (var index = 0; index < this.mobs.length; index++) {
-//                this.mobs[index].update();
-//            }
         }
 
         // Reset all the mobs back to default position (for use in restarting game)

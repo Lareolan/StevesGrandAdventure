@@ -3,7 +3,7 @@
 * Author:              Konstantin Koton
 * Filename:            GUI.ts
 * Last Modified By:    Konstantin Koton
-* Date Last Modified:  Nov. 22, 2014
+* Date Last Modified:  Dec. 9, 2014
 * Revision History:
 *      v1 - Migrated file to Project 1
 *      v2 - Completely reworked how screens are displayed
@@ -38,8 +38,6 @@ var Managers;
             // Initialize Instructions Screen
             this.instructionScreen.addChild(this.sky);
             this.instructionScreen.addChild(this.clouds);
-
-            //           this.instructionScreen.addChild(this.map);
             this.instructionScreen.init();
 
             // Initialize Game Screen
@@ -68,37 +66,58 @@ var Managers;
             this.transitionScreen.init();
         };
 
-        // Sets internal reference to the stage object
+        /**
+        * Sets internal reference to the stage object
+        * @param stage The stage object reference to set
+        */
         GUI.prototype.setStage = function (stage) {
             this.stage = stage;
         };
 
-        // Sets internal reference to sky object
+        /**
+        * Sets internal reference to the sky object
+        * @param sky The sky object reference to set
+        */
         GUI.prototype.setSky = function (sky) {
             this.sky = sky;
         };
 
-        // Sets internal reference to clouds object
+        /**
+        * Sets internal reference to the Cloud Manager object
+        * @param clouds The Cloud Manager object reference to set
+        */
         GUI.prototype.setCloudManager = function (clouds) {
             this.clouds = clouds;
         };
 
-        // Sets internal reference to map object
+        /**
+        * Sets internal reference to the map object
+        * @param map The map object reference to set
+        */
         GUI.prototype.setMap = function (map) {
             this.map = map;
         };
 
-        // Sets internal reference to player object
+        /**
+        * Sets internal reference to the player object
+        * @param player The player object reference to set
+        */
         GUI.prototype.setPlayer = function (player) {
             this.player = player;
         };
 
-        // Sets internal reference to Mob Manager object
+        /**
+        * Sets internal reference to the Mobs Manager object
+        * @param mobs The Mobs Manager object reference to set
+        */
         GUI.prototype.setMobManager = function (mobs) {
             this.mobs = mobs;
         };
 
-        // Sets internal reference to Objects Manager object
+        /**
+        * Sets internal reference to the Object Manager object
+        * @param gameObjects The Objects Manager object reference to set
+        */
         GUI.prototype.setGameObjects = function (gameObjects) {
             this.gameObjects = gameObjects;
         };
@@ -118,13 +137,18 @@ var Managers;
         };
 
         /**
-        *
+        * Calls the game screen's changeInventory function to change inventory display
+        * @param slot Which slot to set
+        * @param item The item to set that slot to
         */
         GUI.prototype.changeInventory = function (slot, item) {
             this.gameScreen.changeInventory(slot, item);
         };
 
-        //
+        /**
+        * This function loads and displays the specific screen based on the state machine.
+        * @param gameState The current state of the game's state machine
+        */
         GUI.prototype.display = function (gameState) {
             switch (gameState) {
                 case Constants.GAME_STATE_PRELOAD:

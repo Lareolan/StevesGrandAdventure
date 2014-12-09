@@ -3,8 +3,9 @@
 * Author:              Konstantin Koton
 * Filename:            MapEntities.ts
 * Last Modified By:    Konstantin Koton
-* Date Last Modified:  Nov. 22, 2014
-* Revision History:    Too numerous to mention
+* Date Last Modified:  Nov. 23, 2014
+* Revision History:
+*      v1 - Migrated file to Project 1
 */
 var GameObjects;
 (function (GameObjects) {

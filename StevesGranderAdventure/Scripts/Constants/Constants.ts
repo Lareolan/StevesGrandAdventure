@@ -3,7 +3,7 @@
  * Author:              Konstantin Koton
  * Filename:            Constants.ts
  * Last Modified By:    Konstantin Koton
- * Date Last Modified:  Nov. 22, 2014
+ * Date Last Modified:  Dec. 9, 2014
  * Revision History:    
  *      v1 - Created module and added all game constants to it.
  *      v2 - Added item constants.

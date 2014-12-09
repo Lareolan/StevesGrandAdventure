@@ -1,6 +1,4 @@
-﻿/// <reference path="tileset.ts" />
-/// <reference path="../managers/assets.ts" />
-var __extends = this.__extends || function (d, b) {
+﻿var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -11,7 +9,7 @@ var __extends = this.__extends || function (d, b) {
 * Author:              Konstantin Koton
 * Filename:            GameMap.ts
 * Last Modified By:    Konstantin Koton
-* Date Last Modified:  Nov. 22, 2014
+* Date Last Modified:  Dec. 9, 2014
 * Revision History:
 *      v1 - Migrated file to Project 1
 *      v2 - Modified class to extend GameObjects.BitmapObject
@@ -103,13 +101,8 @@ var GameObjects;
 
             // Convert the data from the new canvas into a bitmap and use that bitmap as the
             // map from now on (Results in much faster and more efficient map operations).
-            this.name = "Map";
+            this.name = "Map of " + mapName;
             this.image = canvas;
-            //            super(null, new createjs.Bitmap(canvas));
-            //            this.image = new createjs.Bitmap(canvas).image;
-            //            this.map = new createjs.Bitmap(canvas);
-            //            this.map.name = "Map";
-            //            stage.addChild(this.map);
         };
 
         /*
@@ -131,11 +124,6 @@ var GameObjects;
             if (this.x <= -Constants.MOVE_SPEED) {
                 this.x += Constants.MOVE_SPEED;
             }
-            /*
-            if (this.map.x <= -constants.MOVE_SPEED) {
-            this.map.x += constants.MOVE_SPEED;
-            }
-            */
         };
 
         // Move all the map image to the left to reflect player moving right
@@ -143,35 +131,12 @@ var GameObjects;
             if (this.x >= -(this.mapWidth - Constants.SCREEN_WIDTH - Constants.MOVE_SPEED)) {
                 this.x -= Constants.MOVE_SPEED;
             }
-            /*
-            if (this.map.x >= -(this.mapWidth - Constants.SCREEN_WIDTH - constants.MOVE_SPEED)) {
-            this.map.x -= constants.MOVE_SPEED;
-            }
-            */
         };
 
-        // Show all the map by adding it to the stage
-        GameMap.prototype.show = function () {
-            //            stage.addChild(this.map);
-        };
-
-        // Hide all the map by removing it from the stage
-        GameMap.prototype.hide = function () {
-            //            stage.removeChild(this.map);
-        };
-
-        // Returns the map's bitmap image
-        //        getImage(): createjs.Bitmap {
-        //            return this.map;
-        //        }
         // resets the map back to start
         GameMap.prototype.reset = function () {
             this.x = 0;
             this.y = 0;
-            /*
-            this.map.x = 0;
-            this.map.y = 0;
-            */
         };
         return GameMap;
     })(GameObjects.BitmapObject);

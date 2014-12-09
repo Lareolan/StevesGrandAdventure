@@ -1,95 +1,20 @@
-﻿/// <reference path="lib/jquery.d.ts" />
-/// <reference path="gameobjects/sky.ts" />
-/// <reference path="managers/cloudmanager.ts" />
-/// <reference path="gameobjects/gamemap.ts" />
-/// <reference path="gameobjects/player.ts" />
-/// <reference path="gameobjects/button.ts" />
-/// <reference path="managers/gui.ts" />
+﻿/**
+* This file contains simply creates and initiates the main game object and binds handler code for switching
+* game to full-screen mode.
+* Author:              Konstantin Koton
+* Filename:            game.ts
+* Last Modified By:    Konstantin Koton
+* Date Last Modified:  Dec. 9, 2014
+* Revision History:
+*      v1 - Migrated file to Project 1
+*      v2 - Removed most code and moved it to MainGame class
+*/
 
 ;
 
-// Global object references
-// TODO: Get rid of these in next version
-//var stage: createjs.Stage;
-//var queue;
-// Game objects
-// TODO: Get rid of these in next version
-//var text: createjs.Text;
-//var progressBar: createjs.Shape;
-//var sky: GameObjects.Sky;
-//var cloudManager: Managers.CloudManager;
-//var player: GameObjects.Player;
-//var map: GameObjects.GameMap;
-//var gui: Managers.GUI;
-//var sound: Managers.Sound;
-//var mobs: Managers.Mobs;
-//var gameState: number;
-//var worldTimer: number;
-//var gameObjects: Managers.Objects;
-//var startButton: Array<createjs.DisplayObject>;
-//var instructionsButton: Array<createjs.DisplayObject>;
-// This JavaScript Object holds user input states
-/*
-var input = {
-keyboard: {
-KEY_LEFT: false,
-KEY_RIGHT: false,
-KEY_UP: false,
-KEY_SPACE: false
-},
-mouse: {
-LEFT_BUTTON: false,
-RIGHT_BUTTON: false,
-MIDDLE_BUTTON: false
-},
-touch: {
-TOUCH: false
-}
-}
-// Game Constants
-var constants = {
-FOREGROUND_LAYER_NAME: "Foreground",
-MAX_CLOUDS: 5,
-CLOUDS: ["cloud1", "cloud2"],
-MOVE_SPEED: 8,
-FACING_LEFT: 0,
-FACING_RIGHT: 1,
-AIR_BLOCK: 0,
-WATER_BLOCK: 206,
-LAVA_BLOCK: 238,
-AI_ACTION_IDLE: 0,
-AI_ACTION_MOVE_RIGHT: 1,
-AI_ACTION_MOVE_LEFT: 2,
-AI_ACTION_ATTACK: 3,
-GAME_STATE_PRELOAD: 1,
-GAME_STATE_START: 2,
-GAME_STATE_INSTRUCTIONS: 3,
-GAME_STATE_PLAY: 4,
-GAME_STATE_DEATH: 5,
-GAME_STATE_VICTORY: 6
-};
-*/
 // Preload function used to load all the data and display progress report
 function start() {
     var game = new MainGame(document.getElementById("canvas"));
-    /*
-    stage = new createjs.Stage(document.getElementById("canvas"));
-    
-    gui = new Managers.GUI(stage);
-    
-    
-    progressBar = new createjs.Shape();
-    text = new createjs.Text();
-    text.font = "bold 36px Arial";
-    text.color = "#C33";
-    
-    stage.addChild(progressBar);
-    stage.addChild(text);
-    
-    Managers.Assets.init();
-    Managers.Assets.loader.addEventListener("progress", handleProgress);
-    Managers.Assets.loader.addEventListener("complete", handleComplete);
-    */
 }
 
 // If fullscreen button is clicked, initialize fullscreen mode

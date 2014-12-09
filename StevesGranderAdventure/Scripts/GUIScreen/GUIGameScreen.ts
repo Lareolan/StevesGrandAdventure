@@ -3,7 +3,7 @@
  * Author:              Konstantin Koton
  * Filename:            GUIGameScreen.ts
  * Last Modified By:    Konstantin Koton
- * Date Last Modified:  Nov. 22, 2014
+ * Date Last Modified:  Dec. 9, 2014
  * Revision History:
  *      v1 - Migrated file to Project 1
  *      v2 - Moved class into GUIScreen module
@@ -36,6 +36,9 @@ module GUIScreen {
             this.playerHealth = Constants.PLAYER_MAX_HEALTH;
         }
 
+        /*
+         * Initializes all the instruction screen data.
+         */
         init(): void {
             this.quickBar = new createjs.Sprite(Managers.Assets.guiComponents, "QuickBar");
             this.quickBar.x = Constants.HALF_SCREEN_WIDTH - this.quickBar.getBounds().width / 2;
@@ -59,7 +62,7 @@ module GUIScreen {
             this.killDisplay = new createjs.Text();
             this.killDisplay.font = "32px Minecrafter";
             this.killDisplay.text = "Kill Count: 0";
-            this.killDisplay.y = Constants.SCREEN_HEIGHT - 32; //640 + 16 + 64 + 16;
+            this.killDisplay.y = Constants.SCREEN_HEIGHT - 32;
             this.killDisplay.textBaseline = "middle";
             this.killDisplay.name = "Kill Display";
             this.screenObjects.push(this.killDisplay);
@@ -78,7 +81,7 @@ module GUIScreen {
             this.scoreDisplay.font = "32px Minecrafter";
             this.scoreDisplay.text = "Score: 0";
             this.scoreDisplay.x = Constants.SCREEN_WIDTH;
-            this.scoreDisplay.y = Constants.SCREEN_HEIGHT - 32; //640 + 16 + 64 + 16;
+            this.scoreDisplay.y = Constants.SCREEN_HEIGHT - 32;
             this.scoreDisplay.textBaseline = "middle";
             this.scoreDisplay.textAlign = "right";
             this.scoreDisplay.name = "Score Display";
@@ -139,18 +142,18 @@ module GUIScreen {
         }
 
         // When the player is hit, flash the screen with a red overlay for 100ms
-        playerHit(/*stage: createjs.Stage, instance: GUIScreen.GUIGameScreen*/): void {
+        playerHit(): void {
             var hitShape = this.hitShape;
             hitShape.visible = true;
-//            stage.addChild(instance.hitShape);
             setTimeout(function () {
                 hitShape.visible = false;
-//                stage.removeChild(instance.hitShape);
             }, 100);
         }
 
         /**
-         * 
+         * Changes the sprite of the inventory and displays the inventory item
+         * @param slot The inventory slot to change
+         * @param item The item to set the specific slot to
          */
         changeInventory(slot: number, item: number): void {
             if (slot > this.inventorySprites.length) {

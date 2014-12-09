@@ -3,7 +3,7 @@
  * Author:              Konstantin Koton
  * Filename:            Objects.ts
  * Last Modified By:    Konstantin Koton
- * Date Last Modified:  Nov. 22, 2014
+ * Date Last Modified:  Dec. 9, 2014
  * Revision History:
  *      v1 - Migrated file to Project 1
  *      v2 - Modified class to extend createjs.Container
@@ -86,7 +86,11 @@ module Managers {
             }
         }
 
-        // Spawns loot in the world
+        /**
+         * Spawns loot items in the world (At the moment only spawns food drops);
+         * @param x The x coordinate of where to place the loot object.
+         * @param y The y coordinate of where to place the loot object.
+         */
         spawnLoot(x: number, y: number): void {
             var image = createjs.SpriteSheetUtils.extractFrame(Managers.Assets.guiComponents, "FullFood");
             var bitmap = new createjs.Bitmap(image);

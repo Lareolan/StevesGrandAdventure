@@ -3,7 +3,7 @@
  * Author:              Konstantin Koton
  * Filename:            Controls.ts
  * Last Modified By:    Konstantin Koton
- * Date Last Modified:  Nov. 22, 2014
+ * Date Last Modified:  Dec. 9, 2014
  * Revision History:    
  *      v1 - Created module and added all game controls to it.
  *      v2 - Added resetControls() function.
@@ -38,6 +38,9 @@ module Controls {
         TOUCH3: false
     };
 
+    /**
+     * A simple function to reset all control states to default so keys don't get "stuck" sometimes.
+     */
     export function resetControls(): void {
         Controls.keyboard.KEY_LEFT = false;
         Controls.keyboard.KEY_RIGHT = false;

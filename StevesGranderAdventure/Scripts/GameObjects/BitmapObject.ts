@@ -4,7 +4,8 @@
  * Filename:            BitmapObject.ts
  * Last Modified By:    Konstantin Koton
  * Date Last Modified:  Nov. 22, 2014
- * Revision History:    Too numerous to mention
+ * Revision History:
+ *      v1 - Migrated file to Project 1
  */
 module GameObjects {
     // BitmapObject Class
@@ -37,16 +38,6 @@ module GameObjects {
         // Retrieve the Bitmap object
         getImage(): createjs.Bitmap {
             return this;
-        }
-
-        // Show the bitmap object by adding it to the stage
-        show(): void {
-//            stage.addChild(this);
-        }
-
-        // Hide the bitmap object by removing it from the stage
-        hide(): void {
-//            stage.removeChild(this);
         }
     }
 }  

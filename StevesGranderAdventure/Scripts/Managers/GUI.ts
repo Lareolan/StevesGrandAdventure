@@ -3,7 +3,7 @@
  * Author:              Konstantin Koton
  * Filename:            GUI.ts
  * Last Modified By:    Konstantin Koton
- * Date Last Modified:  Nov. 22, 2014
+ * Date Last Modified:  Dec. 9, 2014
  * Revision History:
  *      v1 - Migrated file to Project 1
  *      v2 - Completely reworked how screens are displayed
@@ -62,7 +62,6 @@ module Managers {
             // Initialize Instructions Screen
             this.instructionScreen.addChild(this.sky);
             this.instructionScreen.addChild(this.clouds);
- //           this.instructionScreen.addChild(this.map);
             this.instructionScreen.init();
 
             // Initialize Game Screen
@@ -91,37 +90,58 @@ module Managers {
             this.transitionScreen.init();
         }
 
-        // Sets internal reference to the stage object
+        /**
+         * Sets internal reference to the stage object
+         * @param stage The stage object reference to set
+         */
         setStage(stage: createjs.Stage): void {
             this.stage = stage;
         }
 
-        // Sets internal reference to sky object
+        /**
+         * Sets internal reference to the sky object
+         * @param sky The sky object reference to set
+         */
         setSky(sky: GameObjects.Sky): void {
             this.sky = sky;
         }
 
-        // Sets internal reference to clouds object
+        /**
+         * Sets internal reference to the Cloud Manager object
+         * @param clouds The Cloud Manager object reference to set
+         */
         setCloudManager(clouds: Managers.CloudManager): void {
             this.clouds = clouds;
         }
 
-        // Sets internal reference to map object
+        /**
+         * Sets internal reference to the map object
+         * @param map The map object reference to set
+         */
         setMap(map: GameObjects.GameMap): void {
             this.map = map;
         }
 
-        // Sets internal reference to player object
+        /**
+         * Sets internal reference to the player object
+         * @param player The player object reference to set
+         */
         setPlayer(player: GameObjects.Player): void {
             this.player = player;
         }
 
-        // Sets internal reference to Mob Manager object
+        /**
+         * Sets internal reference to the Mobs Manager object
+         * @param mobs The Mobs Manager object reference to set
+         */
         setMobManager(mobs: Managers.Mobs): void {
             this.mobs = mobs;
         }
 
-        // Sets internal reference to Objects Manager object
+        /**
+         * Sets internal reference to the Object Manager object
+         * @param gameObjects The Objects Manager object reference to set
+         */
         setGameObjects(gameObjects: Managers.Objects): void {
             this.gameObjects = gameObjects;
         }
@@ -141,13 +161,18 @@ module Managers {
         }
 
         /**
-         * 
+         * Calls the game screen's changeInventory function to change inventory display
+         * @param slot Which slot to set
+         * @param item The item to set that slot to
          */
         changeInventory(slot: number, item: number): void {
             this.gameScreen.changeInventory(slot, item);
         }
 
-        //
+        /**
+         * This function loads and displays the specific screen based on the state machine.
+         * @param gameState The current state of the game's state machine
+         */
         display(gameState: number): void {
             switch (gameState) {
                 case Constants.GAME_STATE_PRELOAD:

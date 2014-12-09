@@ -9,7 +9,7 @@
 * Author:              Konstantin Koton
 * Filename:            Zombie.ts
 * Last Modified By:    Konstantin Koton
-* Date Last Modified:  Nov. 22, 2014
+* Date Last Modified:  Dec. 9, 2014
 * Revision History:
 *      v1 - Created initial class framework
 */

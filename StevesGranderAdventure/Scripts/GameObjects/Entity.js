@@ -9,7 +9,7 @@
 * Author:              Konstantin Koton
 * Filename:            Entity.ts
 * Last Modified By:    Konstantin Koton
-* Date Last Modified:  Nov. 22, 2014
+* Date Last Modified:  Dec. 9, 2014
 * Revision History:
 *      v1 - Migrated file to Project 1
 *      v2 - Modified the class to extend createjs.Sprite.
@@ -264,27 +264,9 @@ var GameObjects;
 
         // Update the entity's current position
         Entity.prototype.update = function () {
-            //            this.sprite.x = this.canvasX;
-            //            this.sprite.y = this.canvasY;
             this.x = this.canvasX;
             this.y = this.canvasY;
             return false;
-        };
-
-        // Show the entity by adding it to the stage
-        Entity.prototype.show = function () {
-            //            if (this.sprite) {
-            //                stage.addChild(this.sprite);
-            //            }
-            //            stage.addChild(this);
-        };
-
-        // Hide the entity by removing it from the stage
-        Entity.prototype.hide = function () {
-            //            if (this.sprite) {
-            //                stage.removeChild(this.sprite);
-            //            }
-            //            stage.removeChild(this);
         };
         return Entity;
     })(createjs.Sprite);

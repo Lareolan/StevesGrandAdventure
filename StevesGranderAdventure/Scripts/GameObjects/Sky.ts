@@ -3,8 +3,9 @@
  * Author:              Konstantin Koton
  * Filename:            Sky.ts
  * Last Modified By:    Konstantin Koton
- * Date Last Modified:  Nov. 22, 2014
- * Revision History:    Too numerous to mention
+ * Date Last Modified:  Nov. 23, 2014
+ * Revision History:
+ *      v1 - Migrated file to Project 1
  */
 module GameObjects {
     // Sky Class
@@ -15,16 +16,6 @@ module GameObjects {
         // The constructor adds the sky to the stage at position 0 (the very back)
         constructor() {
             super("sky", null, 0);
-        }
-
-        // Show the sky by adding it to the stage
-        show(): void {
-//            stage.addChildAt(this.image, 0);
-        }
-
-        // Hit the sky by removing it from the stage
-        hide(): void {
-//            stage.removeChild(this.image);
         }
     }
 } 

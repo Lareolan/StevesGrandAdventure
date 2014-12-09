@@ -9,7 +9,7 @@
 * Author:              Konstantin Koton
 * Filename:            GUIVictoryScreen.ts
 * Last Modified By:    Konstantin Koton
-* Date Last Modified:  Nov. 22, 2014
+* Date Last Modified:  Dec. 9, 2014
 * Revision History:
 *      v1 - Migrated file to Project 1
 *      v2 - Moved class into GUIScreen module
@@ -48,10 +48,7 @@ var GUIScreen;
             this.textLines = {};
         }
         /*
-        * Initializes all the screen data. Accepts Steve's kill count and timestamp of the
-        * start of the game.
-        * @param killCount The number of monsters Steve killed
-        * @param time The timestamp at the start of the game
+        * Initializes all the screen data.
         */
         GUIVictoryScreen.prototype.init = function () {
             var theStage = this.stage;

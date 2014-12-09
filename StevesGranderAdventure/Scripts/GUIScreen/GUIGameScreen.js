@@ -9,7 +9,7 @@
 * Author:              Konstantin Koton
 * Filename:            GUIGameScreen.ts
 * Last Modified By:    Konstantin Koton
-* Date Last Modified:  Nov. 22, 2014
+* Date Last Modified:  Dec. 9, 2014
 * Revision History:
 *      v1 - Migrated file to Project 1
 *      v2 - Moved class into GUIScreen module
@@ -31,6 +31,9 @@ var GUIScreen;
             this.inventorySprites = [];
             this.playerHealth = Constants.PLAYER_MAX_HEALTH;
         }
+        /*
+        * Initializes all the instruction screen data.
+        */
         GUIGameScreen.prototype.init = function () {
             this.quickBar = new createjs.Sprite(Managers.Assets.guiComponents, "QuickBar");
             this.quickBar.x = Constants.HALF_SCREEN_WIDTH - this.quickBar.getBounds().width / 2;
@@ -54,7 +57,7 @@ var GUIScreen;
             this.killDisplay = new createjs.Text();
             this.killDisplay.font = "32px Minecrafter";
             this.killDisplay.text = "Kill Count: 0";
-            this.killDisplay.y = Constants.SCREEN_HEIGHT - 32; //640 + 16 + 64 + 16;
+            this.killDisplay.y = Constants.SCREEN_HEIGHT - 32;
             this.killDisplay.textBaseline = "middle";
             this.killDisplay.name = "Kill Display";
             this.screenObjects.push(this.killDisplay);
@@ -73,7 +76,7 @@ var GUIScreen;
             this.scoreDisplay.font = "32px Minecrafter";
             this.scoreDisplay.text = "Score: 0";
             this.scoreDisplay.x = Constants.SCREEN_WIDTH;
-            this.scoreDisplay.y = Constants.SCREEN_HEIGHT - 32; //640 + 16 + 64 + 16;
+            this.scoreDisplay.y = Constants.SCREEN_HEIGHT - 32;
             this.scoreDisplay.textBaseline = "middle";
             this.scoreDisplay.textAlign = "right";
             this.scoreDisplay.name = "Score Display";
@@ -134,19 +137,18 @@ var GUIScreen;
         };
 
         // When the player is hit, flash the screen with a red overlay for 100ms
-        GUIGameScreen.prototype.playerHit = function ( /*stage: createjs.Stage, instance: GUIScreen.GUIGameScreen*/ ) {
+        GUIGameScreen.prototype.playerHit = function () {
             var hitShape = this.hitShape;
             hitShape.visible = true;
-
-            //            stage.addChild(instance.hitShape);
             setTimeout(function () {
                 hitShape.visible = false;
-                //                stage.removeChild(instance.hitShape);
             }, 100);
         };
 
         /**
-        *
+        * Changes the sprite of the inventory and displays the inventory item
+        * @param slot The inventory slot to change
+        * @param item The item to set the specific slot to
         */
         GUIGameScreen.prototype.changeInventory = function (slot, item) {
             if (slot > this.inventorySprites.length) {

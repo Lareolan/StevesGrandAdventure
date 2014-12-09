@@ -4,7 +4,7 @@
  * Author:              Konstantin Koton
  * Filename:            Monster.ts
  * Last Modified By:    Konstantin Koton
- * Date Last Modified:  Nov. 22, 2014
+ * Date Last Modified:  Dec. 9, 2014
  * Revision History:
  *      v1 - Migrated file to Project 1
  *      v2 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class)
@@ -16,8 +16,11 @@ module GameObjects {
         player: GameObjects.Player;
         sound: Managers.Sound;
 
-        // The constructor sets the local reference to the player object, and lets the superclass
-        // constructor do the rest.
+        /**
+         * The constructor accepts a SpriteSheet and frame parameters and passes them to it's super class
+         * @param spriteSheet The sprite sheet to use
+         * @param frameNameOrNumber The frame to use
+         */
         constructor(spriteSheet: createjs.SpriteSheet, frameNameOrNumber?: string);
         constructor(spriteSheet: createjs.SpriteSheet, frameNameOrNumber?: number);
         constructor(spriteSheet: createjs.SpriteSheet, frameNameOrNumber: any) {

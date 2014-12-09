@@ -9,7 +9,7 @@
 * Author:              Konstantin Koton
 * Filename:            GUIStartScreen.ts
 * Last Modified By:    Konstantin Koton
-* Date Last Modified:  Nov. 22, 2014
+* Date Last Modified:  Dec. 1, 2014
 * Revision History:
 *      v1 - Migrated file to Project 1
 *      v2 - Added code for button initialization
@@ -24,6 +24,9 @@ var GUIScreen;
         function GUIStartScreen(stage) {
             _super.call(this, stage);
         }
+        /*
+        * Initializes all the screen data.
+        */
         GUIStartScreen.prototype.init = function () {
             var theStage = this.stage;
 

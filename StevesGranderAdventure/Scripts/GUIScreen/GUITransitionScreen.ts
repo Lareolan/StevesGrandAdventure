@@ -3,7 +3,7 @@
  * Author:              Konstantin Koton
  * Filename:            GUITransitionScreen.ts
  * Last Modified By:    Konstantin Koton
- * Date Last Modified:  Nov. 22, 2014
+ * Date Last Modified:  Dec. 9, 2014
  * Revision History:
  *      v1 - Created initial class framework
  */
@@ -45,10 +45,7 @@ module GUIScreen {
         }
 
         /*
-         * Initializes all the screen data. Accepts Steve's kill count and timestamp of the 
-         * start of the game.
-         * @param killCount The number of monsters Steve killed
-         * @param time The timestamp at the start of the game
+         * Initializes all the screen data.
          */
         init(): void {
             var theStage = this.stage;

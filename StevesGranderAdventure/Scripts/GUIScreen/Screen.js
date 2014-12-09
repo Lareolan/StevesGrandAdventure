@@ -4,7 +4,7 @@
 * Author:              Konstantin Koton
 * Filename:            Screen.ts
 * Last Modified By:    Konstantin Koton
-* Date Last Modified:  Nov. 22, 2014
+* Date Last Modified:  Dec. 9, 2014
 * Revision History:
 *      v1 - Migrated file to Project 1
 *      v2 - Moved class into GUIScreen module
@@ -22,9 +22,6 @@ var GUIScreen;
         // Hides all screen objects by taking them out of the stage and into an internal
         // storage array, then clearing the stage.
         Screen.prototype.hide = function () {
-            //            for (var index = 0; index < this.stage.getNumChildren(); index++) {
-            //                this.screenObjects.push(this.stage.getChildAt(index));
-            //            }
             this.stage.removeAllChildren();
         };
 

@@ -1,9 +1,9 @@
 ﻿/**
- * This file contains game initialization code, input code and primary game loop.
+ * This file contains game initialization code, input code, primary game loop and pretty much runs the game.
  * Author:              Konstantin Koton
  * Filename:            MainGame.ts
  * Last Modified By:    Konstantin Koton
- * Date Last Modified:  Nov. 22, 2014
+ * Date Last Modified:  Dec. 9, 2014
  * Revision History:    
  *      v1 - Created initial framework for the new class.
  *      v2 - Moved all game functionality code into this class and made the game work fully again.
@@ -33,13 +33,21 @@ class MainGame {
     // Fix squiggly lines, not actually used
     instance: MainGame;
 
-
+    /**
+     * Constructor simply initializes level, creates the primary stage object from the canvas passed as parameter
+     * and calls primary game init() function.
+     * @param canvas The canvas HTML element to render all our graphics onto.
+     */
     constructor(canvas: Element) {
         this.stage = new createjs.Stage(canvas);
         this.currentLevel = 0;
         this.init();
     }
 
+    /**
+     * This function initializes the primary game objects, sets up the pre-loader, ticker, bind keyboard event handlers
+     * and other primary event handlers for button presses.
+     */
     init() {
         // Initialize the GUI object
         this.gui = new Managers.GUI(this.stage);
@@ -54,7 +62,7 @@ class MainGame {
         // Workaround for callback function scope issue
         var stage = this.stage;
 
-        // Bind document-wide keydown event, and update key states accordingly for keyboard input
+        // Bind document-wide "keydown" event, and update key states accordingly for keyboard input
         $(document).keydown(function (e: Event) {
             switch (e.keyCode) {
                 case 27:        // ESC
@@ -153,7 +161,7 @@ class MainGame {
             }
         });
 
-        // Bind document-wide keyup event, and update key states accordingly for keyboard input
+        // Bind document-wide "keyup" event, and update key states accordingly for keyboard input
         $(document).keyup(function (e: Event) {
             switch (e.keyCode) {
                 case 27:        // ESC
@@ -210,6 +218,10 @@ class MainGame {
         this.stage.addEventListener("continueButtonClicked", { handleEvent: this.startNextLevel, instance: this });
     }
 
+    /**
+     * This function is an event handler fired by the pre-loader when all game assets finished loading.
+     * Calls the primary game initialization function.
+     */
     preloadComplete(event: Event): void {
         var instance = this.instance;
         instance.changeGameState = Constants.GAME_STATE_START;
@@ -217,6 +229,10 @@ class MainGame {
         instance.initGameStart();
     }
 
+    /**
+     * This function is called after the pre-loader finished loading all game assets. It initializes all the
+     * game's objects and switches state to the start menu screen.
+     */
     initGameStart(): void {
         // Initialize sound manager
         this.sound = new Managers.Sound();
@@ -262,12 +278,18 @@ class MainGame {
         this.stage.addEventListener("playerDeath", { handleEvent: this.playerDeath, instance: this });
         this.stage.addEventListener("exitReached", { handleEvent: this.loadNextLevel, instance: this });
 
+        // Initialize the GUI components/screens
         this.gui.init();
 
         this.gameState = this.changeGameState;
         this.gui.display(this.gameState);
     }
 
+    /**
+     * This function is an event handler fired every tick of the Stage's clock. Updates the appropriate object
+     * instances depending on game's current state machine value.
+     * @param e The "tick" event object
+     */
     gameLoop(event: Event): void {
         var instance = this.instance;
 
@@ -301,6 +323,11 @@ class MainGame {
         instance.stage.update();
     }
 
+    /**
+     * This function is an event handler fired when player clicks the "Instructions" button on the main menu screen.
+     * Switches game state.
+     * @param e The "instructionsClicked" event object
+     */
     showInstructions(event: Event): void {
         var instance = this.instance;
 
@@ -309,6 +336,11 @@ class MainGame {
         instance.gui.display(instance.gameState);
     }
 
+    /**
+     * This function is an event handler fired when player clicks the "Start Game" button on the main menu screen.
+     * Switches game state.
+     * @param e The "startGameClicked" event object
+     */
     startGame(event: Event): void {
         var instance = this.instance;
 
@@ -319,6 +351,11 @@ class MainGame {
         instance.gui.display(instance.gameState);
     }
 
+    /**
+     * This function is an event handler fired when player clicks the "Back" button on the instructions screen.
+     * Switches game state.
+     * @param e The "backButtonClicked" event object
+     */
     showStartScreen(event: Event): void {
         var instance = this.instance;
 
@@ -327,7 +364,10 @@ class MainGame {
         instance.gui.display(instance.gameState);
     }
 
-    // Handle player being killed, switch game state to dead state
+    /**
+     * This function is an event handler fired when player dies. It displays the FINAL score and switches game state.
+     * @param e The "playerDeath" event object
+     */
     playerDeath(e: Event): void {
         var instance = this.instance;
 
@@ -338,6 +378,10 @@ class MainGame {
         instance.gui.display(instance.gameState);
     }
 
+    /**
+     * This function is called when player reaches the final exit door on the last level. It displays the FINAL score
+     * breakdown and allows the player to play again if they wish.
+     */
     playerWins(): void {
 //        var instance = this.instance;
 
@@ -352,8 +396,8 @@ class MainGame {
         scoreData["inventory"] = this.player.getFoodCount();
         scoreData["inventoryScore"] = scoreData["inventory"] * Constants.SCORE_INVENTORY.FOOD;
         var levelTime = Math.floor((new Date().getTime() - this.worldTimer) / 1000);
-        var time = Constants.LEVEL_OPTIMUM_TIME[this.currentLevel] - levelTime;
-        scoreData["optimumTime"] = Constants.LEVEL_OPTIMUM_TIME[this.currentLevel];
+        var time = Constants.LEVEL_OPTIMUM_TIME[this.currentLevel - 1] - levelTime;
+        scoreData["optimumTime"] = Constants.LEVEL_OPTIMUM_TIME[this.currentLevel - 1];
         scoreData["playerTime"] = levelTime;
         scoreData["time"] = (time > 0) ? time : 0;
         scoreData["timeScore"] = (time > 0) ? time * Constants.SCORE_TIMER : 0;
@@ -364,6 +408,12 @@ class MainGame {
         this.gui.display(this.gameState);
     }
 
+    /**
+     * This function is an event handler fired when player reaches the exit door. It displays the current score
+     * breakdown and allows the player to proceed. It also checks whether this was the last level, if it was, then it
+     * calls the playerWins() function instead.
+     * @param e The "exitReached" event object
+     */
     loadNextLevel(e: Event): void {
         var instance = this.instance;
 
@@ -378,8 +428,8 @@ class MainGame {
             scoreData["inventory"] = instance.player.getFoodCount();
             scoreData["inventoryScore"] = scoreData["inventory"] * Constants.SCORE_INVENTORY.FOOD;
             var levelTime = Math.floor((new Date().getTime() - instance.worldTimer) / 1000);
-            var time = Constants.LEVEL_OPTIMUM_TIME[instance.currentLevel] - levelTime;
-            scoreData["optimumTime"] = Constants.LEVEL_OPTIMUM_TIME[instance.currentLevel];
+            var time = Constants.LEVEL_OPTIMUM_TIME[instance.currentLevel - 1] - levelTime;
+            scoreData["optimumTime"] = Constants.LEVEL_OPTIMUM_TIME[instance.currentLevel - 1];
             scoreData["playerTime"] = levelTime;
             scoreData["time"] = (time > 0) ? time : 0;
             scoreData["timeScore"] = (time > 0) ? time * Constants.SCORE_TIMER : 0;
@@ -420,10 +470,14 @@ class MainGame {
 
         // TODO: Change this
 //        instance.changeGameState = Constants.GAME_STATE_PLAY;
-//        instance.gameState = Constants.GAME_STATE_PLAY;
         instance.gui.display(instance.gameState);
     }
 
+    /**
+     * This function is an event handler fired when player clicks the "continue" button on the level
+     * transition menu screen. The map has already been pre-loaded so all that's needed is state change.
+     * @param e The "continueButtonClicked" event object
+     */
     startNextLevel(e: Event): void {
         var instance = this.instance;
 
@@ -436,6 +490,11 @@ class MainGame {
         instance.gui.display(instance.gameState);
     }
 
+    /**
+     * This function is an event handler fired when player clicks the "Play Again?" button after dieing in the game.
+     * It resets the game back to initial state at level 1 and starts over giving the player another shot at victory.
+     * @param e The "playAgainButtonClicked" event object
+     */
     restartGame(event: Event): void {
         var instance = this.instance;
 
@@ -470,9 +529,11 @@ class MainGame {
         gameObjects.loadObjects(map.entities.getAllEntities(), map.tileset);
 
         // Reset all game container managers back to initial positions
+        instance.clouds.reset();
         map.reset();
         mobs.reset();
         gameObjects.reset();
+        instance.player.reset();
 
         // Start up the level timer
         instance.worldTimer = new Date().getTime();
@@ -482,7 +543,6 @@ class MainGame {
         instance.worldTimer = new Date().getTime();
         instance.clouds.reset();
         instance.map.reset();
-        instance.player.reset();
         instance.gameObjects.reset();
         instance.mobs.reset();
 */

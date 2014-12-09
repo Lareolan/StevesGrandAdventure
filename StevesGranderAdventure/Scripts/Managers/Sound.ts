@@ -3,10 +3,11 @@
  * Author:              Konstantin Koton
  * Filename:            Sound.ts
  * Last Modified By:    Konstantin Koton
- * Date Last Modified:  Nov. 22, 2014
+ * Date Last Modified:  Dec. 9, 2014
  * Revision History:
  *      v1 - Migrated file to Project 1
- * TODO: v2 - Add panning support for moving sounds
+ *      v2 - Added creeper sounds
+ *      v3 - Added food eating sound
  */
 module Managers {
     // An internal class containing static names of the various sound assets.
@@ -41,9 +42,6 @@ module Managers {
 
     // Sound manager class
     export class Sound {
-        // Container
-//        private children: Array<createjs.SoundInstance>;
-
         // Internal variables
         private background: createjs.SoundInstance;
         private playerWalkSound: string;
@@ -59,8 +57,6 @@ module Managers {
 
         // The constructor
         constructor() {
-//            this.children = [];
-
             this.background = createjs.Sound.play(SoundsList.BACKGROUND, createjs.Sound.INTERRUPT_NONE, 0, 0, -1, 1, 0);
             this.lavaInstance = createjs.Sound.createInstance(SoundsList.LAVA);
             this.lavaPopInstance = createjs.Sound.createInstance(SoundsList.LAVA_POP);
@@ -125,7 +121,6 @@ module Managers {
                     break;
             }
             this.zombieSpeakInstance = createjs.Sound.play(this.zombieSpeakSound, createjs.Sound.INTERRUPT_NONE, 0, 0, 0, volume, pan);
-//            this.children.push(this.zombieSpeakInstance);
         }
 
         /*
@@ -146,7 +141,6 @@ module Managers {
             }
 
             this.zombieSpeakInstance = createjs.Sound.play(soundID, createjs.Sound.INTERRUPT_NONE, 0, 0, 0, volume, pan);
-//            this.children.push(this.zombieSpeakInstance);
         }
 
         /*
@@ -162,7 +156,6 @@ module Managers {
             pan = distance / halfScreenWidth;
             volume = (1 - Math.abs(pan)) * 0.8;
             this.zombieSpeakInstance = createjs.Sound.play(SoundsList.ZOMBIE_DEATH, createjs.Sound.INTERRUPT_NONE, 0, 0, 0, volume, pan);
-//            this.children.push(this.zombieSpeakInstance);
         }
 
         /*
@@ -191,7 +184,6 @@ module Managers {
                     break;
             }
             this.creeperSpeakInstance = createjs.Sound.play(soundID, createjs.Sound.INTERRUPT_NONE, 0, 0, 0, volume, pan);
-//            this.children.push(this.creeperSpeakInstance);
         }
 
         /*
@@ -207,7 +199,6 @@ module Managers {
             pan = distance / halfScreenWidth;
             volume = (1 - Math.abs(pan)) * 0.8;
             this.creeperSpeakInstance = createjs.Sound.play(SoundsList.CREEPER_DEATH, createjs.Sound.INTERRUPT_NONE, 0, 0, 0, volume, pan);
-//            this.children.push(this.creeperSpeakInstance);
         }
 
         /*
@@ -223,7 +214,6 @@ module Managers {
             pan = distance / halfScreenWidth;
             volume = (1 - Math.abs(pan)) * 1.2;
             this.creeperSpeakInstance = createjs.Sound.play(SoundsList.CREEPER_FUSE, createjs.Sound.INTERRUPT_NONE, 0, 0, 0, volume, pan);
-//            this.children.push(this.creeperSpeakInstance);
         }
 
         /*
@@ -252,7 +242,6 @@ module Managers {
                     break;
             }
             this.creeperSpeakInstance = createjs.Sound.play(soundID, createjs.Sound.INTERRUPT_NONE, 0, 0, 0, volume, pan);
-            //            this.children.push(this.creeperSpeakInstance);
         }
 
         /*
@@ -310,7 +299,6 @@ module Managers {
                 }
                 if (Math.floor(Math.random() * 60) === 0) {
                     this.lavaPopInstance.play(createjs.Sound.INTERRUPT_NONE, 0, 0, 0, volume, pan);
-//                    this.children.push(this.lavaPopInstance);
                 }
             }
 

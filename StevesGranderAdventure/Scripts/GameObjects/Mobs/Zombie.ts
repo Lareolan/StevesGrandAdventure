@@ -3,7 +3,7 @@
  * Author:              Konstantin Koton
  * Filename:            Zombie.ts
  * Last Modified By:    Konstantin Koton
- * Date Last Modified:  Nov. 22, 2014
+ * Date Last Modified:  Dec. 9, 2014
  * Revision History:
  *      v1 - Migrated file to Project 1
  *      v2 - Modified class to remove sprite property and make it the sprite (after modifications to the Entity base class)
@@ -32,43 +32,14 @@ module GameObjects {
              * to be kept in internal variables. Then initializes the Zombie object instance
              * and all its variables.
              */
-//            constructor(zombie: Object, foreground: GameObjects.Layer, sound: Managers.Sound, player: GameObjects.Player) {
             constructor() {
                 super(Managers.Assets.characters, "zombieStandRight");
 
                 this.name = "Zombie";
-//                this.sound = sound;
-//                this.setEntity(zombie);
-//                this.setMapData(foreground);
-//                this.setPlayer(player);
-
-
-                /*
-                var spriteName: string;
-                for (var frameID = 0; frameID < this.spriteNames.length; frameID++) {
-                    spriteName = this.spriteNames[frameID];
-                    this.sprites[spriteName] = new createjs.Sprite(Managers.Assets.characters, spriteName);
-                }
-                this.sprites.length = this.spriteNames.length;
-*/
 
                 this.facing = Constants.FACING_RIGHT;
                 this.falling = true;
                 this.jumping = false;
-
-                //                this.sprite = this.sprites[this.spriteNames[0]].clone();
-                //                this.sprite.x = this.canvasX;
-                //                this.sprite.y = this.canvasY;
-                //                this.sprite.regX = 0;
-                //                this.sprite.regY = 0;
-
-//                this.x = this.canvasX;
-//                this.y = this.canvasY;
-//                this.regX = 0;
-//                this.regY = 0;
-
-                //                stage.addChild(this.sprite);
-//                stage.addChild(this);
 
                 this.health = 20;
                 this.attackTimer = 0;
@@ -110,33 +81,21 @@ module GameObjects {
 
                 // Animate zombie facing/walking sprites
                 if (this.spriteUpdate) {
-                    //                    stage.removeChild(this.sprite);
-//                    stage.removeChild(this);
-
                     if (this.facing === Constants.FACING_LEFT) {
                         if (Math.floor((this.runDistance % (this.runDistanceIncrements * 4)) / this.runDistanceIncrements * 2)) {
-                            //                            this.sprite = this.sprites["zombieStepLeft"].clone();
                             this.gotoAndStop("zombieStepLeft");
                         } else {
-                            //                            this.sprite = this.sprites["zombieStandLeft"].clone();
                             this.gotoAndStop("zombieStandLeft");
                         }
                     } else if (this.facing === Constants.FACING_RIGHT) {
                         if (Math.floor((this.runDistance % (this.runDistanceIncrements * 4)) / (this.runDistanceIncrements * 2))) {
-                            //                            this.sprite = this.sprites["zombieStepRight"].clone();
                             this.gotoAndStop("zombieStepRight");
                         } else {
-                            //                            this.sprite = this.sprites["zombieStandRight"].clone();
                             this.gotoAndStop("zombieStandRight");
                         }
                     }
-
-//                    this.sprite.x = this.canvasX;
-//                    this.sprite.y = this.canvasY;
-//                    stage.addChild(this.sprite);
                     this.x = this.canvasX;
                     this.y = this.canvasY;
-//                    stage.addChild(this);
 
                     this.spriteUpdate = false;
                 }
@@ -194,8 +153,6 @@ module GameObjects {
                     this.falling = true;
                     this.mapY = newY;
                     this.canvasY = newY;
-                    //                    this.sprite.y = this.canvasY;
-                    //                    this.sprite.x = this.canvasX;
                     this.y = this.canvasY;
                     this.x = this.canvasX;
                 } else {

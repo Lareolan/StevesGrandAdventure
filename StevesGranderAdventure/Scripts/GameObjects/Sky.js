@@ -9,8 +9,9 @@
 * Author:              Konstantin Koton
 * Filename:            Sky.ts
 * Last Modified By:    Konstantin Koton
-* Date Last Modified:  Nov. 22, 2014
-* Revision History:    Too numerous to mention
+* Date Last Modified:  Nov. 23, 2014
+* Revision History:
+*      v1 - Migrated file to Project 1
 */
 var GameObjects;
 (function (GameObjects) {
@@ -23,15 +24,6 @@ var GameObjects;
             // Initializes the name of the bitmap object
             this.name = "Sky";
         }
-        // Show the sky by adding it to the stage
-        Sky.prototype.show = function () {
-            //            stage.addChildAt(this.image, 0);
-        };
-
-        // Hit the sky by removing it from the stage
-        Sky.prototype.hide = function () {
-            //            stage.removeChild(this.image);
-        };
         return Sky;
     })(GameObjects.BitmapObject);
     GameObjects.Sky = Sky;

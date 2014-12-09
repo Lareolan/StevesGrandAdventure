@@ -1,12 +1,9 @@
-﻿/// <reference path="tileset.ts" />
-/// <reference path="../managers/assets.ts" />
-
-/**
+﻿/**
  * This file contains the game's game map object
  * Author:              Konstantin Koton
  * Filename:            GameMap.ts
  * Last Modified By:    Konstantin Koton
- * Date Last Modified:  Nov. 22, 2014
+ * Date Last Modified:  Dec. 9, 2014
  * Revision History:
  *      v1 - Migrated file to Project 1
  *      v2 - Modified class to extend GameObjects.BitmapObject
@@ -16,7 +13,6 @@ module GameObjects {
     // GameMap class
     export class GameMap extends GameObjects.BitmapObject {
         // Instance variables
-//        map: createjs.Bitmap;
         layers: Array<GameObjects.Layer>;
         tileset: GameObjects.Tileset;
         entities: GameObjects.MapEntities;
@@ -109,15 +105,8 @@ module GameObjects {
             // Convert the data from the new canvas into a bitmap and use that bitmap as the
             // map from now on (Results in much faster and more efficient map operations).
 
-            this.name = "Map";
+            this.name = "Map of " + mapName;
             this.image = canvas;
-//            super(null, new createjs.Bitmap(canvas));
-//            this.image = new createjs.Bitmap(canvas).image;
-
-//            this.map = new createjs.Bitmap(canvas);
-//            this.map.name = "Map";
-
-//            stage.addChild(this.map);
         }
 
         /*
@@ -139,11 +128,6 @@ module GameObjects {
             if (this.x <= -Constants.MOVE_SPEED) {
                 this.x += Constants.MOVE_SPEED;
             }
-/*
-            if (this.map.x <= -constants.MOVE_SPEED) {
-                this.map.x += constants.MOVE_SPEED;
-            }
-*/
         }
 
         // Move all the map image to the left to reflect player moving right
@@ -151,36 +135,12 @@ module GameObjects {
             if (this.x >= -(this.mapWidth - Constants.SCREEN_WIDTH - Constants.MOVE_SPEED)) {
                 this.x -= Constants.MOVE_SPEED;
             }
-/*
-            if (this.map.x >= -(this.mapWidth - Constants.SCREEN_WIDTH - constants.MOVE_SPEED)) {
-                this.map.x -= constants.MOVE_SPEED;
-            }
-*/
         }
-
-        // Show all the map by adding it to the stage
-        show(): void {
-//            stage.addChild(this.map);
-        }
-
-        // Hide all the map by removing it from the stage
-        hide(): void {
-//            stage.removeChild(this.map);
-        }
-
-        // Returns the map's bitmap image
-//        getImage(): createjs.Bitmap {
-//            return this.map;
-//        }
 
         // resets the map back to start
         reset(): void {
             this.x = 0;
             this.y = 0;
-/*
-            this.map.x = 0;
-            this.map.y = 0;
-*/
         }
     }
 } 
