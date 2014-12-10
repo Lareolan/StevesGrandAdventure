@@ -7,19 +7,20 @@
  * Revision History:
  *      v1 - Migrated file to Project 1
  *      v2 - Moved class into GUIScreen module
+ *      v3 - Modified output to show final score
  */
 module GUIScreen {
     // GUIDeathScreen Class
     export class GUIDeathScreen extends GUIScreen.Screen {
         // Instance variables holding information
         redOverlay: createjs.Shape;
-        killLine: createjs.Text;
+        scoreLine: createjs.Text;
 
         epilogue: Object = {
             line1: { text: "Despite your best efforts, Steve is dead.", textSize: 32, color: "#000000", x: 128, y: 64 },
             line2: { text: "You have Failed Steve after all...", textSize: 32, color: "#000000", x: 128, y: 128 },
             line3: { text: "R.I.P Steve", textSize: 32, color: "#ff0000", x: 128, y: 192 },
-            line4: { text: "Game Over", textSize: 128, color: "#ff0000", x: Constants.HALF_SCREEN_WIDTH, y: 256 }
+            line4: { text: "Game Over", textSize: 128, color: "#ff0000", x: Constants.HALF_SCREEN_WIDTH, y: Constants.HALF_SCREEN_HEIGHT - 64 }
         };
         epilogueList: Array<string> = [
             "line1",
@@ -62,15 +63,15 @@ module GUIScreen {
             textLine.textAlign = "center";
 
             // Add on the zombie kill count line
-            textLine = new createjs.Text("On the bright side, at least you killed " + 0 + " zombies!", "32px Minecrafter", "#000000");
+            textLine = new createjs.Text("", "32px Minecrafter", "#000000");
             textLine.x = 128;
             textLine.y = 512;
             this.screenObjects.push(textLine);
-            this.killLine = textLine;
+            this.scoreLine = textLine;
 
 
             // Create the "Play Again?" button
-            var btn = new GameObjects.Button("Play Again?", 256, 64, (Constants.HALF_SCREEN_WIDTH - 128), 576, GameObjects.Button.ROUNDED, "black", "#5533DD", "rgba(100, 60, 200, 0.8)");
+            var btn = new GameObjects.Button("Try Again?", 256, 64, (Constants.HALF_SCREEN_WIDTH - 128), 576, GameObjects.Button.ROUNDED, "black", "#5533DD", "rgba(100, 60, 200, 0.8)");
             btn.setFadeEffect();
             btn.setClickHandler(function () {
                 var event = new createjs.Event("playAgainButtonClicked", true, false);
@@ -83,8 +84,10 @@ module GUIScreen {
          * Accepts Steve's kill count and changes the text to show it.
          * @param killCount The number of monsters Steve killed
          */
-        setKillCount(killCount: number): void {
-            this.killLine.text = "On the bright side, at least you killed " + killCount + " zombies!";
+        setFinalScore(score: number): void {
+            this.scoreLine.text = "Game Final Score: " + score;
+            this.scoreLine.x = Constants.HALF_SCREEN_WIDTH;
+            this.scoreLine.textAlign = "center";
         }
 
         // Shows the victory screen

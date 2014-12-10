@@ -83,6 +83,7 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\images\2K-LOGO.jpg" />
     <Content Include="Assets\images\Character-Tileset.png" />
     <Content Include="Assets\images\Cloud_1.png" />
     <Content Include="Assets\images\Cloud_2.png" />

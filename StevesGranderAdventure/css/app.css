@@ -1,9 +1,9 @@
 ﻿#canvas {
-/*    border: dashed 1px black; */
+/*    border: solid 1px black; */
 }
 
 .fullscreen {
-    cursor: none;
+/*    cursor: none; */
 }
 
 .turnCW {

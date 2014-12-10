@@ -7,13 +7,16 @@
  * Revision History:
  *      v1 - Migrated file to Project 1
  *      v2 - Moved class into GUIScreen module
+ *      v3 - Added company logo and copyright text
  */
 module GUIScreen {
     // GUIPreloadScreen Class
     export class GUIPreloadScreen extends GUIScreen.Screen {
         // Instance variables
+        logoBitmap: createjs.Bitmap;
         progressBar: createjs.Shape;
         text: createjs.Text;
+        copyrightText: createjs.Text;
         progressBarWidth: number = 400;
         progressBarheight: number = 50;
 
@@ -31,7 +34,16 @@ module GUIScreen {
          * Initializes all the screen data.
          */
         init() {
+            this.logoBitmap = new createjs.Bitmap("Assets/images/2K-LOGO.jpg");
+            this.logoBitmap.x = Constants.HALF_SCREEN_WIDTH;
+            this.logoBitmap.y = Constants.HALF_SCREEN_HEIGHT / 2;
+            this.logoBitmap.regX = 128;
+            this.logoBitmap.regY = 128;
+            this.screenObjects.push(this.logoBitmap);
+
             this.progressBar = new createjs.Shape();
+            this.screenObjects.push(this.progressBar);
+
             this.text = new createjs.Text();
             this.text.font = "bold 36px Arial";
             this.text.color = "#C33";
@@ -39,8 +51,27 @@ module GUIScreen {
             this.text.textBaseline = "middle";
             this.text.x = Constants.HALF_SCREEN_WIDTH;
             this.text.y = Constants.HALF_SCREEN_HEIGHT;
-            this.screenObjects.push(this.progressBar);
             this.screenObjects.push(this.text);
+
+            this.copyrightText = new createjs.Text();
+            this.copyrightText.text = "This game is a product of Y2K Software. All rights reserved.";
+            this.copyrightText.font = "bold 36px Arial";
+            this.copyrightText.color = "#000";
+            this.copyrightText.textAlign = "center";
+            this.copyrightText.textBaseline = "middle";
+            this.copyrightText.x = Constants.HALF_SCREEN_WIDTH;
+            this.copyrightText.y = Constants.SCREEN_HEIGHT - 90;
+            this.screenObjects.push(this.copyrightText);
+
+            this.copyrightText = new createjs.Text();
+            this.copyrightText.text = "Minecraft is a registered trademark of Mojang inc.";
+            this.copyrightText.font = "bold 36px Arial";
+            this.copyrightText.color = "#000";
+            this.copyrightText.textAlign = "center";
+            this.copyrightText.textBaseline = "middle";
+            this.copyrightText.x = Constants.HALF_SCREEN_WIDTH;
+            this.copyrightText.y = Constants.SCREEN_HEIGHT - 36;
+            this.screenObjects.push(this.copyrightText);
 
             Managers.Assets.init();
             Managers.Assets.loader.addEventListener("progress", { handleEvent: this.handleProgress, instance: this });

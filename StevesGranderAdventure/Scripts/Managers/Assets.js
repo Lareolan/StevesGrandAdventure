@@ -7,6 +7,7 @@
 * Revision History:
 *      v1 - Migrated file to Project 1
 *      v2 - Added assets for levels 2 and 3, added new mob assets for creepers
+*      v3 - Added 2 new entries to the GUI SpriteSheet ("1" and "9" keys)
 */
 var Managers;
 (function (Managers) {
@@ -85,14 +86,16 @@ var Managers;
             frames: [
                 [0, 78, 32, 32],
                 [33, 78, 32, 32],
-                [165, 78, 27, 27],
-                [193, 78, 18, 18],
+                [198, 78, 27, 27],
+                [226, 78, 18, 18],
                 [66, 78, 32, 32],
-                [0, 0, 364, 44],
                 [99, 78, 32, 32],
-                [0, 45, 192, 32],
                 [132, 78, 32, 32],
-                [193, 45, 32, 32]
+                [0, 0, 364, 44],
+                [193, 45, 32, 32],
+                [0, 45, 192, 32],
+                [165, 78, 32, 32],
+                [226, 45, 32, 32]
             ],
             animations: {
                 AKey: [0],
@@ -100,11 +103,13 @@ var Managers;
                 FullFood: [2],
                 FullHeart: [3],
                 LeftArrowKey: [4],
-                QuickBar: [5],
-                RightArrowKey: [6],
-                SpaceBar: [7],
-                UpArrowKey: [8],
-                WKey: [9]
+                NINEKey: [5],
+                ONEKey: [6],
+                QuickBar: [7],
+                RightArrowKey: [8],
+                SpaceBar: [9],
+                UpArrowKey: [10],
+                WKey: [11]
             }
         };
 

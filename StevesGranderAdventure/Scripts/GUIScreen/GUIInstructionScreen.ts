@@ -7,6 +7,7 @@
  * Revision History:
  *      v1 - Migrated file to Project 1
  *      v2 - Moved class into GUIScreen module
+ *      v3 - Added instructions on using inventory hotkeys
  */
 module GUIScreen {
     // GUIInstructionScreen Class
@@ -33,6 +34,10 @@ module GUIScreen {
             JumpText: { x: 288, y: 480, text: "Make Steve Jump" },
             SpaceBar: { x: 64, y: 544 },
             AttackText: { x: 288, y: 544, text: "Make Steve Slash With His Sword" },
+            ONEKey: { x: 96, y: 608 },
+            SeparatorText: { x: 128, y: 608, text: " ... " },
+            NINEKey: { x: 192, y: 608 },
+            InventoryText: { x: 288, y: 608, text: "Use inventory slots 1 through 9" }
         };
         instructionsList: Array<string> = [
             "AKey",
@@ -45,7 +50,11 @@ module GUIScreen {
             "UpArrowKey",
             "JumpText",
             "SpaceBar",
-            "AttackText"
+            "AttackText",
+            "ONEKey",
+            "SeparatorText",
+            "NINEKey",
+            "InventoryText"
         ];
 
         // Constructor simply calls the super class constructor

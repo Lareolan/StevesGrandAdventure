@@ -9,11 +9,12 @@
 * Author:              Konstantin Koton
 * Filename:            GUIStartScreen.ts
 * Last Modified By:    Konstantin Koton
-* Date Last Modified:  Dec. 1, 2014
+* Date Last Modified:  Dec. 9, 2014
 * Revision History:
 *      v1 - Migrated file to Project 1
 *      v2 - Added code for button initialization
 *      v3 - Moved class into GUIScreen module
+*      v4 - Added the game's TITLE to the screen display (erm... yeah)
 */
 var GUIScreen;
 (function (GUIScreen) {
@@ -29,6 +30,14 @@ var GUIScreen;
         */
         GUIStartScreen.prototype.init = function () {
             var theStage = this.stage;
+
+            // Add game's title to the screen
+            var title = new createjs.Text("Steve's Grand Adventure", "80px Minecrafter", "#000000");
+            title.textAlign = "center";
+            title.x = Constants.HALF_SCREEN_WIDTH;
+            title.y = 64;
+            title.color = "#3333DD";
+            this.screenObjects.push(title);
 
             // Create "Start Game" button, and bind a click handler function to change state when clicked
             var buttonWidth = 400;

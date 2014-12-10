@@ -8,6 +8,7 @@
  *      v1 - Created initial framework for the new class.
  *      v2 - Moved all game functionality code into this class and made the game work fully again.
  *      v3 - Implemented the ability to go to the next level.
+ *      v4 - Tweaked Death screen parameter call
  */
 
 class MainGame {
@@ -374,7 +375,7 @@ class MainGame {
         // TODO: Change this
         instance.gameState = Constants.GAME_STATE_DEATH;
         instance.player.die();
-        instance.gui.deathScreen.setKillCount(instance.player.getKillCount());
+        instance.gui.deathScreen.setFinalScore(instance.player.getScore());
         instance.gui.display(instance.gameState);
     }
 
