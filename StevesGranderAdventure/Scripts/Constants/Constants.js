@@ -36,7 +36,7 @@ var Constants;
 
     // Game level constants
     Constants.LEVELS = ["Level1", "Level2", "Level3"];
-    Constants.LEVEL_OPTIMUM_TIME = [60, 90, 90];
+    Constants.LEVEL_OPTIMUM_TIME = [90, 150, 180];
 
     // Layer names
     Constants.LAYER_NAME_FOREGROUND = "Foreground";

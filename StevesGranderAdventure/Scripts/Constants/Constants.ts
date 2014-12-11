@@ -35,7 +35,7 @@ module Constants {
 
     // Game level constants
     export var LEVELS: Array<string> = ["Level1", "Level2", "Level3"];
-    export var LEVEL_OPTIMUM_TIME: Array<number> = [60, 90, 90];
+    export var LEVEL_OPTIMUM_TIME: Array<number> = [90, 150, 180];
 
     // Layer names
     export var LAYER_NAME_FOREGROUND: string = "Foreground";

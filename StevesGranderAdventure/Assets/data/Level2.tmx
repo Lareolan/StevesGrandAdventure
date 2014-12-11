@@ -170,7 +170,7 @@
   <object name="Entrance" type="Door" gid="82" x="96" y="480"/>
   <object name="Torch" type="Torch" gid="81" x="160" y="448"/>
   <object name="Torch" type="Torch" gid="81" x="32" y="448"/>
-  <object name="Exit" type="Door" gid="98" x="448" y="512"/>
-  <object name="Exit" type="Door" gid="82" x="448" y="480"/>
+  <object name="Exit" type="Door" gid="98" x="5760" y="576"/>
+  <object name="Exit" type="Door" gid="82" x="5760" y="544"/>
  </objectgroup>
 </map>

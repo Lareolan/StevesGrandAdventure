@@ -8,12 +8,12 @@
  </tileset>
  <layer name="Foreground" width="500" height="22">
   <data encoding="base64" compression="zlib">
-   eJztnA1u2zAMhdOkOcB6h919p+lReoYhQAMIBCX+SqLt9wHEWkSSJfmJj3bX3m7n5HMQUhvNGLStdG0AAABgFs/dE5jIfRCjNtoxaFupH+fp1joBAAAAaHk2cVa0Piz5s9XLLX08tQIAAIDr8VTE2dF6amQMqY923F4fPL8DAMC1gZ/nYn1u9j7LW9rgfT0AAFwT+HktvD/D135eGdQeAADgB35+LKz/B6Dy+3o6hyPVHmANqPHAanbnxQjUz4+4BsDjeV+/kiO/SwBrePxGFshvoMfbwx9NrNRLRg1B/Zw7OzgD52Pkn5m/NzfqDz+/DlYN0dyq+dsPmsisDUB9tJqjPn6/rfF0qs2oPjk/587A7PcPVd4BXwnr7+Rp3ttLni1dC5wPmiultrQ9FyONSoH8cn569WCvbU9X2fUk5600ND4YGX/m+wdpXWAP3p/TS23AdeDOduunlvwT8W/J28E50OhopLmeRiRPnB0en7aOb93fSP2AM7cHrRdr2u32cmhoLZyPW/LjLP+Gp9fFeh9GXmL15ZE+Zvm0pMvdNcPsGgLnDlhptZg1lhTVkOYlrcGy5sgzz0oPr+LpHt1k6WyXXnsa05xRyV+093vU5+Ycp0p9uqsm8Po6AFp6NSglsz6toFFu3r02Ur1uqbcr5LCVnh59V2l9Rvp0tJfG8ZBx3Z8mtGvSemUPSQPW9tWD7k+WD2fWDxXyJaiDx4O9Xp2h0Y/fyESzHtq2dz5nnXVL/FkY1NMt+UXrq5q9ytagRateT9Zoof23Dc7PoxrTMKPvjHGsMXv87DqDy00RtHtvGY8La44AOrS5ZVdtSu/5B4l2DVnPWpq87fFeOndu7b2+34PPRj67As7T32d2xHsvZ+e5GbHiWpq1/pCI7JsHT/+Z88kkc37ZGuf05/XHkaYydKHdw6w8rgnNNXcjzcXqYZm5MpKPqQ/SWJG/M9Z1Z+au7ffdBPf5ag+ncH7+ipEWuT3RrH9U23j0JbXlvtacC89crJqyeHkVLOvbyYz5RXSr0ZDFhyyaov3oWfSusfWiGXsjXXe0n9baIBt6X+n1Mn0p2p9qgsvT1f3cqyWrp2u9rKKfPzrtNXvB6SPL02dF5Cx5rqf18wpE9nUHVeZl0dArImeEvu/p6ar6OVwZdJ+yv6f3eUf90wspR3P66Pl4ZB47fJxbl6bdPyZ6bXf5uRbpvlp0cvVcwuXeXh7YTea6K82pCtGz0dPSK9q8g3PY3zvp+945tZzjCqHNzRqNRH38iDE6a7TtEfx89K7Fqpfd96aCBiRtzGb33lSLv014x9CQeTYkLUl+fqWzaN27yNmtEF7/hkZ8Gmn7vfyc/v3pVaFdW6afn10jZ8kJR44vBAKBQCAQh4//HX1A0w==
+   eJztXFty4zgM5HgmB9i5QazaEyQX9l9Ok6PkDLuuGtTAHTwpipJtdFWXXxSfABqkZbf2mPhl0CsTqQPLem0XCoVCobAVXvbuwIY4/c+zwBOUWRhPQh1ErAPL4nVUJ10jaXo2TygUCoVCgeOF8VHBtdfSYU3LCZKmW1pO1/A8QbvmZLBQKBQKBcJLgI8OTycj+tmjtVR2SdSraX/t3wuFQuG5UXo+Ftl9czRXwL28Vo+UU9R5faFQKDwnSs+PBWl/znFp37+/vyjX39t5feUehUKh0I/S8/vCVZuv+s2/u78IZSw9P8r+HftwT7lHYQ4qxyvMxt5xcQ1Qz+9xDAUZ3j0Ce+/f7/ksoTAHP/9wFCq+FTSQhv9knGkvI3II1HPJd8oHHg+Wfo783Zx1fen58yBrQxhbI//9EOHI3KBwfERtDnX81OZoOtrmWvuU9Fzyga3PH45yBvxMiPwmL3tu72m211bh8YCx0iuL5SXye0z4I30PxX8bgqz48vjQ8kGtLJXD/x8ZnU9K2oqM6OCa+rc8f/DGVdgHET3vKVN4Hki+vbS++KPZGtdzfo+opefE91Yx5pEQsSPL5haFniZuzR6dztafnd81+UP53D6IanGk3N5aXjY0F+jbpLHR+GjpsKTpqOf8flFLz0vTj4PsOlhaItmCZ2+UG6JdbaXTml1G+jsjZ9g6hyi/K2TBbXFUXR6PBq9f3hgyY0bf5/tlHi/XavgIkp7TGfwe6LGbUXa2l71qNhbxUU9fUBO13M6yuya8x22FP89o96X9/b2xpeNeHmrZM743Myfo1fVCIQotB0WMzE+PYKNSv7UyXr6eybf5e5n4JMWi2exZt7Vnldk90q+O8l49PRjR7hdjdEyeVpJeavBswCr/3m61PMJL+943ixk9fxco6fkW+q7NQWl6YS16NLhXq0fY6I8/HInIeLAsxsRRPp/dU0ix6J+JRE3PxJeorkbmarQNZmy1V5MjtsAfOSU977GxiI5zRLU8c+0W9WQp1b+023tMrjy3vrMA6XxCI2+L8pSFfa7FpjWIzn2mPinXysaIo+JoY4jGFrK/UfFPy42lOMnxA8jHMGqvFYnbUlxc2vd7e3msxL57+wDOT+MzS2dnQNJ00nULNJeaz0uMxMwZ+j2jLW1e6PlHu9Xzr3arGWu0LIqe67fsz0hI2so1tqeuyPkExhBu/xhbrFgZBfoV2lMPaBzS+Lgdc4yK4xFG2vRAOrAVvL5kNQzXYY2ea7b7Do9SjEQdRM6I39FxSXp+Je19NE33YvAno6fpe0DS8ystW6QyWo7D49hn8+cgSlxDHl/52i3t7xrT87NCyTZQAyRmfAXnBPX8o9l6cRRk1mpPSPpj6VGmzgyx/VGaLtV9Jeo5jlOKRxxaDJTGxLWI7BavleqR2rjAc37mhD6h7SX4fEb3f1sB1xW13dIlmhvtOyo+11JMpPelWKetKcZojNNH1/OMT/J5lTTdytmjWnZEPdfsnT63ziwk++jRdPz+VbJxSdMXeC3FIyS3C7wGz6KWdpsjR8dCbWX0/AjI+AtyD1jrPbNfkfnhcUnykQt75PaP8RnPe77a7fgl3+xdU6wT9VzLC/g68M89P5d8A/tw5Rt7HslNMPeh12d4TfVon1NfsD5cZysXwX5bsU6ba2280lx5MRrtQzqnxtiP/eDtSj6I9p/liHt6aFzSPOO1HwKlNl7bfnoeBe+vtaYRO+mNJV7Oimtg+bLnT9rnI2xIir0YByg27Y2eddJ4pD4dBZJvvDKi7by1W93SbInyROJIP/T84Q1I75+brumWfyPpenwf2+P+LPm0pufUhjavZygv+bHUF+KrMz4vBnnU2o7GZslGcG2k752l3IKvd7TvGZvjtmfNeY9Na/ZixW7y23vQc+usJWsvWVscSS3eZGn5JcVRywa8eLA1tpzjNWuZXZvIXizCfxkzNsDtIALPNyy7yug51/TRuXVmLUeu3bnZ2pCxtx7fjPiu1heep82Y8179lhjNtXr7Oyrmj4jrXM+za09re9Vz/P/pWfT8jDhSz7U4srWWj7Ihyzd7dRz1fPSYXwVuPccz1kbTg9/FYrFYLBbvnv8BCB61eA==
   </data>
  </layer>
  <layer name="Background" width="500" height="22">
   <data encoding="base64" compression="zlib">
-   eJzt2zFOwzAYgFGrEgdg78oC4ghw/4mjcAaoSKUiuWmcOIn/+D3JU+vKSZx8rRAp9ed7GPd8DQMAaJeeA0B8eg4A8ek5AMSn5wBE8pQZ6DkAsUzteW+913MAItHzPD0HIBI9z9NzACLx9/M8PQeA+PQcAOLTcwCIT88BuDjtvQAW0XOA4zjdGaXziEfPAeK71/EpjV4yd43PKeV7yB89h/XMfb7k/h+n9uAYpjR0rKlz5tReT81Rc31Ho+cwX8mzYYuGb930oz8ft7B3H+dcu9bXueaxt+yIx8QyR97vNZWeo/dh5Lo79trY+x/NKVl/rWcl0+3d8KXXq9X15ua93Iw9ztsW94j7kIuevsPu5drf88247fNnKuv5OT3u+XOqe223aERPIrd8rWNZay21e97COR87XvdhX1rajz3I9fz1d7ylsp5/pP+/z6+fsXbP7ZG6InYjikfno5ee974Pjqz1PUnb7BEAAGr6AUdPRpc=
+   eJzt201q3DAYgGER6AG6zyYzdNPS1WTb3H/Vo/QMrckYFCHbkkd2I/t54COQzI+csfXOEBLC+fy5z5Tf9wEAPi89B4D+6TkA9E/PAaB/eg5AT75kBj0HoC+lPT9b7/UcgJ7oeZ6eA9ATPc/TcwB64u/neXoOAP3TcwDon54DQP/0HIDB0/9eAA/Rc4DjeJqY2vvRHz0H6N9Ux0sa/ch9t3icWt6HvNNz2M7a/SX3/zith2MYO3YNZT1Nz8mp26SPV7uekrlWrjs3l+jrZeX6ptZwNHoO68V7zZI9Gr5304++P+6htIlzXRxbV9PYtT0vWfMwr9HzvBbeJ3dMl+R7tesreT9xFEc8Jh5z5PO9pfTzw5Kf98l1d+5nc7dfuk/J+mtf57PsjXtI+xd37xqWW55rXknLW71eSz2Pp7bh6TGVXmfpusZj/hbN1HPHa2h9nu9xjbgOGZRcazxm7O9zNHGf30Jdz5/Dcs+/hrav7Xj7l0aPd3a5jpfOXPtKp/WxtJit1rLU85qWl85to+NL5c6D20bPxeeUO//izwPjHvMSPu7frJP2fOjt93/zI9T1/Ff4+Pl8fIzant9C3XUftzw9J27ROEfKjL+7tT3fs9W8a9H0rdYV99y1eHwl517c8mHSfdtecV6593bpvhXvXQAAMOcvxVtUhQ==
   </data>
  </layer>
  <objectgroup name="Objects">
@@ -27,14 +27,12 @@
   <object gid="81" x="9792" y="608"/>
   <object gid="81" x="9920" y="608"/>
   <object gid="81" x="10048" y="608"/>
-  <object gid="183" x="9344" y="672"/>
+  <object gid="183" x="9344" y="640"/>
   <object gid="151" x="9568" y="640"/>
   <object gid="152" x="9600" y="640"/>
   <object gid="66" x="416" y="640"/>
   <object gid="82" x="9696" y="608"/>
   <object gid="98" x="9696" y="640"/>
-  <object gid="2147483730" x="9728" y="608"/>
-  <object gid="2147483746" x="9728" y="640"/>
   <object gid="81" x="14528" y="512"/>
   <object gid="81" x="14368" y="544"/>
   <object gid="81" x="14112" y="576"/>
@@ -46,7 +44,73 @@
   <object name="Exit" type="Door" gid="98" x="15776" y="288"/>
   <object name="Exit" type="Door" gid="82" x="15776" y="256"/>
   <object gid="81" x="15712" y="224"/>
-  <object name="Exit" type="Door" gid="98" x="672" y="352"/>
-  <object name="Exit" type="Door" gid="82" x="672" y="320"/>
+  <object name="Exit" type="Door" gid="98" x="864" y="352"/>
+  <object name="Exit" type="Door" gid="82" x="864" y="320"/>
+  <object name="Zombie" type="Mob" gid="265" x="576" y="640" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="864" y="640" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="1632" y="576" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="2464" y="512" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="2656" y="480" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="2080" y="576" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="480" y="640" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="736" y="640" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="3168" y="512" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="3424" y="512" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="3680" y="512" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="4032" y="544" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="3680" y="128" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="3936" y="192" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="3392" y="96" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="4192" y="544" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="5184" y="544" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="5696" y="448" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="5888" y="416" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="6304" y="416" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="6752" y="480" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="7072" y="480" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="7776" y="416" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="8160" y="384" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="8512" y="384" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="8992" y="320" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="9408" y="256" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="9344" y="192" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="9888" y="256" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="10240" y="448" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="10656" y="448" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="11136" y="384" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="11552" y="384" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="12128" y="384" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="12608" y="416" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="13024" y="416" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="13312" y="416" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="13728" y="352" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="13952" y="256" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="14400" y="192" width="32" height="64"/>
+  <object name="Zombie" type="Mob" gid="265" x="15168" y="288" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="5312" y="512" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="5952" y="448" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="6624" y="384" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="7552" y="480" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="7904" y="480" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="8896" y="256" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="9536" y="256" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="9728" y="256" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="9984" y="224" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="10624" y="416" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="11200" y="384" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="11584" y="384" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="12160" y="384" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="12640" y="416" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="14080" y="320" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="14528" y="288" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="15040" y="288" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="14880" y="288" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="15520" y="320" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="15616" y="320" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="15392" y="288" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="15264" y="256" width="32" height="64"/>
+  <object name="Creeper" type="Mob" gid="269" x="15328" y="224" width="32" height="64"/>
+  <object gid="82" x="9728" y="608"/>
+  <object gid="98" x="9728" y="640"/>
  </objectgroup>
 </map>
